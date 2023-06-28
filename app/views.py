@@ -4,3 +4,6 @@ from django.http import HttpResponse
 
 def home(request):
     return render(request,'app/home.html')
+
+def base(request):
+    return render(request,'app/base.html')
