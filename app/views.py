@@ -10,3 +10,6 @@ def base(request):
 
 def register_finder(request):
     return render(request,'app/register_finder.html')
+
+def register_company(request):
+    return render(request,'app/register_company.html')

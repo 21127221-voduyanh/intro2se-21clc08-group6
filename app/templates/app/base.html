@@ -75,11 +75,15 @@
                     <li><a class="dropdown-item" href="#">Log Out</a></li>
                   </ul>
                 </li>
+
                 <li class="nav-item">
                   <a class="nav-link" href="#">Login</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Register</a>
+                  <a class="nav-link" href="{% url 'register_finder' %}">Register as job finders</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'register_company' %}">Register as companies</a>
                 </li>
                 
               </ul>
