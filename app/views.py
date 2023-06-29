@@ -13,3 +13,6 @@ def register_finder(request):
 
 def register_company(request):
     return render(request,'app/register_company.html')
+
+def login(request):
+    return render(request,'app/login.html')
