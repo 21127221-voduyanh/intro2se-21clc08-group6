@@ -7,3 +7,6 @@ def home(request):
 
 def base(request):
     return render(request,'app/base.html')
+
+def register_finder(request):
+    return render(request,'app/register_finder.html')
