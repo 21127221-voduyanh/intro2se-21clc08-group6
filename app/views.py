@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from app.models import CustomUser, Employer, Job_finder
 from django.contrib import messages
