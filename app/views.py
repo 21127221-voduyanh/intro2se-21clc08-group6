@@ -74,3 +74,7 @@ def login(request):
             messages.error(request, "Success")
             
     return render(request,'app/login.html')
+
+def profile(request):
+    user = request.user
+    return render(request, 'app/profile.html', {'user': user})
