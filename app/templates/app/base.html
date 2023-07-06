@@ -10,7 +10,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <!--css-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
         <!--js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
@@ -40,21 +40,41 @@
                   </li>
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Ngành nghề hot
+                      Popular Job
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Ngành Công nghệ thông tin</a></li>
-                      <li><a class="dropdown-item" href="#">Ngành Tài chính - Ngân hàng</a></li>
-                      <li><a class="dropdown-item" href="#">Ngành Kế toán</a></li>
+                      <li><a class="dropdown-item" href="#">Information Technology</a></li>
+                      <li><a class="dropdown-item" href="#">Finance and Banking</a></li>
+                      <li><a class="dropdown-item" href="#">Business Management</a></li>
                     </ul>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Salary
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Below 500$</a></li>
+                      <li><a class="dropdown-item" href="#">From 500$ to 1000$</a></li>
+                      <li><a class="dropdown-item" href="#">Above 1000$</a></li>
+                    </ul>
                   </li>
-                  <li class="nav-item">
-                    <a class="nav-link disabled">Disabled</a>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Popular Cities
+                    </a>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Ho Chi Minh City</a></li>
+                      <li><a class="dropdown-item" href="#">Ha Noi</a></li>
+                      <li><a class="dropdown-item" href="#">Da Nang</a></li>
+                      <li><a class="dropdown-item" href="#">Hue</a></li>
+                      <li><a class="dropdown-item" href="#">Nha Trang</a></li>
+                      <li><a class="dropdown-item" href="#">Hai Phong</a></li>
+                    </ul>
                   </li>
                 </ul>
+
                 <form class="d-flex" role="search">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                   <button class="btn btn-outline-success" type="submit">Search</button>
@@ -68,21 +88,46 @@
                     Username
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="#">Profile</a></li>
-                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <i class="bi bi-person-circle" > </i>
+                        Profile
+                      </a>  
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href = "#">
+                        <i class="bi bi-gear" > </i>
+                        Settings
+                      <a/>
+                    </li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item" href="#">Log Out</a></li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <i class="bi bi-box-arrow-right"> </i>
+                        Log Out
+                      </a>
+                    </li>
+
                   </ul>
                 </li>
 
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'login' %}">Login</a>
+                  <a class="nav-link" href="{% url 'login' %}" >
+                    <i class="bi bi-box-arrow-in-left" ></i>
+                    Login
+                  </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'register_finder' %}">Register as job finders</a>
+                  <a class="nav-link" href="{% url 'register_finder' %}" >
+                    <i class="bi bi-briefcase-fill" > </i>
+                    Register as job finders
+                  </a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="{% url 'register_company' %}">Register as companies</a>
+                  <a class="nav-link" href="{% url 'register_company' %}">
+                    <i class="bi bi-building " ></i>
+                    Register as companies
+                  </a>
                 </li>
                 
               </ul>
