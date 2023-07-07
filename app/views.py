@@ -62,12 +62,12 @@ def register_company(request):
         else:
             user = User.objects.create_user(username=name, password=password)
             user.save()
-            em = Employer.objects.create()
+            em = Employer.objects.create(user=user)
             em.address = addr
             em.company_name = c_name
             em.city = city
             em.introduction = intro
-            em.user = user
+            #em.user = user
             em.save()
             return redirect('login')
         
