@@ -1,8 +1,9 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from app.models import Employer, Job_finder
 from django.contrib import messages
 from django.contrib.auth import authenticate
+from django.contrib.auth.models import User
 from django.contrib.auth.models import User
 # Create your views here.
 
@@ -21,6 +22,7 @@ def register_finder(request):
         password = request.POST.get("pass")
         r_password = request.POST.get("rpass")
         date = request.POST.get("inputDate")
+        date = request.POST.get("inputDate")
         addr = request.POST.get("addr")
         city = request.POST.get("city")
         intro = request.POST.get("intro")
@@ -31,7 +33,16 @@ def register_finder(request):
             messages.error(request, 'Passwords must match')
         else:
             user = User.objects.create(username=name, password=password)
+            user = User.objects.create(username=name, password=password)
             user.save()
+            jf = Job_finder.objects.create(user=user)
+            jf.address = addr
+            jf.full_name = f_name
+            jf.city = city
+            jf.date_of_birth = date
+            jf.gender = gender
+            jf.introduction = intro
+            jf.save()
             jf = Job_finder.objects.create(user=user)
             jf.address = addr
             jf.full_name = f_name
@@ -60,6 +71,7 @@ def register_company(request):
         elif(password != r_password):
             messages.error(request, 'Passwords must match')
         else:
+            user = User.objects.create_user(username=name, password=password)
             user = User.objects.create_user(username=name, password=password)
             user.save()
             em = Employer.objects.create()
