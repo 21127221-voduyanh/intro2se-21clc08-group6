@@ -13,31 +13,40 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <form class="row g-3 align-items-center" method=='POST'>
-            {% csrf_token %}
-            <div class="col-auto">
-                <label for="inputOldPassword" class="form-label">Old Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder = "Type old password" name="old_pass">
+        <div class="accordion accordion-flush w-25" id="accordionFlushExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Password
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">
+                    <form class="row g-3 align-items-center" method=='POST'>
+                        {% csrf_token %}
+                        <div class="col-auto">
+                            <label for="inputOldPassword" class="form-label">Old Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder = "Type old password" name="old_pass">
+                        </div>
+                    
+                        <div class="col-auto">
+                            <label for="inputNewPassword" class="form-label">New Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder = "Type new password" name = "pass">
+                        </div>
+                    
+                        <div class="col-auto">
+                            <label for="inputConfirmNewPassword" class="form-label">Confirm New Password</label>
+                            <input type="password" class="form-control" id="inputPassword" placeholder = "Confirm new password" name ="rpass">
+                        </div>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary btn-lg">Change password</button>
+                        </div>
+                    </form>
+              </div>
             </div>
-        
-            <div class="col-auto">
-                <label for="inputNewPassword" class="form-label">New Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder = "Type new password" name = "pass">
-            </div>
-        
-            <div class="col-auto">
-                <label for="inputConfirmNewPassword" class="form-label">Confirm New Password</label>
-                <input type="password" class="form-control" id="inputPassword" placeholder = "Confirm new password" name ="rpass">
-            </div>
-            <div class="d-flex mx-5 mb-2 mb-lg-4">
-                <button type="submit" class="btn btn-primary btn-lg">Change password</button>
-            </div>
-        
-        </form>
+        </div>
         
         <script src="" async defer></script>
     </body>
 </html>
-
-
 {% endblock main-content %}
