@@ -87,6 +87,12 @@ def login_user(request):
     return render(request,'app/login.html')
 
 
-def profile(request):
+def profileA(request):
     user = request.user
-    return render(request, 'app/profile.html', {'user': user})
+    return render(request, 'app/profileA.html', {'user': user})
+def profileJF(request):
+    user = request.user
+    return render(request, 'app/profileJF.html', {'user': user})
+def profileE(request):
+    user = request.user
+    return render(request, 'app/profileE.html', {'user': user})

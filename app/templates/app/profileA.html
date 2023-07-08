@@ -1,0 +1,14 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block main-content %}
+<div class="content-section">
+    <div class="media">
+      <div class="media-body">
+        <h2 class="account-heading">{{ app.username }}</h2>
+        <p class="text-secondary">{{ app.email }}</p>
+      </div>
+    </div>
+    <!-- FORM HERE -->
+  </div>
+
+{% endblock main-content %}
