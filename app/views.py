@@ -60,7 +60,7 @@ def register_company(request):
         elif(password != r_password):
             messages.error(request, 'Passwords must match')
         else:
-            user = User.objects.create_user(username=name, password=password)
+            user = User.objects.create(username=name, password=password)
             user.save()
             em = Employer.objects.create(user=user)
             em.address = addr
