@@ -20,8 +20,13 @@
                   <div class="row justify-content-center">
                     <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
       
-                      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">WELCOME BACK FINDER</p>
-                      STATUS HERE
+                      <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">WELCOME BACK {{user.username}}</p>
+                      <p>Full name: {{jf.full_name}}</p>
+                      <p>Gender: {{jf.gender}}</p>
+                      <p>Date of birth: {{jf.date_of_birth}}</p>
+                      <p>Finder address:{{jf.address}}</p>
+                      <p>City:{{em.city}}</p>
+                      <p>Introduction: <br>{{jf.introduction}}</p>
     </body>
 </html>
 {% endblock main-content %}
