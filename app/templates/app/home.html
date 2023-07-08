@@ -1,11 +1,36 @@
 {% extends 'app/base.html'%}
 {% load static %}
+
 {% block main-content %}
- <div class = "container">
-    <div class = "row justify-content-center mt-0">
-        <div class = "col-md-10 col-sm-12 text-center">
-            <h1 class="display-10">Welcome to O.J.F.A</h1>
+
+<div class="container">
+    <div class="row justify-content-center mt-0">
+        <div class="col-md-10 col-sm-12 text-center">
+            <h1 class="display-10">Employment timelines</h1>
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        {% for _ in "123" %}
+        <div class="col-md-6 offset-md-3">
+            <div class="card mb-4 post-card">
+                <img src="{% static 'app/image/logo.jpg' %}" alt="Your Picture" class="card-img-top img-fluid">
+                <div class="card-body">
+                    <h5 class="card-title">Caption for your Picture</h5>
+                    <p class="card-text">Welcome to O.J.F.A</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+    .post-card {
+        margin-bottom: 20px; /* Adjust the margin-bottom value as needed */
+    }
+</style>
+
 {% endblock main-content %}
