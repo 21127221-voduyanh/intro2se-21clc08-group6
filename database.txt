@@ -12,6 +12,7 @@ Script to create database in pgAdmin
 Login/Group Roles (right click) -> Create
 General: Name = admin 
 Definition: Password = admin
+Privigeles: Can login -> Choose
 
 2. Create the database OJFA
 Databases (right click) -> Create
