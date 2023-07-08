@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from app.models import Employer, Job_finder
 from django.contrib import messages
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,login
 from django.contrib.auth.models import User
 # Create your views here.
 
@@ -73,7 +73,7 @@ def register_company(request):
         
     return render(request,'app/register_company.html')
 
-def login(request):
+def login_user(request):
     if request.method == "POST":
         uname = request.POST.get("uname")
         password = request.POST.get("pass")
@@ -81,6 +81,7 @@ def login(request):
         user = authenticate(request, username=uname, password=password)
 
         if user is not None:
+            login(request,user)
             return redirect('home')
             
     return render(request,'app/login.html')
