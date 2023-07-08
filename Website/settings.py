@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'app.CustomUser'
 # Application definition
 
 INSTALLED_APPS = [
@@ -76,8 +75,10 @@ WSGI_APPLICATION = 'Website.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'OJFA',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
     }
 }
 
