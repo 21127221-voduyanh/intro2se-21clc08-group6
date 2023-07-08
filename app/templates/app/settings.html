@@ -1,0 +1,43 @@
+{% extends 'app/base.html'%}
+{% load static %}
+
+{% block main-content %}
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <form class="row g-3 align-items-center" method=='POST'>
+            {% csrf_token %}
+            <div class="col-auto">
+                <label for="inputOldPassword" class="form-label">Old Password</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder = "Type old password" name="old_pass">
+            </div>
+        
+            <div class="col-auto">
+                <label for="inputNewPassword" class="form-label">New Password</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder = "Type new password" name = "pass">
+            </div>
+        
+            <div class="col-auto">
+                <label for="inputConfirmNewPassword" class="form-label">Confirm New Password</label>
+                <input type="password" class="form-control" id="inputPassword" placeholder = "Confirm new password" name ="rpass">
+            </div>
+            <div class="d-flex mx-5 mb-2 mb-lg-4">
+                <button type="submit" class="btn btn-primary btn-lg">Change password</button>
+            </div>
+        
+        </form>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
+
+
+{% endblock main-content %}

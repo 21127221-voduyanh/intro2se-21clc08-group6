@@ -101,3 +101,6 @@ def profileE(request):
     em = Employer.objects.get(user=user)
     context = {'user':user,'em': em}
     return render(request, 'app/profileE.html', context)
+
+def settings(request):
+    return render(request,'app/settings.html')
