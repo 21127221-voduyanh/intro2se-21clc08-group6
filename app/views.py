@@ -89,10 +89,15 @@ def login_user(request):
 
 def profileA(request):
     user = request.user
-    return render(request, 'app/profileA.html', {'user': user})
+    context = {'user':user}
+    return render(request, 'app/profileA.html', context)
 def profileJF(request):
     user = request.user
-    return render(request, 'app/profileJF.html', {'user': user})
+    jf = Job_finder.objects.get(user=user)
+    context = {'user':user,'jf': jf}
+    return render(request, 'app/profileJF.html', context)
 def profileE(request):
     user = request.user
-    return render(request, 'app/profileE.html', {'user': user})
+    em = Employer.objects.get(user=user)
+    context = {'user':user,'em': em}
+    return render(request, 'app/profileE.html', context)
