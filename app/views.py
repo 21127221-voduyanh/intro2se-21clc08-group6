@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from app.models import Employer, Job_finder
+from app.models import Employer, Job_finder, User
 from django.contrib import messages
-from django.contrib.auth import authenticate,login
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login as auth_login, logout
 # Create your views here.
 
 def home(request):
@@ -30,13 +29,14 @@ def register_finder(request):
         elif(password != r_password):
             messages.error(request, 'Passwords must match')
         else:
-            user = User.objects.create(username=name, password=password)
+            user = User.objects.create_user(username=name, password=password)
+            user.is_job_finder = True
             user.save()
             jf = Job_finder.objects.create(user=user)
             jf.address = addr
             jf.full_name = f_name
             jf.city = city
-            jf.date_of_birth = date
+            # jf.date_of_birth = date
             jf.gender = gender
             jf.introduction = intro
             jf.save()
@@ -60,14 +60,14 @@ def register_company(request):
         elif(password != r_password):
             messages.error(request, 'Passwords must match')
         else:
-            user = User.objects.create(username=name, password=password)
+            user = User.objects.create_user(username=name, password=password)
+            user.is_employer = True
             user.save()
             em = Employer.objects.create(user=user)
             em.address = addr
             em.company_name = c_name
             em.city = city
             em.introduction = intro
-            #em.user = user
             em.save()
             return redirect('login')
         
@@ -80,17 +80,23 @@ def login_user(request):
     
         user = authenticate(request, username=uname, password=password)
 
-        if user is not None:
-            login(request,user)
-            return redirect('home')
+        if user is not None and user.is_job_finder:
+            auth_login(request, user)
+            return redirect('register_finder')
+        elif user is not None and user.is_employer:
+            auth_login(request, user)
+            return redirect('register_company')
             
     return render(request,'app/login.html')
 
 
 def profileA(request):
-    user = request.user
-    context = {'user':user}
-    return render(request, 'app/profileA.html', context)
+    us = request.user 
+    if request.method == "POST":
+        logout(request)
+
+    return render(request, 'app/profileA.html', {'us.username':us.username})
+
 def profileJF(request):
     user = request.user
     jf = Job_finder.objects.get(user=user)
@@ -104,3 +110,5 @@ def profileE(request):
 
 def settings(request):
     return render(request,'app/settings.html')
+
+
