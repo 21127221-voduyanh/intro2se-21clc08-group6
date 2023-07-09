@@ -9,7 +9,9 @@ def home(request):
     return render(request,'app/home.html')
 
 def base(request):
-    return render(request,'app/base.html')
+    user = request.user
+    context = {'user': user}
+    return render(request,'app/base.html',context)
 
 def register_finder(request):
     if( request.method == "POST" ):
@@ -24,10 +26,13 @@ def register_finder(request):
         city = request.POST.get("city")
         intro = request.POST.get("intro")
 
+        check_user =  authenticate(request, username=name, password=password)
         if check == False:
             messages.error(request, "Please accept the terms")
         elif(password != r_password):
             messages.error(request, 'Passwords must match')
+        elif check_user is not None:
+            messages.error(request, 'Username existed, please choose another username')
         else:
             user = User.objects.create_user(username=name, password=password)
             user.is_job_finder = True
@@ -36,7 +41,7 @@ def register_finder(request):
             jf.address = addr
             jf.full_name = f_name
             jf.city = city
-            # jf.date_of_birth = date
+            jf.date_of_birth = date
             jf.gender = gender
             jf.introduction = intro
             jf.save()
@@ -55,10 +60,14 @@ def register_company(request):
         city = request.POST.get("city")
         intro = request.POST.get("intro")
 
+        check_user =  authenticate(request, username=name, password=password)
+
         if check == False:
             messages.error(request, "Please accept the terms")
         elif(password != r_password):
             messages.error(request, 'Passwords must match')
+        elif check_user is not None:
+            messages.error(request, 'Username existed, please choose another username')
         else:
             user = User.objects.create_user(username=name, password=password)
             user.is_employer = True
@@ -86,6 +95,11 @@ def login_user(request):
         elif user is not None and user.is_employer:
             auth_login(request, user)
             return redirect('register_company')
+        elif user is not None:
+            auth_login(request, user)
+            return redirect('home')
+        else:
+            messages.error(request,'Username doen\'t exists or Password is incorrect')
             
     return render(request,'app/login.html')
 

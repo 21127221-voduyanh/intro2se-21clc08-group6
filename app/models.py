@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-DATE_INPUT_FORMATS = ['%m-%d-%Y']
+
 
 # Create your models here.
 class User(AbstractUser):
@@ -13,7 +13,7 @@ class Job_finder(models.Model):
     gender=models.CharField(max_length=100)
     address=models.TextField()
     city=models.TextField()
-    # date_of_birth=models.DateField()
+    date_of_birth=models.TextField()
     introduction=models.TextField()
     
 
