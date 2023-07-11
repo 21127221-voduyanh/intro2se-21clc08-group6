@@ -109,7 +109,12 @@ def profileA(request):
     if request.method == "POST":
         logout(request)
 
-    return render(request, 'app/profileA.html', {'us.username':us.username})
+    return redirect('home')
+
+def logout_user(request):
+    logout(request)
+
+    return redirect('home')
 
 def profileJF(request):
     user = request.user
