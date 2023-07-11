@@ -125,16 +125,17 @@ def profileE(request):
 def settings(request):
     if request.method == 'POST':
         old_password = request.POST.get('old_pass')
-        new_password = request.POST['pass']
-        confirm_password = request.POST['rpass']
+        new_password = request.POST.get('pass')
+        confirm_password = request.POST.get('rpass')
+        u = request.user
 
-        user = authenticate(username=request.user.username, password=old_password)
+        user_change = authenticate(request, username=u.username, password=old_password)
 
-        if user is not None:
+        if user_change is not None:
             if new_password == confirm_password:
-                user.set_password(new_password)
-                user.save()
-                auth_login(request, user)
+                user_change.set_password(new_password)
+                user_change.save()
+                auth_login(request, user_change)
                 return redirect('home')
             else:
                 messages.error(request, 'New passwords do not match.')
