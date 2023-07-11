@@ -123,6 +123,24 @@ def profileE(request):
     return render(request, 'app/profileE.html', context)
 
 def settings(request):
+    if request.method == 'POST':
+        old_password = request.POST.get('old_pass')
+        new_password = request.POST['pass']
+        confirm_password = request.POST['rpass']
+
+        user = authenticate(username=request.user.username, password=old_password)
+
+        if user is not None:
+            if new_password == confirm_password:
+                user.set_password(new_password)
+                user.save()
+                auth_login(request, user)
+                return redirect('login')
+            else:
+                messages.error(request, 'New passwords do not match.')
+        else:
+            messages.error(request, 'Invalid password.')
     return render(request,'app/settings.html')
+
 
 
