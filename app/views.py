@@ -135,7 +135,7 @@ def settings(request):
                 user.set_password(new_password)
                 user.save()
                 auth_login(request, user)
-                return redirect('login')
+                return redirect('home')
             else:
                 messages.error(request, 'New passwords do not match.')
         else:
