@@ -138,16 +138,18 @@ def settings(request):
                 auth_login(request, user_change)
                 logout(request)
                 return redirect('login')
-            else:
-                messages.error(request, 'New passwords do not match.')
-        else:
-            messages.error(request, 'Invalid password.')
+        
+        delete_password = request.POST.get('dpass')
+        user_delete = authenticate(request,username=u.username,password = delete_password)
+        if user_delete is not None and user_delete.is_job_finder:
+            user_delete.delete()
+            logout(request)
+            return redirect('register_finder')
+        elif user_delete is not None and user_delete.is_employer:
+            user_delete.delete()
+            logout(request)
+            return redirect('register_company')
 
-    elif request.method == 'DELETE':
-        user_delete = request.user
-        user_delete.delete()
-        return redirect ('register_finder')
-    
     return render(request,'app/settings.html')
 
 
