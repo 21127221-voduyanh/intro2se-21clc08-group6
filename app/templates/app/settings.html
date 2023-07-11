@@ -22,16 +22,7 @@
               </h2>
               <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    <form class="row g-3 align-items-center" action="" method='POST'>
-                      <div class=" text-center fw-bold">
-                        {% if messages %}
-                          <div class="alert alert-danger" role="alert">
-                            {% for message in messages %}
-                              <div>{{ message }}</div>
-                            {% endfor %}
-                          </div>
-                        {% endif %}
-                      </div>
+                    <form class="row g-3 align-items-center" action="" method='POST' id='ChangePassword'>
                         {% csrf_token %}
                         <div class="col-auto">
                             <label for="inputOldPassword" class="form-label">Old Password</label>
@@ -78,11 +69,12 @@
                           <div class="modal-body">
                             This will delete your account permanently and cannot be undone.
                           </div>
-                          <div class="modal-footer"> 
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <form action ="" method ="DELETE">
+                          <div class="modal-footer">
+                            <form class ="row g-3 align-items-center" action = "" method = 'POST'>
                               {% csrf_token %}
-                              <button type="button" class="btn btn-danger">I want to Delete</button>
+                                <label for="inputConfirmNewPassword" class="form-label">Type your password to delete the account.</label>
+                                <input type="password" class="form-control" id="inputPassword" placeholder = "Type your password" name ="dpass">
+                              <button type="submit" class="btn btn-danger">I want to Delete</button>
                             </form>
                           </div>
                         </div>
