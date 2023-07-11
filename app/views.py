@@ -137,7 +137,7 @@ def settings(request):
                 user_change.save()
                 auth_login(request, user_change)
                 logout(request)
-                redirect('login')
+                return redirect('login')
             else:
                 messages.error(request, 'New passwords do not match.')
         else:
