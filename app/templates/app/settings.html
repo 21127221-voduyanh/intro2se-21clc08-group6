@@ -53,6 +53,7 @@
                     </form>
               </div>
             </div>
+
             <div class="accordion-item">
                 <h2 class="accordion-header">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
@@ -61,6 +62,7 @@
                 </h2>
                 <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                   <div class="accordion-body">
+                    </div>
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                       Delete Account
@@ -76,9 +78,12 @@
                           <div class="modal-body">
                             This will delete your account permanently and cannot be undone.
                           </div>
-                          <div class="modal-footer">
+                          <div class="modal-footer"> 
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-danger">Delete Account</button>
+                            <form action ="" method ="DELETE">
+                              {% csrf_token %}
+                              <button type="button" class="btn btn-danger">I want to Delete</button>
+                            </form>
                           </div>
                         </div>
                       </div>
