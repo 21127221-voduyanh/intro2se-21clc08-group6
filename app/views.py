@@ -136,11 +136,18 @@ def settings(request):
                 user_change.set_password(new_password)
                 user_change.save()
                 auth_login(request, user_change)
-                return redirect('home')
+                logout(request)
+                redirect('login')
             else:
                 messages.error(request, 'New passwords do not match.')
         else:
             messages.error(request, 'Invalid password.')
+
+    elif request.method == 'DELETE':
+        user_delete = request.user
+        user_delete.delete()
+        return redirect ('register_finder')
+    
     return render(request,'app/settings.html')
 
 
