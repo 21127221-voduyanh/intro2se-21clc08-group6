@@ -22,7 +22,16 @@
               </h2>
               <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
-                    <form class="row g-3 align-items-center" method=='POST'>
+                    <form class="row g-3 align-items-center" action="" method='POST'>
+                      <div class=" text-center fw-bold">
+                        {% if messages %}
+                          <div class="alert alert-danger" role="alert">
+                            {% for message in messages %}
+                              <div>{{ message }}</div>
+                            {% endfor %}
+                          </div>
+                        {% endif %}
+                      </div>
                         {% csrf_token %}
                         <div class="col-auto">
                             <label for="inputOldPassword" class="form-label">Old Password</label>
