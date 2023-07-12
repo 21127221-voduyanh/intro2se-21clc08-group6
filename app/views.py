@@ -129,38 +129,41 @@ def profileE(request):
 
 def settings(request):
     if request.method == 'POST':
-        old_password = request.POST.get('old_pass')
-        new_password = request.POST.get('pass')
-        confirm_password = request.POST.get('rpass')
-        delete_password = request.POST.get('dpass')
-
-        u = request.user
+        action = request.POST.get('Security')
         
-        user_delete = authenticate(request,username=u.username,password = delete_password)
-        user_change = authenticate(request, username=u.username, password=old_password)
+        if action == 'ChangePassword' :
+            old_password = request.POST.get('old_pass')
+            new_password = request.POST.get('pass')
+            confirm_password = request.POST.get('rpass')
+           
+            u = request.user
+    
+            user_change = authenticate(request, username=u.username, password=old_password)
 
-        if user_change is not None:
-            if new_password == confirm_password:
-                user_change.set_password(new_password)
-                user_change.save()
-                auth_login(request, user_change)
+            if user_change is not None:
+                if new_password == confirm_password:
+                    user_change.set_password(new_password)
+                    user_change.save()
+                    auth_login(request, user_change)
+                    logout(request)
+                    return redirect('login')
+                else :
+                    messages.error(request, "Passwords must match", extra_tags='changepassword')
+            elif user_change is None:
+                messages.error(request, "Invalid password", extra_tags='changepassword')
+
+        elif action == 'DeleteAccount': 
+            delete_password = request.POST.get('dpass')
+            u = request.user
+
+            user_delete = authenticate(request,username=u.username,password = delete_password)
+
+            if user_delete is not None:
+                user_delete.delete()
                 logout(request)
-                return redirect('login')
-            else :
-                messages.error(request, "Passwords must match", extra_tags='changepassword')
-        elif user_change is None:
-            messages.error(request, "Invalid password", extra_tags='changepassword')
-            
-        elif user_delete is not None and user_delete.is_job_finder:
-            user_delete.delete()
-            logout(request)
-            return redirect('register_finder')
-        elif user_delete is not None and user_delete.is_employer:
-            user_delete.delete()
-            logout(request)
-            return redirect('register_company')
-        else :
-            messages.error(request, "Invalid password", extra_tags='deleteaccount')
+                return redirect('home')
+            elif user_delete is None :
+                messages.error(request, "Invalid password", extra_tags='deleteaccount')
 
     return render(request,'app/settings.html')
 
