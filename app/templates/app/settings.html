@@ -23,6 +23,15 @@
               <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                     <form class="row g-3 align-items-center" action="" method='POST' id='ChangePassword'>
+                      <div class="text-center fw-bold">
+                        {% if messages %}
+                          {% for message in messages %}
+                            {% if message.extra_tags == 'changepassword' %}
+                              <div>{{ message }}</div>
+                            {% endif %}
+                          {% endfor %}
+                        {% endif%}
+                      </div>
                         {% csrf_token %}
                         <div class="col-auto">
                             <label for="inputOldPassword" class="form-label">Old Password</label>
@@ -71,6 +80,15 @@
                           </div>
                           <div class="modal-footer">
                             <form class ="row g-3 align-items-center" action = "" method = 'POST'>
+                              <div class="text-center fw-bold">
+                                {% if messages %}
+                                  {% for message in messages %}
+                                    {% if message.extra_tags == 'deleteaccount' %}
+                                      <div>{{ message }}</div>
+                                    {% endif %}
+                                  {% endfor %}
+                                {% endif %}
+                              </div>
                               {% csrf_token %}
                                 <label for="inputConfirmNewPassword" class="form-label">Type your password to delete the account.</label>
                                 <input type="password" class="form-control" id="inputPassword" placeholder = "Type your password" name ="dpass">
