@@ -23,11 +23,13 @@
               <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                 <div class="accordion-body">
                     <form class="row g-3 align-items-center" action="" method='POST' id='ChangePassword'>
-                      <div class="text-center fw-bold">
+                      <div class="text-center fw-bold" role="alert">
                         {% if messages %}
                           {% for message in messages %}
                             {% if message.extra_tags == 'changepassword' %}
-                              <div>{{ message }}</div>
+                              <div class="alert alert-danger" role="alert">
+                                {{ message }}
+                              </div>
                             {% endif %}
                           {% endfor %}
                         {% endif%}
@@ -48,7 +50,7 @@
                             <input type="password" class="form-control" id="inputPassword" placeholder = "Confirm new password" name ="rpass">
                         </div>
                         <div class="col-auto">
-                            <button type="submit" class="btn btn-primary btn-lg">Change password</button>
+                            <button type="submit" class="btn btn-primary btn-lg" name = "Security" value = "ChangePassword">Change password</button>
                         </div>
                     </form>
               </div>
@@ -84,7 +86,9 @@
                                 {% if messages %}
                                   {% for message in messages %}
                                     {% if message.extra_tags == 'deleteaccount' %}
-                                      <div>{{ message }}</div>
+                                      <div class="alert alert-danger" role="alert">
+                                        {{ message }}
+                                      </div>
                                     {% endif %}
                                   {% endfor %}
                                 {% endif %}
@@ -92,7 +96,7 @@
                               {% csrf_token %}
                                 <label for="inputConfirmNewPassword" class="form-label">Type your password to delete the account.</label>
                                 <input type="password" class="form-control" id="inputPassword" placeholder = "Type your password" name ="dpass">
-                              <button type="submit" class="btn btn-danger">I want to Delete</button>
+                              <button type="submit" class="btn btn-danger" name = "Security" value = "DeleteAccount">I want to Delete</button>
                             </form>
                           </div>
                         </div>
