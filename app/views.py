@@ -99,7 +99,7 @@ def login_user(request):
             auth_login(request, user)
             return redirect('home')
         else:
-            messages.error(request,'Username doen\'t exists or Password is incorrect')
+            messages.error(request,'Username doesn\'t exist or Password is incorrect')
             
     return render(request,'app/login.html')
 

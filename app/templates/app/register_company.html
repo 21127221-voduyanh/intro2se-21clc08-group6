@@ -26,7 +26,9 @@
                           <div class="text-center fw-bold">
                             {% if messages %}
                               {% for message in messages %}
-                                <div>{{ message }}</div>
+                                <div class="alert alert-danger" role="alert">
+                                  {{ message }}
+                                </div>
                               {% endfor %}
                             {% endif %}
                           </div>
@@ -93,7 +95,7 @@
                             <div class="form-check d-flex justify-content-center mb-5">
                               <input class="form-check-input me-2" type="checkbox" value="True" id="form2Example3c" name="checkbox"/>
                               <label class="form-check-label" for="form2Example3">
-                                I agree all statements in <a href="#!">Terms of service</a>
+                                I agree all statements in <a href="#!">Terms of Service</a>
                               </label>
                             </div>
           
