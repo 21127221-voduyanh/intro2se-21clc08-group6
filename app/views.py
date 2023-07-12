@@ -147,7 +147,10 @@ def settings(request):
                 logout(request)
                 return redirect('login')
             else :
-                messages.error(request,'Passwords must match')
+                messages.error(request, "Passwords must match", extra_tags='changepassword')
+        elif user_change is None:
+            messages.error(request, "Invalid password", extra_tags='changepassword')
+            
         elif user_delete is not None and user_delete.is_job_finder:
             user_delete.delete()
             logout(request)
@@ -157,7 +160,7 @@ def settings(request):
             logout(request)
             return redirect('register_company')
         else :
-            messages.error(request,'Invalid password')
+            messages.error(request, "Invalid password", extra_tags='deleteaccount')
 
     return render(request,'app/settings.html')
 
