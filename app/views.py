@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from app.models import Employer, Job_finder, User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
+from app.form import EUpdateForm, JFUpdateForm
 # Create your views here.
 
 def home(request):
@@ -118,28 +119,35 @@ def logout_user(request):
 
 def profileJF(request):
     user = request.user
+    if request.method == 'POST':
+        u_form = JFUpdateForm(request.POST, instance=user.job_finder)
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profileJF')
+
+    else:
+        u_form = JFUpdateForm(instance=user.job_finder)
+
     jf = Job_finder.objects.get(user=user)
-    context = {'user':user,'jf': jf}
+    context = {'user':user,'jf': jf, 'u_form': u_form}
     return render(request, 'app/profileJF.html', context)
 
 def profileE(request):
     user = request.user
+    if request.method == 'POST':
+        u_form = EUpdateForm(request.POST, instance=user.employer)
+        if u_form.is_valid():
+            u_form.save()
+            messages.success(request, f'Your account has been updated!')
+            return redirect('profileE')
+
+    else:
+        u_form = EUpdateForm(instance=user.employer)
+
     em = Employer.objects.get(user=user)
-    context = {'user':user,'em': em}
+    context = {'user':user,'em': em, 'u_form': u_form}
     return render(request, 'app/profileE.html', context)
-
-def edit(request):
-    user=request.user
-    if user is not None and user.is_jobfinder:
-        jf=Job_finder.objects.get(user=user)
-        context = {'user':user,'jf': jf}
-
-        return render(request, 'app/edit.html', context)
-    elif user is not None and user.is_employer:
-        em = Employer.objects.get(user=user)
-        context = {'user':user,'em': em}
-
-        return render(request, 'app/edit.html', context)
 
 def settings(request):
     if request.method == 'POST':

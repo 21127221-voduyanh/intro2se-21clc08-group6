@@ -15,6 +15,9 @@ class Job_finder(models.Model):
     city=models.TextField()
     date_of_birth=models.TextField()
     introduction=models.TextField()
+    def save(self):
+        super().save()
+
     
 
 class Employer(models.Model):
@@ -23,3 +26,5 @@ class Employer(models.Model):
     address=models.TextField()
     city=models.TextField()
     introduction=models.TextField()
+    def save(self):
+        super().save()
