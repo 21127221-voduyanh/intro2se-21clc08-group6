@@ -121,11 +121,25 @@ def profileJF(request):
     jf = Job_finder.objects.get(user=user)
     context = {'user':user,'jf': jf}
     return render(request, 'app/profileJF.html', context)
+
 def profileE(request):
     user = request.user
     em = Employer.objects.get(user=user)
     context = {'user':user,'em': em}
     return render(request, 'app/profileE.html', context)
+
+def edit(request):
+    user=request.user
+    if user is not None and user.is_jobfinder:
+        jf=Job_finder.objects.get(user=user)
+        context = {'user':user,'jf': jf}
+
+        return render(request, 'app/edit.html', context)
+    elif user is not None and user.is_employer:
+        em = Employer.objects.get(user=user)
+        context = {'user':user,'em': em}
+
+        return render(request, 'app/edit.html', context)
 
 def settings(request):
     if request.method == 'POST':

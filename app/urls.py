@@ -13,4 +13,5 @@ urlpatterns = [
     path('profileJF/', views.profileJF, name='profileJF'),
     path('settings/',views.settings, name='settings'),
     path('logout', views.logout_user, name='logout'),
+    path('edit', views.edit, name='edit'),
 ]
