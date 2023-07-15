@@ -188,6 +188,12 @@ def settings(request):
                 messages.error(request, "Invalid password", extra_tags='deleteaccount')
 
     return render(request,'app/settings.html')
+    
+def post(request):
+    user = request.user
+    return render(request, 'app/post.html', {'user': user})
 
-
+def publish(request):
+    user = request.user
+    return render(request, 'app/publish.html', {'user': user})
 
