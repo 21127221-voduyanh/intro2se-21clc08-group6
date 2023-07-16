@@ -123,7 +123,7 @@ def profileJF(request):
         u_form = JFUpdateForm(request.POST, instance=user.job_finder)
         if u_form.is_valid():
             u_form.save()
-            messages.success(request, f'Your account has been updated!')
+            messages.success(request, 'Your account has been updated!')
             return redirect('profileJF')
 
     else:
@@ -139,7 +139,7 @@ def profileE(request):
         u_form = EUpdateForm(request.POST, instance=user.employer)
         if u_form.is_valid():
             u_form.save()
-            messages.success(request, f'Your account has been updated!')
+            messages.success(request, 'Your account has been updated!')
             return redirect('profileE')
 
     else:

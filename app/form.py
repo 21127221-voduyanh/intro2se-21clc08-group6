@@ -9,4 +9,4 @@ class EUpdateForm(forms.ModelForm):
 class JFUpdateForm(forms.ModelForm):
     class Meta:
         model = Job_finder
-        fields = ['address', 'city', 'introduction']
+        fields = ['full_name','gender','address', 'city', 'introduction']
