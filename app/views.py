@@ -92,10 +92,10 @@ def login_user(request):
 
         if user is not None and user.is_job_finder:
             auth_login(request, user)
-            return redirect('register_finder')
+            return redirect('home')
         elif user is not None and user.is_employer:
             auth_login(request, user)
-            return redirect('register_company')
+            return redirect('home')
         elif user is not None:
             auth_login(request, user)
             return redirect('home')
@@ -106,48 +106,44 @@ def login_user(request):
 
 
 def profileA(request):
-    us = request.user 
-    if request.method == "POST":
-        logout(request)
+    user = request.user 
+    if user.is_authenticated:
+        if user.is_job_finder:
+            if request.method == 'POST':
+                u_form = JFUpdateForm(request.POST, instance=user.job_finder)
+                if u_form.is_valid():
+                    u_form.save()
+                    messages.success(request, 'Your account has been updated!')
+                    return redirect('profileJF')
 
+            else:
+                u_form = JFUpdateForm(instance=user.job_finder)
+
+            jf = Job_finder.objects.get(user=user)
+            context = {'user':user,'jf': jf, 'u_form': u_form}
+            return render(request, 'app/profileJF.html', context)
+        
+        elif user.is_employer:
+            if request.method == 'POST':
+                u_form = EUpdateForm(request.POST, instance=user.employer)
+                if u_form.is_valid():
+                    u_form.save()
+                    messages.success(request, 'Your account has been updated!')
+                    return redirect('profileE')
+
+            else:
+                u_form = EUpdateForm(instance=user.employer)
+
+            em = Employer.objects.get(user=user)
+            context = {'user':user,'em': em, 'u_form': u_form}
+            return render(request, 'app/profileE.html', context)
+        
     return redirect('home')
 
 def logout_user(request):
     logout(request)
 
     return redirect('home')
-
-def profileJF(request):
-    user = request.user
-    if request.method == 'POST':
-        u_form = JFUpdateForm(request.POST, instance=user.job_finder)
-        if u_form.is_valid():
-            u_form.save()
-            messages.success(request, 'Your account has been updated!')
-            return redirect('profileJF')
-
-    else:
-        u_form = JFUpdateForm(instance=user.job_finder)
-
-    jf = Job_finder.objects.get(user=user)
-    context = {'user':user,'jf': jf, 'u_form': u_form}
-    return render(request, 'app/profileJF.html', context)
-
-def profileE(request):
-    user = request.user
-    if request.method == 'POST':
-        u_form = EUpdateForm(request.POST, instance=user.employer)
-        if u_form.is_valid():
-            u_form.save()
-            messages.success(request, 'Your account has been updated!')
-            return redirect('profileE')
-
-    else:
-        u_form = EUpdateForm(instance=user.employer)
-
-    em = Employer.objects.get(user=user)
-    context = {'user':user,'em': em, 'u_form': u_form}
-    return render(request, 'app/profileE.html', context)
 
 def settings(request):
     if request.method == 'POST':
