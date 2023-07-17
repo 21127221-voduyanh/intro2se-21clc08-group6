@@ -104,18 +104,21 @@
                         Profile
                       </a>  
                     </li>
+                    {% if user.is_employer%}
                     <li>
                       <a class="dropdown-item" href="{% url 'publish' %}">
                         <i class="bi bi-person-circle" > </i>
                         Create post
                       </a>  
                     </li>
+                    {% endif %}
                     <li>
                       <a class="dropdown-item" href = "{% url 'settings' %}">
                         <i class="bi bi-gear" > </i>
                         Settings
                       <a/>
                     </li>
+
                     <li><hr class="dropdown-divider"></li>
                     <li>
                       <a class="dropdown-item" href="/logout">
