@@ -48,7 +48,7 @@ def register_finder(request):
             jf.save()
             return redirect('login')
         
-    return render(request,'app/register_finder.html')
+    return render(request,'app/user/register_finder.html')
 
 def register_company(request):
     if( request.method == "POST" ):
@@ -81,7 +81,7 @@ def register_company(request):
             em.save()
             return redirect('login')
         
-    return render(request,'app/register_company.html')
+    return render(request,'app/user/register_company.html')
 
 def login_user(request):
     if request.method == "POST":
@@ -102,7 +102,7 @@ def login_user(request):
         else:
             messages.error(request,'Username doesn\'t exist or Password is incorrect')
             
-    return render(request,'app/login.html')
+    return render(request,'app/user/login.html')
 
 
 def profileA(request):
@@ -121,7 +121,7 @@ def profileA(request):
 
             jf = Job_finder.objects.get(user=user)
             context = {'user':user,'jf': jf, 'u_form': u_form}
-            return render(request, 'app/profileJF.html', context)
+            return render(request, 'app/user/profileJF.html', context)
         
         elif user.is_employer:
             if request.method == 'POST':
@@ -136,7 +136,7 @@ def profileA(request):
 
             em = Employer.objects.get(user=user)
             context = {'user':user,'em': em, 'u_form': u_form}
-            return render(request, 'app/profileE.html', context)
+            return render(request, 'app/user/profileE.html', context)
         
     return redirect('home')
 
@@ -187,9 +187,9 @@ def settings(request):
     
 def post(request):
     user = request.user
-    return render(request, 'app/post.html', {'user': user})
+    return render(request, 'app/post/post.html', {'user': user})
 
 def publish(request):
     user = request.user
-    return render(request, 'app/publish.html', {'user': user})
+    return render(request, 'app/post/publish.html', {'user': user})
 
