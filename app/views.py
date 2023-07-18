@@ -193,3 +193,6 @@ def publish(request):
     user = request.user
     return render(request, 'app/post/publish.html', {'user': user})
 
+def apply(request):
+    return render(request,'app/post/apply.html')
+
