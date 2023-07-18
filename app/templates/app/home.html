@@ -3,58 +3,74 @@
 
 {% block main-content %}
 
-<div class="container">
-    <div class="row justify-content-center mt-5">
-        <div class="col-md-10 col-sm-12 text-center">
-            <h1 class="display-10">Welcome to O.J.F.A</h1>
-        </div>
-    </div>
-</div>
+<!DOCTYPE html>
 
-<div class="container mt-5">
-    <div class="row row-cols-1 row-cols-md-2 g-4">
-        {% for _ in "123456" %}
-        <div class="col ">
-            <div class="card mt-4 mx-5 w-75">
-                <a href="{% url 'post' %}">
-                    <img src="{% static 'app/image/logo.jpg' %}" alt="Your Picture" class="card-img-top img-fluid">
-                </a>
-                <div class="card-body">
-                    <a href="{% url 'post' %}">
-                        <h5 class="card-title">Caption for your Picture</h5> 
-                    </a>
-                    <p class="card-text lh-sm">Company Name : </p>
-                    <p class="card-text lh-sm">City : </p>
-                    <p class="card-text lh-sm">Field : </p>
-                    <p class="card-text lh-sm">Salary : </p>
-                    <p class="card-text lh-sm">Working hours : </p>
-                    <p class="card-text lh-sm">
-                        <small class="text-body-secondary">Posted 3 mins ago by</small>
-                        <a href="#" class="text-decoration-none">username</a>
-                    </p>
-                    
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <div class="container">
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-10 col-sm-12 text-center">
+                    <h1 class="display-10">Welcome to O.J.F.A</h1>
                 </div>
             </div>
         </div>
-        {% endfor %}
-    </div>
-</div>
-
-
-<div class="row justify-content-center mt-5">
-<nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-      <li class="page-item">
-        <a class="page-link" href="#">Previous</a>
-      </li>
-      <li class="page-item active"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
-      </li>
-    </ul>
-</nav>
-</div>
+        
+        <div class="container mt-5">
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                {% for _ in "123456" %}
+                <div class="col ">
+                    <div class="card mt-4 mx-5 w-75">
+                        <a href="{% url 'post' %}">
+                            <img src="{% static 'app/image/logo.jpg' %}" alt="Your Picture" class="card-img-top img-fluid">
+                        </a>
+                        <div class="card-body">
+                            <a class = "text-decoration-none" href="{% url 'post' %}">
+                                <h5 class="card-title">Caption for your Picture</h5> 
+                            </a>
+                            <p class="card-text lh-sm">Company Name : </p>
+                            <p class="card-text lh-sm">City : </p>
+                            <p class="card-text lh-sm">Field : </p>
+                            <p class="card-text lh-sm">Salary : </p>
+                            <p class="card-text lh-sm">Working hours : </p>
+                            <p class="card-text lh-sm">
+                                <small class="text-body-secondary">Posted 3 mins ago by</small>
+                                <a href="#" class="text-decoration-none">username</a>
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        
+        
+        <div class="row justify-content-center mt-5">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <li class="page-item">
+                <a class="page-link" href="#">Previous</a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+        </nav>
+        </div>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
 
 {% endblock main-content %}

@@ -107,7 +107,7 @@
                     {% if user.is_employer%}
                     <li>
                       <a class="dropdown-item" href="{% url 'publish' %}">
-                        <i class="bi bi-person-circle" > </i>
+                        <i class="bi bi-file-earmark-text"></i>
                         Create post
                       </a>  
                     </li>
@@ -169,55 +169,14 @@
         </div>
         {% endif %}
         
-          <!--Main body-->
-          {% block main-content%}{% endblock main-content%}
+        <!--Main body-->
+        {% block main-content%}{% endblock main-content%}
 
-          <!--Footer-->
-          <hr class="my-4">
-          <div class="container">
-            <footer class="py-5">
-              <div class="row">
-                <div class="col-6 col-md">
-                  <h5>Home</h5>
-                </div>
-          
-                <div class="col-6 col-md">
-                  <h5>Popular Job</h5>
-                  <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Information Technology</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Finance and Banking</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Business Management</a></li>
-                  </ul>
-                </div>
-          
-                <div class="col-6 col-md">
-                  <h5>Salary</h5>
-                  <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Below 500$</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">500$ - 1000$</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Above 1000$</a></li>
-                  </ul>
-                </div>
-                
-                <div class="col-6 col-md">
-                  <h5>Cities</h5>
-                  <ul class="nav flex-column">
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Ho Chi Minh City</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Ha Noi</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Da Nang</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hue</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nha Trang</a></li>
-                    <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hai Phong</a></li>
-                  </ul>
-                </div>
-
-              </div>
-          
-              <div class="text-center flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <p>© 2023 TouGras. All rights reserved.</p>
-              </div>
-            </footer>
-          </div>
-
+        <!--Footer-->
+        <footer class ="container--fluid bg-success text-center fixed-bottom p-2 mt-5">
+          Copyright 2023
+        </footer>
+      
+      <script src="" async defer></script>
     </body>
 </html>
