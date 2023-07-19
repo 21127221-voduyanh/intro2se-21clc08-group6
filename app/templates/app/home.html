@@ -25,24 +25,24 @@
         
         <div class="container mt-5">
             <div class="row row-cols-1 row-cols-md-2 g-4">
-                {% for post_ in posts %}
+                {% for post in posts %}
                 <div class="col ">
                     <div class="card mt-4 mx-5 w-75">
-                        <a href="{% url 'post' post.id %}">
+                        <a href="{% url 'post'%}">
                             <img src="{% static 'app/image/logo.jpg' %}" alt="Your Picture" class="card-img-top img-fluid">
                         </a>
                         <div class="card-body">
-                            <a class="text-decoration-none" href="{% url 'post' post.id %}">
-                                <h5 class="card-title">{{ post.title }}</h5>
+                            <a class="text-decoration-none" href="{% url 'post' %}">
+                                <h5 class="card-title">Post Title</h5>
                             </a>
-                            <p class="card-text lh-sm">Company Name: {{ post.company_name }}</p>
-                            <p class="card-text lh-sm">City: {{ post.city }}</p>
-                            <p class="card-text lh-sm">Field: {{ post.field }}</p>
-                            <p class="card-text lh-sm">Salary: {{ post.salary }}</p>
-                            <p class="card-text lh-sm">Working hours: {{ post.working_hours }}</p>
+                            <p class="card-text lh-sm">Company Name: </p>
+                            <p class="card-text lh-sm">City: </p>
+                            <p class="card-text lh-sm">Field: </p>
+                            <p class="card-text lh-sm">Salary: </p>
+                            <p class="card-text lh-sm">Working hours:</p>
                             <p class="card-text lh-sm">
-                                <small class="text-body-secondary">Posted {{ post.timestamp|timesince }} ago by</small>
-                                <a href="#" class="text-decoration-none">{{ post.user.username }}</a>
+                                <small class="text-body-secondary">Posted 3 minutes ago by</small>
+                                <a href="#" class="text-decoration-none">username</a>
                             </p>
 
                         </div>
