@@ -44,7 +44,8 @@
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="inputPicURL" class="form-label">Picture (URL):</label>
-                                                <input class="form-control" type="text" id="inputPicURL" name="PicURL">
+                                                {% comment %} <input class="form-control" type="text" id="inputPicURL" name="PicURL" value="{{ form.pic_url }}"> {% endcomment %}
+                                                {{ form.pic_url }}
                                             </div>
                                         </div>
 
@@ -52,7 +53,8 @@
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="inputCaption" class="form-label">Caption:</label>
-                                                <input class="form-control" type="text" id="inputCaption" name="Caption">
+                                                {% comment %} <input class="form-control" type="text" id="inputCaption" name="Caption" value="{{ form.caption }}" required> {% endcomment %}
+                                                {{ form.caption }}
                                             </div>
                                         </div>
 
@@ -60,7 +62,8 @@
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="inputAddress" class="form-label">Address</label>
-                                                <input class="form-control" type="text" id="inputAddress" placeholder="1234 Main St" name="addr">
+                                                {% comment %} <input class="form-control" type="text" id="inputAddress" placeholder="1234 Main St" name="addr" value="{{ form.address }}" required> {% endcomment %}
+                                                {{ form.address }}
                                             </div>
                                         </div>
 
@@ -68,7 +71,8 @@
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="inputJob" class="form-label">Job</label>
-                                                <input class="form-control" type="text" id="inputJob" placeholder="Job title" name="job">
+                                                {% comment %} <input class="form-control" type="text" id="inputJob" placeholder="Job title" name="job"  value="{{ form.job }}" required> {% endcomment %}
+                                                {{ form.job }}
                                             </div>
                                         </div>
 
@@ -76,7 +80,8 @@
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="inputDescription" class="form-label">Job description</label>
-                                                <textarea class="form-control" placeholder="Briefly describe the job" id="inputDescription" style="height: 100px" name="description"></textarea>
+                                                {% comment %} <textarea class="form-control" placeholder="Briefly describe the job" id="inputDescription" style="height: 100px" name="description" value="{{ form.description }}" required></textarea> {% endcomment %}
+                                                {{ form.description }}
                                             </div>
                                         </div>
 
@@ -84,7 +89,8 @@
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="inputHour" class="form-label">Hour</label>
-                                                <input class="form-control" type="text" id="inputHour" placeholder="Working hours" name="hour">
+                                                {% comment %} <input class="form-control" type="text" id="inputHour" placeholder="Working hours" name="hour" value="{{ form.hour }}" required> {% endcomment %}
+                                                {{ form.hour }}
                                             </div>
                                         </div>
 
@@ -92,7 +98,8 @@
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="inputSalary" class="form-label">Salary</label>
-                                                <input class="form-control" type="text" id="inputSalary" placeholder="Salary amount" name="salary">
+                                                {% comment %} <input type="text" id="inputSalary" placeholder="Salary amount" name="salary" value="{{ form.salary }}" required> {% endcomment %}
+                                                {{ form.salary }}
                                             </div>
                                         </div>
 

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from app.models import Employer, Job_finder, User, Post, Comment
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
-from app.form import EUpdateForm, JFUpdateForm
+from app.form import EUpdateForm, JFUpdateForm, PostForm
 from django.core.paginator import Paginator
 # Create your views here.
 
@@ -211,8 +211,17 @@ def post(request, post_id):
     return render(request, 'app/post.html', {'post': post, 'comments': comments})
 
 def publish(request):
-    user = request.user
-    return render(request, 'app/post/publish.html', {'user': user})
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST)   
+        if form.is_valid():
+            form.instance.employer = request.user.employer
+            form.save()
+            messages.error(request, "Post created successfully")
+        else:
+            messages.error(request, "Please complete all information")
+
+    return render(request, 'app/post/publish.html', {'form':form})
 
 def apply(request):
     return render(request,'app/post/apply.html')
