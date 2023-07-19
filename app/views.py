@@ -4,10 +4,16 @@ from app.models import Employer, Job_finder, User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm
+from django.core.paginator import Paginator
 # Create your views here.
 
 def home(request):
-    return render(request,'app/home.html')
+    p = Paginator(User.objects.all().order_by('username'),1)
+    page = request.GET.get('page')
+    posts = p.get_page(page)
+    nums = 'n' * posts.paginator.num_pages
+    context = {'posts': posts, 'nums': nums}
+    return render(request,'app/home.html',context)
 
 def base(request):
     user = request.user
