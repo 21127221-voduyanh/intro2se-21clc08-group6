@@ -157,6 +157,25 @@
                           <a type="apply" class="btn btn-primary btn-lg"  href="{% url 'apply' %}" >Apply</a>
                         </div>
                         {% endif %}
+                        <!-- Like and dislike buttons -->
+                        <form method="POST" action="{% url 'post' post.id %}">
+                            {% csrf_token %}
+                            <button type="submit" name="action" value="like">Like ({{ post.likes.count }})</button>
+                            <button type="submit" name="action" value="dislike">Dislike ({{ post.dislikes.count }})</button>
+                        </form>
+  
+                        <!-- Comment section -->
+                        <h3>Comments:</h3>
+                        {% for comment in comments %}
+                            <p>{{ comment.content }}</p>
+                        {% endfor %}
+                        
+                        <!-- Comment form -->
+                        <form method="POST" action="{% url 'post' post.id %}">
+                            {% csrf_token %}
+                            <textarea name="comment_content" placeholder="Write a comment"></textarea>
+                            <button type="submit" name="action" value="comment">Post Comment</button>
+                        </form>
                     </div>
                 </div>
             </div>
