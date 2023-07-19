@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from app.models import Employer, Job_finder, User
+from app.models import Employer, Job_finder, User, Post, Comment
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm
@@ -191,9 +191,24 @@ def settings(request):
 
     return render(request,'app/settings.html')
     
-def post(request):
-    user = request.user
-    return render(request, 'app/post/post.html', {'user': user})
+def post(request, post_id):
+    post = Post.objects.get(pk=post_id)
+    comments = Comment.objects.filter(post=post)
+
+    if request.method == 'POST':
+        # Process like or dislike action
+        action = request.POST.get('action')
+        if action == 'like':
+            post.likes.add(request.user)
+        elif action == 'dislike':
+            post.dislikes.add(request.user)
+        # Process comment submission
+        elif action == 'comment':
+            content = request.POST.get('comment_content')
+            comment = Comment(user=request.user, post=post, content=content)
+            comment.save()
+
+    return render(request, 'app/post.html', {'post': post, 'comments': comments})
 
 def publish(request):
     user = request.user
