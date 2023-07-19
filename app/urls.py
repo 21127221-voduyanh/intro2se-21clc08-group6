@@ -16,4 +16,5 @@ urlpatterns = [
     path('post/', views.post, name='post'),
     path('publish/', views.publish, name='publish'),
     path('apply/', views.apply, name='apply'),
+    path('about/',views.about,name='about'),
 ]

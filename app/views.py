@@ -196,3 +196,6 @@ def publish(request):
 def apply(request):
     return render(request,'app/post/apply.html')
 
+def about(request):
+    return render(request,'app/about.html')
+
