@@ -28,7 +28,7 @@
                 {% for post in posts %}
                 <div class="col ">
                     <div class="card mt-4 mx-5 w-75">
-                        <a href="{% url 'post' post.id%}">
+                        <a href="{% url 'post' post_id=post.id %}">
                             <img src="{% static 'app/image/logo.jpg' %}" alt="Your Picture" class="card-img-top img-fluid">
                         </a>
                         <div class="card-body">
