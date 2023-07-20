@@ -194,14 +194,22 @@ def settings(request):
 def post(request, post_id):
     post = Post.objects.get(pk=post_id)
     comments = Comment.objects.filter(post=post)
+    user = request.user
 
     if request.method == 'POST':
-        # Process like or dislike action
         action = request.POST.get('action')
         if action == 'like':
-            post.likes.add(request.user)
+            if user in post.likes.all():
+                post.likes.remove(user)
+            else:
+                post.likes.add(user)
+                post.dislikes.remove(user)
         elif action == 'dislike':
-            post.dislikes.add(request.user)
+            if user in post.dislikes.all():
+                post.dislikes.remove(user)
+            else:
+                post.dislikes.add(user)
+                post.likes.remove(user)
         # Process comment submission
         elif action == 'comment':
             content = request.POST.get('comment_content')
