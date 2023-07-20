@@ -157,49 +157,68 @@
                           <a type="apply" class="btn btn-primary btn-lg"  href="{% url 'apply' %}" >Apply</a>
                         </div>
                         {% endif %}
-                        <!-- Like and dislike buttons -->
-                        <form method="POST" action="{% url 'post' post.id %}">
-                            {% csrf_token %}
-                            <button type="submit" name="action" value="like">Like ({{ post.likes.count }})</button>
-                            <button type="submit" name="action" value="dislike">Dislike ({{ post.dislikes.count }})</button>
-                        </form>
-  
-                        <!-- Comment section -->
-                        <h3>Comments:</h3>
-                        <!-- Comment form -->
-                        <form method="POST" action="{% url 'post' post.id %}">
-                            {% csrf_token %}
-                            <textarea name="comment_content" placeholder="Write a comment"></textarea>
-                            <button type="submit" name="action" value="comment">Post Comment</button>
-                        </form>
-                        {% for comment in comments %}
-                            <div class="comment">
-                                <p><strong>{{ comment.user.username }}</strong> - {{ comment.created_at|timesince }} ago</p>
-                                <p>{{ comment.content }}</p>
-                            </div>
-
-                            {% if forloop.counter|divisibleby:10 and not forloop.last %}
-                                <div class="pagination">
-                                    <a href="?page={{ comments.next_page_number }}">Next</a>
-                                    <a href="?page={{ comments.paginator.num_pages }}">Last</a>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-
-                        <!-- Pagination for remaining comments -->
-                        {% if comments.paginator.num_pages > 1 and not comments|length_is:forloop.counter %}
-                            <div class="pagination">
-                                <a href="?page={{ comments.next_page_number }}">Next</a>
-                                <a href="?page={{ comments.paginator.num_pages }}">Last</a>
-                            </div>
-                        {% endif %}
+                        
+                        
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Like and dislike buttons -->
+    <div class="container">
+        <div class="d-flex flex-row align-items-center mb-5 mt-5 mx-5">
+            
+    <form method="POST" action="{% url 'post' post.id %}">
+        {% csrf_token %}
+        <button type="submit" name="action" value="like" class ="btn btn-secondary btn-lg mx-2"><i class="bi bi-hand-thumbs-up "></i></i> ({{ post.likes.count }})</button>
+        <button type="submit" name="action" value="dislike" class ="btn btn-secondary btn-lg mx-2"><i class="bi bi-hand-thumbs-down "></i> ({{ post.dislikes.count }})</button>
+    </form>
+    <div class="col-md-8 col-sm-12 text-center">
+    <!-- Comment section -->
+    <h1>Comments:</h1>
+</div>
+</div>
+    <!-- Comment form -->
+    <form method="POST" action="{% url 'post' post.id %}">
+        {% csrf_token %}
+
+        <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+        <div class="form-outline flex-fill ">
+            <p><strong>{{ comment.user.username }}</strong>
+        <label for="floatingTextarea2"></label>
+        <textarea name="comment_content" class=col-md-3 style="height: 35px" placeholder="Write a comment"></textarea>
+        <button type="submit" name="action" value="comment" >Post Comment</button>                               
+    </form>
+    </div>
     
+    
+    {% for comment in comments %}
+    <div class="card mt-4" >
+        <div class="comment">
+            <p><strong>{{ comment.user.username }}</strong> - {{ comment.created_at|timesince }} ago</p>
+            <p>{{ comment.content }}</p>
+        </div>
+    </div>
+
+        {% if forloop.counter|divisibleby:10 and not forloop.last %}
+            <div class="pagination">
+                <a href="?page={{ comments.next_page_number }}">Next</a>
+                <a href="?page={{ comments.paginator.num_pages }}">Last</a>
+            </div>
+        
+        {% endif %}
+    {% endfor %}
+
+    <!-- Pagination for remaining comments -->
+    {% if comments.paginator.num_pages > 1 and not comments|length_is:forloop.counter %}
+        <div class="pagination">
+            <a href="?page={{ comments.next_page_number }}">Next</a>
+            <a href="?page={{ comments.paginator.num_pages }}">Last</a>
+        </div>
+    {% endif %}
+    </div>
+
     
 </section>
 
