@@ -33,16 +33,17 @@
                         </a>
                         <div class="card-body">
                             <a class="text-decoration-none" href="{% url 'post' %}">
-                                <h5 class="card-title">Post Title</h5>
+                                <h5 class="card-title">{{post.caption}}</h5>
                             </a>
-                            <p class="card-text lh-sm">Company Name: </p>
-                            <p class="card-text lh-sm">City: </p>
-                            <p class="card-text lh-sm">Field: </p>
-                            <p class="card-text lh-sm">Salary: </p>
-                            <p class="card-text lh-sm">Working hours:</p>
+                            <p class="card-text lh-sm">Company Name: {{post.employer.company_name}}</p>
+                            <p class="card-text lh-sm">City: {{post.address}}</p>
+                            <p class="card-text lh-sm">Field: {{post.job}}</p>
+                            <p class="card-text lh-sm">Salary: {{post.salary}}</p>
+                            <p class="card-text lh-sm">Working hours: {{post.hour}}</p>
+                            <p class="card-text lh-sm">ID: {{post.id}}</p>
                             <p class="card-text lh-sm">
-                                <small class="text-body-secondary">Posted 3 minutes ago by</small>
-                                <a href="#" class="text-decoration-none">username</a>
+                                <small class="text-body-secondary">Posted {{post.time_posted}} by</small>
+                                <a href="#" class="text-decoration-none">{{post.employer.user.username}}</a>
                             </p>
 
                         </div>

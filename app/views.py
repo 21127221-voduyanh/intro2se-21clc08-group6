@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 def home(request):
-    p = Paginator(User.objects.all().order_by('username'),1)
+    p = Paginator(Post.objects.all().order_by('created_at'),1)
     page = request.GET.get('page')
     posts = p.get_page(page)
     nums = 'n' * posts.paginator.num_pages
