@@ -35,22 +35,22 @@
                         {% endif%}
                       </div>
                         {% csrf_token %}
-                        <div class="col-auto">
+                        <div class="mx-auto mb-3 w-75">
                             <label for="inputOldPassword" class="form-label">Old Password</label>
                             <input type="password" class="form-control" id="inputPassword" placeholder = "Type old password" name="old_pass">
                         </div>
                     
-                        <div class="col-auto">
+                        <div class="mx-auto mb-3 w-75">
                             <label for="inputNewPassword" class="form-label">New Password</label>
                             <input type="password" class="form-control" id="inputPassword" placeholder = "Type new password" name = "pass">
                         </div>
                     
-                        <div class="col-auto">
+                        <div class="mx-auto mb-3 w-75">
                             <label for="inputConfirmNewPassword" class="form-label">Confirm New Password</label>
                             <input type="password" class="form-control" id="inputPassword" placeholder = "Confirm new password" name ="rpass">
                         </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary btn-lg" name = "Security" value = "ChangePassword">Change password</button>
+                        <div class="mx-auto mt-2 w-auto">
+                            <button type="submit" class="btn btn-primary" name = "Security" value = "ChangePassword">Change password</button>
                         </div>
                     </form>
               </div>
@@ -66,9 +66,11 @@
                   <div class="accordion-body">
                     </div>
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                      Delete Account
-                    </button>
+                    <div class="container text-center">
+                      <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                        Delete Account
+                      </button>
+                    </div>
                     <!-- Modal -->
                     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                       <div class="modal-dialog">
