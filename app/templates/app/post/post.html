@@ -18,7 +18,7 @@
     <div class="container">
         <div class="row justify-content-center mt-5">
             <div class="col-md-10 col-sm-12 text-center">
-                <h1 class="display-10">Caption title</h1>
+                <h1 class="display-10">{{ post.caption }}</h1>
             </div>
         </div>
     </div>
@@ -27,7 +27,7 @@
       <div class="row justify-content-left">
           <div class="col-md-6 offset-md-3">
               <div class="card mb-4 post-card">
-                  <a href="{% url 'post' %}">
+                  <a href="{% url 'post' post_id=post.id %}">
                       <img src="{% static 'app/image/logo.jpg' %}" alt="Your Picture" class="card-img-top img-fluid">
                   </a>
               </div>

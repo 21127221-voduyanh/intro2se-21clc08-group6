@@ -28,21 +28,21 @@
                 {% for post in posts %}
                 <div class="col ">
                     <div class="card mt-4 mx-5 w-75">
-                        <a href="{% url 'post'%}">
+                        <a href="{% url 'post' post.id%}">
                             <img src="{% static 'app/image/logo.jpg' %}" alt="Your Picture" class="card-img-top img-fluid">
                         </a>
                         <div class="card-body">
-                            <a class="text-decoration-none" href="{% url 'post' %}">
-                                <h5 class="card-title">Post Title</h5>
+                            <a class="text-decoration-none" href="{% url 'post' post_id=post.id %}">
+                                <h5 class="card-title">{{ post.caption }}</h5>
                             </a>
-                            <p class="card-text lh-sm">Company Name: </p>
-                            <p class="card-text lh-sm">City: </p>
-                            <p class="card-text lh-sm">Field: </p>
-                            <p class="card-text lh-sm">Salary: </p>
-                            <p class="card-text lh-sm">Working hours:</p>
+                            <p class="card-text lh-sm">Company Name: {{ post.employer.company_name }}</p>
+                            <p class="card-text lh-sm">City: {{ post.address }}</p>
+                            <p class="card-text lh-sm">Field: {{ post.job }}</p>
+                            <p class="card-text lh-sm">Salary: {{ post.salary }}</p>
+                            <p class="card-text lh-sm">Working hours: {{ post.hour }}</p>
                             <p class="card-text lh-sm">
-                                <small class="text-body-secondary">Posted 3 minutes ago by</small>
-                                <a href="#" class="text-decoration-none">username</a>
+                                <small class="text-body-secondary">Posted {{ post.created_at|timesince }} ago by</small>
+                                <a href="#" class="text-decoration-none">{{ post.employer.user.username }}</a>
                             </p>
 
                         </div>
