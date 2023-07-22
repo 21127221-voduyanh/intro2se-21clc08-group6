@@ -68,7 +68,7 @@
                                             <label class="form-label" for="form3Example3c">Contact: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="form3Example3c" class="form-control border-0" name="uname" readonly value="Fixed Contact" />                               
+                                            <input type="text" id="form3Example3c" class="form-control border-0" name="uname" readonly value="{{post.contact}}" />                               
                                         </div>
                                     </div>
                   
@@ -88,7 +88,7 @@
                                             <label for="inputCity" class="form-label">City: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input class="form-control border-0" type="text"  id="inputCity" readonly placeholder="{{ post.city }}" name="city" >
+                                            <input class="form-control border-0" type="text"  id="inputCity" readonly placeholder="{{ post.city }}" name="city here" >
                                         </div>
                                     </div>
                   
@@ -103,6 +103,16 @@
                                     </div>
 
                                     <!-- Additional Labels -->
+                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                        <div class="w-50">
+                                            <i class="fas fa-briefcase fa-lg me-3 fa-fw"></i>
+                                            <label for="formField" class="form-label">Field: </label>
+                                        </div>
+                                        <div class="w-50">
+                                            <input type="text" id="formField" class="form-control border-0" name="field" readonly value="{{post.field}}" />
+                                        </div>
+                                    </div>
+
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-briefcase fa-lg me-3 fa-fw"></i>

@@ -26,6 +26,8 @@ class Employer(models.Model):
 
 class Post(models.Model):
     pic_url = models.URLField(blank=True)
+    company_name=models.CharField(default="",max_length=100)
+    contact = models.CharField(max_length=100, blank=True, null=True)
     introduction = models.TextField(default="")
     city=models.TextField(default="")
     caption = models.CharField(max_length=255)
