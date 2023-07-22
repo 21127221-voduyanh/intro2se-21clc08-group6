@@ -197,19 +197,24 @@ def post(request, post_id):
     user = request.user
 
     if request.method == 'POST':
-        action = request.POST.get('action')
+        action = request.POST.get('action') 
         if action == 'like':
             if user in post.likes.all():
                 post.likes.remove(user)
+                post.is_liked = False
             else:
                 post.likes.add(user)
                 post.dislikes.remove(user)
+                post.is_like = True
+
         elif action == 'dislike':
             if user in post.dislikes.all():
                 post.dislikes.remove(user)
+                post.is_disliked = False
             else:
                 post.dislikes.add(user)
                 post.likes.remove(user)
+                post.is_dislike = True
         # Process comment submission
         elif action == 'comment':
             content = request.POST.get('comment_content')

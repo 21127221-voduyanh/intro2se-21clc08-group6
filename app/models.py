@@ -37,6 +37,9 @@ class Post(models.Model):
     # Additional fields
     likes = models.ManyToManyField(User, related_name='liked_posts')
     dislikes = models.ManyToManyField(User, related_name='disliked_posts')
+    
+    is_liked = models.BooleanField(default=False)
+    is_disliked = models.BooleanField(default=False)
     # Time posted function
     def __str__(self):
         return self.caption
