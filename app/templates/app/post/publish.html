@@ -70,24 +70,24 @@
                                         <div class="d-flex flex-row align-items-center mb-4">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
-                                                <label for="inputGender" class="form-label">Field :</label>
-                                                <select class="form-select" aria-label="Default select example">
-                                                    <option selected>Field</option>
-                                                    <option value="1">Medicine</option>
-                                                    <option value="2">Law</option>
-                                                    <option value="3">Information Technology</option>
-                                                    <option value="4">Finance and Banking</option>
-                                                    <option value="5">Business Management</option>
-                                                    <option value="6">Education</option>
-                                                    <option value="7">Insurance Business</option>
-                                                    <option value="8">Real Estate</option>
-                                                    <option value="9">Tourism</option>
-                                                    <option value="10">Electronics/Electricity</option>
-                                                    <option value="11">Architecture</option>
-                                                    <option value="12">Tourism</option>
-                                                    <option value="13">Hotel and Restaurant</option>
-                                                    <option value="14">Construction/Building</option>
-                                                    <option value="15">Finacial Investment</option>
+                                                <label for="inputField" class="form-label">Field :</label>
+                                                <select id="inputField" name="field" class="form-select" aria-label="Default select example">
+                                                    <option value="">Field</option>
+                                                    <option value="Medicine" {% if post.field == 'Medicine' %}selected{% endif %}>Medicine</option>
+                                                    <option value="Law" {% if post.field == 'Law' %}selected{% endif %}>Law</option>
+                                                    <option value="Information Technology" {% if post.field == 'Information Technology' %}selected{% endif %}>Information Technology</option>
+                                                    <option value="Finance and Banking"{% if post.field == 'Finance and Banking' %}selected{% endif %}>Finance and Banking</option>
+                                                    <option value="Business Management"{% if post.field == 'Business Management' %}selected{% endif %}>Business Management</option>
+                                                    <option value="Education"{% if post.field == 'Education' %}selected{% endif %}>Education</option>
+                                                    <option value="Insurance Business"{% if post.field == 'Insurance Business' %}selected{% endif %}>Insurance Business</option>
+                                                    <option value="Real Estate"{% if post.field == 'Real Estate' %}selected{% endif %}>Real Estate</option>
+                                                    <option value="Tourism"{% if post.field == 'Tourism' %}selected{% endif %}>Tourism</option>
+                                                    <option value="Electronics/Electricity"{% if post.field == 'Electronics/Electricity' %}selected{% endif %}>Electronics/Electricity</option>
+                                                    <option value="Architecture"{% if post.field == 'Architecture' %}selected{% endif %}>Architecture</option>
+                                                    <option value="Tourism"{% if post.field == 'Tourism' %}selected{% endif %}>Tourism</option>
+                                                    <option value="Hotel and Restaurant"{% if post.field == 'Hotel and Restaurant' %}selected{% endif %}>Hotel and Restaurant</option>
+                                                    <option value="Construction/Building"{% if post.field == 'Construction/Building' %}selected{% endif %}>Construction/Building</option>
+                                                    <option value="Finacial Investment"{% if post.field == 'Finacial Investment' %}selected{% endif %}>Finacial Investment</option>
                                                 </select>
                                             </div>
                                         </div>

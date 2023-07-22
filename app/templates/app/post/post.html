@@ -55,17 +55,17 @@
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                            <label class="form-label" for="form3Example1c">Company Name:</label>
+                                            <label class="form-label" for="form3Example1c">Company Name: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="form3Example1c" class="form-control border-0" name="cname" readonly value="Fixed Company Name" />
+                                            <input type="text" id="form3Example1c" class="form-control border-0" name="cname" readonly value="{{post.company_name}}" />
                                         </div>
                                     </div>
                                      
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                            <label class="form-label" for="form3Example3c">Contact:</label>
+                                            <label class="form-label" for="form3Example3c">Contact: </label>
                                         </div>
                                         <div class="w-50">
                                             <input type="text" id="form3Example3c" class="form-control border-0" name="uname" readonly value="Fixed Contact" />                               
@@ -75,30 +75,30 @@
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="inputAddress" class="form-label">Address:</label>
+                                            <label for="inputAddress" class="form-label">Address: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input class="form-control border-0" type="text"  id="inputAddress" readonly placeholder="Fixed Address" name="addr">
-                                        </div>
-                                    </div>
-                  
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
-                                        <div class="w-50">
-                                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="inputCity" class="form-label">City:</label>
-                                        </div>
-                                        <div class="w-50">
-                                            <input class="form-control border-0" type="text"  id="inputCity" readonly placeholder="Fixed City" name="city">
+                                            <input class="form-control border-0" type="text"  id="inputAddress" readonly value="{{post.address}}" name="addr">
                                         </div>
                                     </div>
                   
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="floatingTextarea2">Introduction:</label>
+                                            <label for="inputCity" class="form-label">City: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input class="form-control border-0" type="text" id="floatingTextarea2" name="intro" readonly value="Fixed Introduction" />                               
+                                            <input class="form-control border-0" type="text"  id="inputCity" readonly placeholder="{{ post.city }}" name="city" >
+                                        </div>
+                                    </div>
+                  
+                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                        <div class="w-50">
+                                            <i class="fas fa-key fa-lg me-3 fa-fw"></i>
+                                            <label for="floatingTextarea2">Introduction: </label>
+                                        </div>
+                                        <div class="w-50">
+                                            <input class="form-control border-0" type="text" id="floatingTextarea2" name="intro" readonly value="{{post.introduction}}" />                               
                                         </div>
                                     </div>
 
@@ -106,40 +106,40 @@
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-briefcase fa-lg me-3 fa-fw"></i>
-                                            <label for="formJob" class="form-label">Job:</label>
+                                            <label for="formJob" class="form-label">Job: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="formJob" class="form-control border-0" name="job" readonly value="Fixed Job" />
+                                            <input type="text" id="formJob" class="form-control border-0" name="job" readonly value="{{post.job}}" />
                                         </div>
                                     </div>
 
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-info-circle fa-lg me-3 fa-fw"></i>
-                                            <label for="formJobDescription" class="form-label">Job Description:</label>
+                                            <label for="formJobDescription" class="form-label">Job Description: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="formJobDescription" class="form-control border-0" name="job_description" readonly value="Fixed Job Description" />
+                                            <input type="text" id="formJobDescription" class="form-control border-0" name="job_description" readonly value="{{post.description}}" />
                                         </div>
                                     </div>
 
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-clock fa-lg me-3 fa-fw"></i>
-                                            <label for="formHour" class="form-label">Hour:</label>
+                                            <label for="formHour" class="form-label">Hour: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="formHour" class="form-control border-0" name="hour" readonly value="Fixed Hour" />
+                                            <input type="text" id="formHour" class="form-control border-0" name="hour" readonly value="{{post.hour}}" />
                                         </div>
                                     </div>
 
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-money-bill-alt fa-lg me-3 fa-fw"></i>
-                                            <label for="formSalary" class="form-label">Salary:</label>
+                                            <label for="formSalary" class="form-label">Salary: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="formSalary" class="form-control border-0" name="salary" readonly value="Fixed Salary" />
+                                            <input type="text" id="formSalary" class="form-control border-0" name="salary" readonly value="{{ post.salary }}" />
                                         </div>
                                     </div>
 

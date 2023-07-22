@@ -229,6 +229,8 @@ def publish(request):
         form = PostForm(request.POST)   
         if form.is_valid():
             form.instance.employer = request.user.employer
+            form.instance.introduction=request.user.employer.introduction
+            form.instance.city=request.user.employer.city
             form.save()
             messages.error(request, "Post created successfully")
         else:

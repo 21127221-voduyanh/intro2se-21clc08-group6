@@ -25,9 +25,12 @@ class Employer(models.Model):
     introduction=models.TextField()
 
 class Post(models.Model):
-    pic_url = models.URLField()
+    pic_url = models.URLField(blank=True)
+    introduction = models.TextField(default="")
+    city=models.TextField(default="")
     caption = models.CharField(max_length=255)
     address = models.TextField()
+    field=models.CharField(default="",max_length=100)
     job = models.CharField(max_length=255)
     description = models.TextField()
     hour = models.CharField(max_length=255)
