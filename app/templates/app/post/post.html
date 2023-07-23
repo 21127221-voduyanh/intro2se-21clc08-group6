@@ -175,31 +175,40 @@
         </div>
     </div>
 
+    <!-- Hide and Delete post-->
+    {% if user.is_employer%}
+     <hr class="my-4">
+        <div class="d-grid gap-2 d-md-flex col-6 mx-auto">
+             <a type="button" class="btn btn-secondary btn-lg col-sm-6" href="{% url 'home' %}">Hide Post</a>
+            <a type="submit" class="btn btn-danger btn-lg col-sm-6" href="#">Delete Post</a>
+         </div>
+    {% endif %}
     <!-- Like and dislike buttons -->
     <div class="container">
         <div class="d-flex flex-row align-items-center mb-5 mt-5 mx-5">
             
-    <form method="POST" action="{% url 'post' post.id %}">
-        {% csrf_token %}
+            <form method="POST" action="{% url 'post' post.id %}">
+                {% csrf_token %}
 
-        {% if post.is_liked%}
-        <button type="submit" name="action" value="like" class ="btn btn-primary btn-lg mx-2"><i class="bi bi-hand-thumbs-up-fill "></i></i> ({{ post.likes.count }})</button>
-        {% else %}
-        <button type="submit" name="action" value="like" class ="btn btn-secondary btn-lg mx-2"><i class="bi bi-hand-thumbs-up "></i></i> ({{ post.likes.count }})</button>
-        {% endif %}
+                {% if post.is_liked%}
+                <button type="submit" name="action" value="like" class ="btn btn-primary btn-lg mx-2"><i class="bi bi-hand-thumbs-up-fill "></i></i> ({{ post.likes.count }})</button>
+                {% else %}
+                <button type="submit" name="action" value="like" class ="btn btn-secondary btn-lg mx-2"><i class="bi bi-hand-thumbs-up "></i></i> ({{ post.likes.count }})</button>
+                {% endif %}
 
-        {% if  post.is_disliked%}
-        <button type="submit" name="action" value="dislike" class ="btn btn-danger btn-lg mx-2"><i class="bi bi-hand-thumbs-down-fill "></i> ({{ post.dislikes.count }})</button>
-        {% else %}
-        <button type="submit" name="action" value="dislike" class ="btn btn-secondary btn-lg mx-2"><i class="bi bi-hand-thumbs-down "></i></i> ({{ post.dislikes.count }})</button>
-        {% endif %}
-    
+                {% if  post.is_disliked%}
+                <button type="submit" name="action" value="dislike" class ="btn btn-danger btn-lg mx-2"><i class="bi bi-hand-thumbs-down-fill "></i> ({{ post.dislikes.count }})</button>
+                {% else %}
+                <button type="submit" name="action" value="dislike" class ="btn btn-secondary btn-lg mx-2"><i class="bi bi-hand-thumbs-down "></i></i> ({{ post.dislikes.count }})</button>
+                {% endif %}
+            
 
-    </form>
+            </form>
+        </div>
+    </div>
     <div class="col-md-8 col-sm-12 text-center">
     <!-- Comment section -->
     <h1>Comments:</h1>
-    </div>
     </div>
     <!-- Comment form -->
     <form method="POST" action="{% url 'post' post.id %}">
@@ -212,44 +221,22 @@
         <textarea name="comment_content" class=col-md-3 style="height: 35px" placeholder="Write a comment"></textarea>
         <button type="submit" name="action" value="comment" >Post Comment</button>                               
     </form>
-    </div>
     
     
     {% for comment in comments %}
-    <div class="card mt-4" >
-        <div class="comment">
-            <p><strong>{{ comment.user.username }}</strong> - {{ comment.created_at|timesince }} ago</p>
-            <p>{{ comment.content }}</p>
-        </div>
-    </div>
-
-        {% if forloop.counter|divisibleby:10 and not forloop.last %}
-            <div class="pagination">
-                <a href="?page={{ comments.next_page_number }}">Next</a>
-                <a href="?page={{ comments.paginator.num_pages }}">Last</a>
+        <div class="card mt-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-0"><strong>{{ comment.user.username }}</strong></h6>
+                        <small class="text-muted">{{ comment.created_at|timesince }} ago</small>
+                    </div>
+                </div>
+                <hr>
+                <p>{{ comment.content }}</p>
             </div>
-        
-        {% endif %}
-    {% endfor %}
-
-    <!-- Pagination for remaining comments -->
-    {% if comments.paginator.num_pages > 1 and not comments|length_is:forloop.counter %}
-        <div class="pagination">
-            <a href="?page={{ comments.next_page_number }}">Next</a>
-            <a href="?page={{ comments.paginator.num_pages }}">Last</a>
         </div>
-    {% endif %}
-    </div>
-
-
-    <!-- Hide and Delete post-->
-    {% if user.is_employer%}
-     <hr class="my-4">
-        <div class="d-grid gap-2 d-md-flex col-6 mx-auto">
-             <a type="button" class="btn btn-secondary btn-lg col-sm-6" href="{% url 'home' %}">Hide Post</a>
-            <a type="submit" class="btn btn-danger btn-lg col-sm-6" href="#">Delete Post</a>
-         </div>
-    {% endif %}
+    {% endfor %}
 
 </section>
 
