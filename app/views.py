@@ -5,16 +5,30 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm, PostForm
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
 def home(request):
-    p = Paginator(Post.objects.all().order_by('-created_at'),1)
+    user =request.user
+    employer = None
+
+    # Check if the user is an employer and has an employer profile
+    if user.is_authenticated and hasattr(user, 'employer'):
+        employer = user.employer
+
+    # Get all posts and exclude hidden posts of other users
+    if employer:
+        posts = Post.objects.filter(Q(is_hidden=False) | Q(employer=employer)).order_by('-created_at')
+    else:
+        posts = Post.objects.filter(is_hidden=False).order_by('-created_at')
+
+    p = Paginator(posts, 1)
     page = request.GET.get('page')
     posts = p.get_page(page)
     nums = 'n' * posts.paginator.num_pages
-    context = {'posts': posts, 'nums': nums}
+    context = {'posts': posts, 'nums': nums, 'user': request.user}
     return render(request,'app/home.html',context)
 
 def base(request):
@@ -194,7 +208,7 @@ def settings(request):
     return render(request,'app/settings.html')
     
 def post(request, post_id):
-    post = Post.objects.get(pk=post_id)
+    post = get_object_or_404(Post, pk=post_id)
     comments = Comment.objects.filter(post=post)
     user = request.user
     is_owner = False
@@ -225,6 +239,18 @@ def post(request, post_id):
             content = request.POST.get('comment_content')
             comment = Comment(user=request.user, post=post, content=content)
             comment.save()
+        # Handle hiding and unhiding the post
+        elif is_owner and action == 'hide':
+            post.is_hidden = True
+            post.save()
+
+        elif is_owner and action == 'unhide':
+            post.is_hidden = False
+            post.save()
+        #Handle delete post
+        elif is_owner and action=='delete':
+            post.delete()
+            return redirect('home')
 
     return render(request, 'app/post/post.html', {'post': post, 'comments': comments, 'is_owner': is_owner})
 

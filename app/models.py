@@ -39,6 +39,8 @@ class Post(models.Model):
     salary = models.CharField(max_length=255)
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    # Hide function uses here
+    is_hidden = models.BooleanField(default=False)
     # Additional fields
     likes = models.ManyToManyField(User, related_name='liked_posts')
     dislikes = models.ManyToManyField(User, related_name='disliked_posts')
