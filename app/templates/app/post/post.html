@@ -179,8 +179,24 @@
     {% if is_owner %}
         <hr class="my-4">
         <div class="d-grid gap-2 d-md-flex col-6 mx-auto">
-            <a type="button" class="btn btn-secondary btn-lg col-sm-6" href="{% url 'home' %}">Hide Post</a>
-            <a type="submit" class="btn btn-danger btn-lg col-sm-6" href="#">Delete Post</a>
+            {% if not post.is_hidden %}
+                <form method="POST" action="{% url 'post' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="hide">
+                    <button type="submit" class="btn btn-secondary btn-lg col-sm-10">Hide Post</button>
+                </form>
+            {% else %}
+                <form method="POST" action="{% url 'post' post.id %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="unhide">
+                    <button type="submit" class="btn btn-primary btn-lg col-sm-10">Unhide Post</button>
+                </form>
+            {% endif %}
+            <form method="POST" action="{% url 'post' post.id %}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="delete">
+                <button type="submit" class="btn btn-danger btn-lg col-sm-10">Delete Post</button>
+            </form>
         </div>
     {% endif %}
     <!-- Like and dislike buttons -->
