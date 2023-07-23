@@ -197,6 +197,9 @@ def post(request, post_id):
     post = Post.objects.get(pk=post_id)
     comments = Comment.objects.filter(post=post)
     user = request.user
+    is_owner = False
+    if user == post.employer.user:
+        is_owner = True
 
     if request.method == 'POST':
         action = request.POST.get('action') 
@@ -223,7 +226,7 @@ def post(request, post_id):
             comment = Comment(user=request.user, post=post, content=content)
             comment.save()
 
-    return render(request, 'app/post/post.html', {'post': post, 'comments': comments})
+    return render(request, 'app/post/post.html', {'post': post, 'comments': comments, 'is_owner': is_owner})
 
 def publish(request):
     form = PostForm()
