@@ -176,12 +176,12 @@
     </div>
 
     <!-- Hide and Delete post-->
-    {% if user.is_employer%}
-     <hr class="my-4">
+    {% if is_owner %}
+        <hr class="my-4">
         <div class="d-grid gap-2 d-md-flex col-6 mx-auto">
-             <a type="button" class="btn btn-secondary btn-lg col-sm-6" href="{% url 'home' %}">Hide Post</a>
+            <a type="button" class="btn btn-secondary btn-lg col-sm-6" href="{% url 'home' %}">Hide Post</a>
             <a type="submit" class="btn btn-danger btn-lg col-sm-6" href="#">Delete Post</a>
-         </div>
+        </div>
     {% endif %}
     <!-- Like and dislike buttons -->
     <div class="container">
