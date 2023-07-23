@@ -58,12 +58,13 @@
               <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{user.username}}</p>
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{user2.username}}</p>
                   <div class="form-container">
                     <form method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
                       <fieldset class="form-group">
                         <legend class="border-bottom mb-4"><b>Profile Info</b></legend>
+                        {%if user2 == user%}
                         <div class="form-group">
                           <label for="full-name">Full Name</label>
                           <input type="text" id="full-name" name="full_name" value="{{ jf.full_name }}" required>
@@ -95,6 +96,35 @@
                         <div class="form-group">
                           <button class="btn btn-outline-info" type="submit">Update</button>
                         </div>
+                        {%else%}
+                        <div class="form-group">
+                          <label for="full-name">Full Name</label>
+                          <input type="text" id="full-name" name="full_name" readonly value="{{ jf.full_name }}" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="gender">Gender</label>
+                          <select id="gender" name="gender" required>
+                            <option readonly value="">Choose your Gender</option>
+                            <option value="Male" {% if jf.gender == 'Male' %}selected{% endif %}>Male</option>
+                            <option value="Female" {% if jf.gender == 'Female' %}selected{% endif %}>Female</option>
+                          </select>
+                        </div>
+                        <div class="form-group">
+                          <label for="address">Address</label>
+                          <textarea id="address" name="address" rows="3" required readonly>{{ jf.address }}</textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="city">City</label>
+                          <input type="text" id="city" name="city" readonly value="{{ jf.city }}" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="date-of-birth">Date of Birth</label>
+                          <input type="date" id="date-of-birth" name="date_of_birth" readonly value="{{ jf.date_of_birth }}" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="introduction">Introduction</label>
+                          <textarea id="introduction" name="introduction" rows="5" required readonly>{{ jf.introduction }}</textarea>
+                        {%endif%}
                       </fieldset>
                     </form>
                   </div>

@@ -18,7 +18,7 @@ def home(request):
     return render(request,'app/home.html',context)
 
 def base(request):
-    user = request.user.is_authenticated
+    user = request.user
     context = {'user': user}
     return render(request,'app/base.html',context)
 
@@ -114,36 +114,36 @@ def login_user(request):
 
 @login_required(login_url="/login/")
 def profile(request,username):
-    user = User.objects.get(username=username) 
-    if user.is_authenticated:
-        if user.is_job_finder:
+    user2 = User.objects.get(username=username) 
+    if user2.is_authenticated:
+        if user2.is_job_finder:
             if request.method == 'POST':
-                u_form = JFUpdateForm(request.POST, instance=user.job_finder)
+                u_form = JFUpdateForm(request.POST, instance=user2.job_finder)
                 if u_form.is_valid():
                     u_form.save()
                     messages.success(request, 'Your account has been updated!')
-                    return redirect('profileJF')
+                    return redirect('profile')
 
             else:
-                u_form = JFUpdateForm(instance=user.job_finder)
+                u_form = JFUpdateForm(instance=user2.job_finder)
 
-            jf = Job_finder.objects.get(user=user)
-            context = {'user':user,'jf': jf, 'u_form': u_form}
+            jf = Job_finder.objects.get(user=user2)
+            context = {'user2':user2,'jf': jf, 'u_form': u_form}
             return render(request, 'app/user/profileJF.html', context)
         
-        elif user.is_employer:
+        elif user2.is_employer:
             if request.method == 'POST':
-                u_form = EUpdateForm(request.POST, instance=user.employer)
+                u_form = EUpdateForm(request.POST, instance=user2.employer)
                 if u_form.is_valid():
                     u_form.save()
                     messages.success(request, 'Your account has been updated!')
-                    return redirect('profileE')
+                    return redirect('profile')
 
             else:
-                u_form = EUpdateForm(instance=user.employer)
+                u_form = EUpdateForm(instance=user2.employer)
 
-            em = Employer.objects.get(user=user)
-            context = {'user':user,'em': em, 'u_form': u_form}
+            em = Employer.objects.get(user=user2)
+            context = {'user2':user2,'em': em, 'u_form': u_form}
             return render(request, 'app/user/profileE.html', context)
         
     return redirect('home')

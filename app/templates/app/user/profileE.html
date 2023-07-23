@@ -57,12 +57,13 @@
               <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
 
-                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{user.username}}</p>
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">{{user2.username}}</p>
                   <div class="form-container">
                     <form method="POST" enctype="multipart/form-data">
                       {% csrf_token %}
                       <fieldset class="form-group">
                         <legend class="border-bottom mb-4"><b>Profile Info</b></legend>
+                        {%if user2 == user%}
                         <div class="form-group">
                           <label for="company-name">Company Name</label>
                           <input type="text" id="company-name" name="company_name" value="{{ em.company_name }}" required>
@@ -82,6 +83,24 @@
                         <div class="form-group">
                           <button class="btn btn-outline-info" type="submit">Update</button>
                         </div>
+                        {%else%}
+                        <div class="form-group">
+                          <label for="company-name">Company Name</label>
+                          <input type="text" id="company-name" name="company_name" readonly value="{{ em.company_name }}" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="address">Address</label>
+                          <textarea id="address" name="address" rows="3" required readonly>{{ em.address }}</textarea>
+                        </div>
+                        <div class="form-group">
+                          <label for="city">City</label>
+                          <input type="text" id="city" name="city" readonly value="{{ em.city }}" required>
+                        </div>
+                        <div class="form-group">
+                          <label for="introduction">Introduction</label>
+                          <textarea id="introduction" name="introduction" rows="5" required readonly>{{ em.introduction }}</textarea>
+                        </div>
+                        {%endif%}
                       </fieldset>
                     </form>
                   </div>
