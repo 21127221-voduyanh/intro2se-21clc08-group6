@@ -5,6 +5,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm, PostForm
 from django.core.paginator import Paginator
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 
 def home(request):
@@ -16,7 +18,7 @@ def home(request):
     return render(request,'app/home.html',context)
 
 def base(request):
-    user = request.user
+    user = request.user.is_authenticated
     context = {'user': user}
     return render(request,'app/base.html',context)
 
@@ -110,9 +112,9 @@ def login_user(request):
             
     return render(request,'app/user/login.html')
 
-
-def profileA(request):
-    user = request.user 
+@login_required(login_url="/login/")
+def profile(request,username):
+    user = User.objects.get(username=username) 
     if user.is_authenticated:
         if user.is_job_finder:
             if request.method == 'POST':

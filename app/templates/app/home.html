@@ -46,7 +46,7 @@
                             <p class="card-text lh-sm">Working hours: {{ post.hour }}</p>
                             <p class="card-text lh-sm">
                                 <small class="text-body-secondary">Posted {{ post.created_at|timesince }} ago by</small>
-                                <a href="#" class="text-decoration-none">{{ post.employer.user.username }}</a>
+                                <a href="{% url 'profile' username=post.employer.user.username %}" class="text-decoration-none">{{ post.employer.user.username }}</a>
                             </p>
 
                         </div>
