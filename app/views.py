@@ -4,7 +4,7 @@ from app.models import Employer, Job_finder, User, Post, Comment
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm, PostForm
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
@@ -277,5 +277,17 @@ def about(request):
     return render(request,'app/about.html')
 
 def search(request):
-    return render(request,'app/search.html')
-
+    searched = request.GET.get('searched', "")
+    posts = Post.objects.filter(caption__contains=searched)
+    count = Post.objects.filter(caption__contains=searched).count
+    p = Paginator(posts, 1)
+    page = request.GET.get('page')
+    try:
+        posts = p.page(page)
+    except EmptyPage:
+        posts = p.page(p.num_pages)
+    except:
+        posts = p.page(1)
+    nums = 'n' * posts.paginator.num_pages
+    context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count}
+    return render(request,'app/search.html',context)
