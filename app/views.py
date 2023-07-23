@@ -245,3 +245,6 @@ def apply(request):
 def about(request):
     return render(request,'app/about.html')
 
+def search(request):
+    return render(request,'app/search.html')
+
