@@ -7,6 +7,7 @@ from app.form import EUpdateForm, JFUpdateForm, PostForm
 from django.core.paginator import Paginator, EmptyPage
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
+from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 
 # Create your views here.
 
@@ -278,10 +279,22 @@ def about(request):
 
 def search(request):
     searched = request.GET.get('searched', "")
-    posts = Post.objects.filter(caption__contains=searched)
-    count = Post.objects.filter(caption__contains=searched).count
+    check = False
+    action = request.GET.get('flexRadioDefault',"")
+    if action == 'option2':
+        check = True
+        posts = Post.objects.filter(caption__contains=searched).order_by('-created_at')
+        count = Post.objects.filter(caption__contains=searched).order_by('-created_at').count
+        messages.error(request,'Sort applied')
+    elif action == 'option1':
+        posts = Post.objects.filter(caption__icontains=searched)
+        count = Post.objects.filter(caption__icontains=searched).count
+        messages.error(request,'Sort applied')
+    else:
+        posts = Post.objects.filter(caption__icontains=searched)
+        count = Post.objects.filter(caption__icontains=searched).count
     p = Paginator(posts, 1)
-    page = request.GET.get('page')
+    page = request.GET.get('page',1)
     try:
         posts = p.page(page)
     except EmptyPage:
@@ -289,5 +302,5 @@ def search(request):
     except:
         posts = p.page(1)
     nums = 'n' * posts.paginator.num_pages
-    context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count}
+    context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count,'check': check}
     return render(request,'app/search.html',context)
