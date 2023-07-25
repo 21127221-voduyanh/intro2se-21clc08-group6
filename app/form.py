@@ -20,8 +20,6 @@ class CommentForm(forms.ModelForm):
         }
 
 class PostForm(forms.ModelForm):
-    pic_url = forms.URLField(label='Picture (URL)', required=False)
-    contact = forms.CharField(label='Contact', required=False)
     class Meta:
         model = Post
-        fields = ['pic_url', 'caption','contact', 'address','field', 'job', 'description', 'hour', 'salary']
+        fields = ['pic_url', 'caption','contact', 'address', 'job', 'description', 'hour', 'salary']

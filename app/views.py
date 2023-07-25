@@ -258,12 +258,12 @@ def post(request, post_id):
 def publish(request):
     form = PostForm()
     if request.method == 'POST':
-        form = PostForm(request.POST)   
+        form = PostForm(request.POST, request.FILES)   
         if form.is_valid():
             form.instance.employer = request.user.employer
-            form.instance.introduction=request.user.employer.introduction
-            form.instance.city=request.user.employer.city
-            form.instance.company_name=request.user.employer.company_name
+            # form.instance.introduction=request.user.employer.introduction
+            # form.instance.city=request.user.employer.city
+            # form.instance.company_name=request.user.employer.company_name
             form.save()
             messages.error(request, "Post created successfully")
         else:

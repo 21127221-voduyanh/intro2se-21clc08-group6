@@ -25,15 +25,29 @@ class Employer(models.Model):
     introduction=models.TextField()
 
 class Post(models.Model):
-    pic_url = models.URLField(blank=True)
-    company_name=models.CharField(default="",max_length=100)
+    pic_url = models.ImageField()
+    # company_name=models.CharField(default="",max_length=100)
     contact = models.CharField(max_length=100, blank=True, null=True)
-    introduction = models.TextField(default="")
-    city=models.TextField(default="")
+    # introduction = models.TextField(default="")
+    # city=models.TextField(default="")
     caption = models.CharField(max_length=255)
     address = models.TextField()
-    field=models.CharField(default="",max_length=100)
-    job = models.CharField(max_length=255)
+    field = ( ('Medicine', 'Medicine'),
+            ('Law', 'Law'),
+            ('Information Technology', 'Information Technology'),
+            ('Finance and Banking', 'Finance and Banking'),
+            ('Business Management', 'Business Management'),
+            ('Education', 'Education'),
+            ('Insurance Business', 'Insurance Business'),
+            ('Real Estate', 'Real Estate'),
+            ('Tourism', 'Tourism'),
+            ('Electronics/Electricity', 'Electronics/Electricity'),
+            ('Architecture', 'Architecture'),
+            ('Hotel and Restaurant', 'Hotel and Restaurant'),
+            ('Construction/Building', 'Construction/Building'),
+            ('Finacial Investment', 'Finacial Investment'),
+        )
+    job = models.CharField(choices=field)
     description = models.TextField()
     hour = models.CharField(max_length=255)
     salary = models.CharField(max_length=255)
