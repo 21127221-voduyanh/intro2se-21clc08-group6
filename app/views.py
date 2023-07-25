@@ -278,18 +278,18 @@ def about(request):
     return render(request,'app/about.html')
 
 def search(request):
+    if request.GET.get('apply') == 'applied':
+        messages.error(request,'Sort applied')
     searched = request.GET.get('searched', "")
     check = False
-    action = request.GET.get('flexRadioDefault',"")
-    if action == 'option2':
+    sort = request.GET.get('sort',"")
+    if sort == 'postdate':
         check = True
         posts = Post.objects.filter(caption__contains=searched).order_by('-created_at')
         count = Post.objects.filter(caption__contains=searched).order_by('-created_at').count
-        messages.error(request,'Sort applied')
-    elif action == 'option1':
+    elif sort == 'relevancy':
         posts = Post.objects.filter(caption__icontains=searched)
         count = Post.objects.filter(caption__icontains=searched).count
-        messages.error(request,'Sort applied')
     else:
         posts = Post.objects.filter(caption__icontains=searched)
         count = Post.objects.filter(caption__icontains=searched).count
@@ -302,5 +302,5 @@ def search(request):
     except:
         posts = p.page(1)
     nums = 'n' * posts.paginator.num_pages
-    context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count,'check': check}
+    context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count,'check': check, 'sort': sort}
     return render(request,'app/search.html',context)
