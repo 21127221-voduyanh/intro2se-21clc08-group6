@@ -36,7 +36,7 @@
                                         {% if post.pic_url %}
                                         <img src="{{ post.pic_url.url }}" alt="{{ post.caption }}" style="object-fit:contain;width:400px;height:400px;"class="card-img-top img-fluid mx-auto d-block">
                                         {% else %}
-                                        <img src="{% static 'app/image/logo.jpg' %}" alt="{{ post.caption }}" class="card-img-top img-fluid">
+                                        <img src="{% static 'app/image/logo.jpg' %}" alt="{{ post.caption }}" style="object-fit:contain;width:400px;height:400px;"class="card-img-top img-fluid mx-auto d-block">
                                         {% endif %}
                                     </a>
                                     <div class="card-body">
@@ -62,7 +62,7 @@
                                 {% if post.pic_url %}
                                 <img src="{{ post.pic_url.url }}" alt="{{ post.caption }}" style="object-fit:contain;width:400px;height:400px;" class="card-img-top-center img-fluid mx-auto d-block">
                                 {% else %}
-                                <img src="{% static 'app/image/logo.jpg' %}" alt="{{ post.caption }}" class="card-img-top img-fluid">
+                                <img src="{% static 'app/image/logo.jpg' %}" alt="{{ post.caption }}"style="object-fit:contain;width:400px;height:400px;"class="card-img-top img-fluid mx-auto d-block">
                                 {% endif %}
                             </a>
                             <div class="card-body">
