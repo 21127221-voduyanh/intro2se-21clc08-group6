@@ -25,7 +25,7 @@ def home(request):
     else:
         posts = Post.objects.filter(is_hidden=False).order_by('-created_at')
 
-    p = Paginator(posts, 1)
+    p = Paginator(posts, 9)
     page = request.GET.get('page')
     posts = p.get_page(page)
     nums = 'n' * posts.paginator.num_pages
