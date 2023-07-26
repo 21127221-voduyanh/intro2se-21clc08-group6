@@ -212,12 +212,21 @@ def post(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments = Comment.objects.filter(post=post)
     user = request.user
-    is_owner = False
-    if user == post.employer.user:
-        is_owner = True
+    is_owner = user == post.employer.user if user.is_authenticated else False
+    liked_comments = Comment.objects.filter(post=post, likes=user)
+    disliked_comments = Comment.objects.filter(post=post, dislikes=user)
+    context = {
+        'post': post,
+        'comments': comments,
+        'is_owner': is_owner,
+        'liked_comments': liked_comments,
+        'disliked_comments': disliked_comments
+    }   
+
 
     if request.method == 'POST':
         action = request.POST.get('action') 
+        #like/dislike post
         if action == 'like':
             if user in post.likes.all():
                 post.likes.remove(user)
@@ -226,6 +235,7 @@ def post(request, post_id):
                 post.likes.add(user)
                 post.dislikes.remove(user)
                 post.is_like = True
+            return redirect('post', post_id=post_id)
 
         elif action == 'dislike':
             if user in post.dislikes.all():
@@ -235,25 +245,49 @@ def post(request, post_id):
                 post.dislikes.add(user)
                 post.likes.remove(user)
                 post.is_dislike = True
+            return redirect('post', post_id=post_id)
+        #like/dislike comments
+        elif action =='like_comment':
+            comment_id = request.POST.get('comment_id')
+            comment = get_object_or_404(Comment, pk=comment_id)
+            if user in comment.likes.all():
+                comment.likes.remove(user)
+            else:
+                comment.likes.add(user)
+                comment.dislikes.remove(user)
+            return redirect('post', post_id=post_id)
+
+        elif action == 'dislike_comment':
+            comment_id = request.POST.get('comment_id')
+            comment = get_object_or_404(Comment, pk=comment_id)
+            if user in comment.dislikes.all():
+                comment.dislikes.remove(user)
+            else:
+                comment.dislikes.add(user)
+                comment.likes.remove(user)
+            return redirect('post', post_id=post_id)
         # Process comment submission
         elif action == 'comment':
             content = request.POST.get('comment_content')
             comment = Comment(user=request.user, post=post, content=content)
             comment.save()
+            return redirect('post', post_id=post_id)
         # Handle hiding and unhiding the post
         elif is_owner and action == 'hide':
             post.is_hidden = True
             post.save()
+            return redirect('post', post_id=post_id)
 
         elif is_owner and action == 'unhide':
             post.is_hidden = False
             post.save()
+            return redirect('post', post_id=post_id)
         #Handle delete post
         elif is_owner and action=='delete':
             post.delete()
             return redirect('home')
 
-    return render(request, 'app/post/post.html', {'post': post, 'comments': comments, 'is_owner': is_owner})
+    return render(request, 'app/post/post.html', context)
 
 def publish(request):
     form = PostForm()
