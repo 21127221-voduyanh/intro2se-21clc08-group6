@@ -63,7 +63,7 @@
                     <div class="card mt-4 mx-5 w-75">
                         <a href="{% url 'post' post_id=post.id %}">
                             {% if post.pic_url %}
-                            <img src="{{ post.pic_url }}" alt="{{ post.caption }}" class="card-img-top img-fluid">
+                            <img src="{{ post.pic_url.url }}" alt="{{ post.caption }}" style="object-fit:contain;width:400px;height:400px;" class="card-img-top-center img-fluid mx-auto d-block">
                             {% else %}
                             <img src="{% static 'app/image/logo.jpg' %}" alt="{{ post.caption }}" class="card-img-top img-fluid">
                             {% endif %}

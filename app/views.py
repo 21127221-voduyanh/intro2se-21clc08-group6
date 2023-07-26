@@ -25,7 +25,7 @@ def home(request):
     else:
         posts = Post.objects.filter(is_hidden=False).order_by('-created_at')
 
-    p = Paginator(posts, 9)
+    p = Paginator(posts, 10)
     page = request.GET.get('page')
     posts = p.get_page(page)
     nums = 'n' * posts.paginator.num_pages
@@ -285,15 +285,15 @@ def search(request):
     sort = request.GET.get('sort',"")
     if sort == 'postdate':
         check = True
-        posts = Post.objects.filter(caption__contains=searched).order_by('-created_at')
-        count = Post.objects.filter(caption__contains=searched).order_by('-created_at').count
+        posts = Post.objects.filter(caption__icontains=searched).order_by('-created_at')
+        count = Post.objects.filter(caption__icontains=searched).order_by('-created_at').count
     elif sort == 'relevancy':
         posts = Post.objects.filter(caption__icontains=searched)
         count = Post.objects.filter(caption__icontains=searched).count
     else:
         posts = Post.objects.filter(caption__icontains=searched)
         count = Post.objects.filter(caption__icontains=searched).count
-    p = Paginator(posts, 1)
+    p = Paginator(posts, 10)
     page = request.GET.get('page',1)
     try:
         posts = p.page(page)
