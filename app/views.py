@@ -25,7 +25,7 @@ def home(request):
     else:
         posts = Post.objects.filter(is_hidden=False).order_by('-created_at')
 
-    p = Paginator(posts, 1)
+    p = Paginator(posts, 9)
     page = request.GET.get('page')
     posts = p.get_page(page)
     nums = 'n' * posts.paginator.num_pages
@@ -295,9 +295,9 @@ def publish(request):
         form = PostForm(request.POST, request.FILES)   
         if form.is_valid():
             form.instance.employer = request.user.employer
-            # form.instance.introduction=request.user.employer.introduction
-            # form.instance.city=request.user.employer.city
-            # form.instance.company_name=request.user.employer.company_name
+            form.instance.introduction=request.user.employer.introduction
+            form.instance.city=request.user.employer.city
+            form.instance.company_name=request.user.employer.company_name
             form.save()
             messages.error(request, "Post created successfully")
         else:
