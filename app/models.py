@@ -51,7 +51,16 @@ class Post(models.Model):
     job = models.CharField()
     description = models.TextField()
     hour = models.CharField(max_length=255)
-    salary = models.CharField(max_length=255)
+    salaries = ( ('Below 100$','Below 100$'),
+               ('100$ - 200$','100$ - 200$'),
+               ('200$ - 400$','200$ - 400$'),
+               ('400$ - 600$','400$ - 600$'),
+               ('600$ - 800$','600$ - 800$'),
+               ('800$ - 1000$','800$ - 1000$'),
+               ('Above 1000$','Above 1000$'),
+               )
+    salary = models.CharField(choices=salaries)
+
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     # Hide function uses here
