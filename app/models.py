@@ -26,13 +26,13 @@ class Employer(models.Model):
 
 class Post(models.Model):
     pic_url = models.ImageField()
-    # company_name=models.CharField(default="",max_length=100)
+    company_name=models.CharField(default="",max_length=100)
     contact = models.CharField(max_length=100, blank=True, null=True)
-    # introduction = models.TextField(default="")
-    # city=models.TextField(default="")
+    introduction = models.TextField(default="")
+    city=models.TextField(default="")
     caption = models.CharField(max_length=255)
     address = models.TextField()
-    field = ( ('Medicine', 'Medicine'),
+    fields = ( ('Medicine', 'Medicine'),
             ('Law', 'Law'),
             ('Information Technology', 'Information Technology'),
             ('Finance and Banking', 'Finance and Banking'),
@@ -47,7 +47,8 @@ class Post(models.Model):
             ('Construction/Building', 'Construction/Building'),
             ('Finacial Investment', 'Finacial Investment'),
         )
-    job = models.CharField(choices=field)
+    field = models.CharField(choices=fields)
+    job = models.CharField()
     description = models.TextField()
     hour = models.CharField(max_length=255)
     salary = models.CharField(max_length=255)
