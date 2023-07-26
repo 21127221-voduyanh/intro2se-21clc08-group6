@@ -28,7 +28,11 @@
           <div class="col-md-6 offset-md-3">
               <div class="card mb-4 post-card">
                   <a href="{% url 'post' post_id=post.id %}">
-                      <img src="{% static 'app/image/logo.jpg' %}" alt="Your Picture" class="card-img-top img-fluid">
+                    {% if post.pic_url %}
+                    <img src="{{ post.pic_url.url }}" alt="{{ post.caption }}"  class="card-img-top-center img-fluid mx-auto d-block">
+                    {% else %}
+                    <img src="{% static 'app/image/logo.jpg' %}" alt="{{ post.caption }}" class="card-img-top img-fluid">
+                    {% endif %}
                   </a>
               </div>
           </div>
