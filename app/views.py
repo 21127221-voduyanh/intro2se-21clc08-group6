@@ -222,7 +222,9 @@ def post(request, post_id):
         'liked_comments': liked_comments,
         'disliked_comments': disliked_comments
     }   
-
+    post.is_liked = user in post.likes.all()
+    post.is_disliked = user in post.dislikes.all()
+    
 
     if request.method == 'POST':
         action = request.POST.get('action') 
@@ -234,7 +236,8 @@ def post(request, post_id):
             else:
                 post.likes.add(user)
                 post.dislikes.remove(user)
-                post.is_like = True
+                post.is_liked = True
+                post.is_disliked = False
             return redirect('post', post_id=post_id)
 
         elif action == 'dislike':
@@ -244,9 +247,11 @@ def post(request, post_id):
             else:
                 post.dislikes.add(user)
                 post.likes.remove(user)
-                post.is_dislike = True
+                post.is_disliked = True
+                post.is_liked= False
             return redirect('post', post_id=post_id)
         #like/dislike comments
+
         elif action =='like_comment':
             comment_id = request.POST.get('comment_id')
             comment = get_object_or_404(Comment, pk=comment_id)
@@ -255,6 +260,11 @@ def post(request, post_id):
             else:
                 comment.likes.add(user)
                 comment.dislikes.remove(user)
+
+            # Update the liked_comments and disliked_comments after processing the like action
+            liked_comments = Comment.objects.filter(post=post, likes=user)
+            disliked_comments = Comment.objects.filter(post=post, dislikes=user)
+
             return redirect('post', post_id=post_id)
 
         elif action == 'dislike_comment':
@@ -265,6 +275,11 @@ def post(request, post_id):
             else:
                 comment.dislikes.add(user)
                 comment.likes.remove(user)
+
+            # Update the liked_comments and disliked_comments after processing the dislike action
+            liked_comments = Comment.objects.filter(post=post, likes=user)
+            disliked_comments = Comment.objects.filter(post=post, dislikes=user)
+
             return redirect('post', post_id=post_id)
         # Process comment submission
         elif action == 'comment':
