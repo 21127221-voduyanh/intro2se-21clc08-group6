@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from app.models import Employer, Job_finder, User, Post, Comment
+from app.models import Employer, Job_finder, User, Post, Comment, CV
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
-from app.form import EUpdateForm, JFUpdateForm, PostForm
+from app.form import EUpdateForm, JFUpdateForm, PostForm, CVForm
 from django.core.paginator import Paginator, EmptyPage
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
@@ -305,9 +305,6 @@ def publish(request):
 
     return render(request, 'app/post/publish.html', {'form':form})
 
-def apply(request):
-    return render(request,'app/post/apply.html')
-
 def about(request):
     return render(request,'app/about.html')
 
@@ -338,3 +335,23 @@ def search(request):
     nums = 'n' * posts.paginator.num_pages
     context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count,'check': check, 'sort': sort}
     return render(request,'app/search.html',context)
+
+def apply(request):
+    form = CVForm()
+    if request.method == 'POST':
+        form = CVForm(request.POST)   
+        if form.is_valid():
+            form.instance.finder = request.user.job_finder
+            form.instance.full_name = request.user.job_finder.full_name
+            form.instance.gender = request.user.job_finder.gender
+            form.instance.address = request.user.job_finder.address
+            form.instance.date_of_birth = request.user.job_finder.date_of_birth
+            form.save()
+            messages.error(request, "CV created successfully")
+        else:
+            messages.error(request, "Please complete all information")
+    context = {
+        'job_finder' : request.user.job_finder,
+        'form' : form
+    }
+    return render(request, 'app/post/apply.html', context)

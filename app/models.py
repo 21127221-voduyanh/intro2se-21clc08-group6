@@ -150,3 +150,18 @@ class Comment(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='liked_comments', blank=True)
     dislikes = models.ManyToManyField(User, related_name='disliked_comments', blank=True)
+
+class CV(models.Model):
+    finder = models.ForeignKey(Job_finder, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=100)
+    gender = models.CharField(max_length=100)
+    address = models.TextField()
+    date_of_birth = models.TextField()
+    introduction = models.TextField()
+    experience = models.TextField()
+    education = models.TextField()
+    interest = models.TextField()
+    languages = models.TextField()
+    skill = models.TextField()
+    mail = models.EmailField()
+    phone = models.CharField()
