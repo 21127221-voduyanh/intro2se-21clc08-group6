@@ -88,7 +88,6 @@
                       About
                     </a>
                   </li>
-
                 </ul>
                 <form class="d-flex" action="{% url 'search' %}">
                   <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" value='{{searched}}' name = 'searched'>
@@ -123,7 +122,16 @@
                       </a>  
                     </li>
                     {% endif %}
+
+                    {% if user.is_employer%}
                     <li>
+                      <a class="dropdown-item" href="{% url 'dashboard' %}">
+                        <i class="bi bi-clipboard-data"></i>
+                        Dashboard
+                      </a>
+                    </li>
+                  {% endif %}
+                  <li>
                       <a class="dropdown-item" href = "{% url 'settings' %}">
                         <i class="bi bi-gear" > </i>
                         Settings
@@ -159,6 +167,7 @@
                     Register as companies
                   </a>
                 </li>
+                
                 {% endif %}
                 
               </ul>

@@ -370,3 +370,6 @@ def apply(request):
         'form' : form
     }
     return render(request, 'app/post/apply.html', context)
+
+def dashboard(request):
+    return render(request,'app/post/dashboard.html')
