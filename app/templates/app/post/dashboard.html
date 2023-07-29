@@ -4,6 +4,8 @@
 
 
 {% block main-content %}
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-lg-8 col-xl-8">
 <div class="table-responsive small">
     <table class="table table-striped table-sm">
       <thead>
@@ -12,26 +14,42 @@
           <th scope="col">Caption</th>
           <th scope="col">Name</th>
           <th scope="col">Applied time</th>
+          <th scope="col">Status</th>
+          <th scope="col"></th>
+          <th scope="col"> Hightlight </th>
+         
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>1</td>
-          <td>random</td>
-          <td>data</td>
-          <td>placeholder</td>
-          <td>text</td>
+          <td>Caption 1</td>
+          <td>Mike</td>
+          <td>Date 1</td>
+          <td>PENDING</td>
+          <td><button type="submit" class="btn btn-secondary btn-sm col-sm-25">View CV</button></td>
+          <td><i class="bi bi-star bi-lg"></i></td>
+          
         </tr>
         <tr>
           <td>2</td>
-          <td>placeholder</td>
-          <td>irrelevant</td>
-          <td>visual</td>
-          <td>layout</td>
+          <td>Caption 2</td>
+          <td>Hana</td>
+          <td>Date 2</td>
+          <td>DENIED</td>
+          <td><button type="submit" class="btn btn-secondary btn-sm col-sm-25">View CV</button></td>
+          <td><i class="bi bi-star bi-lg"></i></td>
+          
         </tr>
         
       </tbody>
     </table>
   </div>
+</div>
+</div>
         
 {% endblock main-content %}
+
+<!--
+ <td><i class="bi bi-check-circle"></i></td>
+<td><i class="bi bi-star bi-lg"></i></td> -->
