@@ -23,6 +23,16 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['pic_url', 'caption','contact', 'address', 'field','job', 'description', 'hour', 'salary']
+        widgets = {
+            'caption' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
+            'contact' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
+            'address' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
+            'field' : forms.Select(attrs={'class':'form-select'}),
+            'job' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
+            'description' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
+            'hour' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
+            'salary' : forms.Select(attrs={'class':'form-select'})
+        }
 
 class CVForm(forms.ModelForm):
     class Meta:
