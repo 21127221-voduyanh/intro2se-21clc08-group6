@@ -64,6 +64,7 @@
                                         <div class="w-50">
                                             <input type="text" id="form3Example1c" class="form-control border-0" name="cname" readonly value="{{post.company_name}}" />
                                         </div>
+                                        
                                     </div>
                                      
                                     <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
@@ -174,7 +175,32 @@
                         
                         
                     </div>
-    <button type="submit" name="action" value="comment" class="btn btn-danger mx-auto" style="width: 130px; height: 60px; font-size:20px">Report post</button>
+
+                    <div class="container text-center mb-5">
+                        <button type="button" class="btn btn-danger mx-auto" style="height: 60px;font-size:20px"data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                          Report Post
+                        </button>
+                    </div>
+                      <!-- Modal -->
+                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Briefly explain why you report this post</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">                            
+                                    <textarea type="text" class="form-control mt-3 mb-2" placeholder = "Type here" id="floatingTextarea2">
+                                    </textarea>
+                                </div>
+                                <div class="modal-footer">     
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger">Report</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  
                 </div>
             </div>
         </div>
