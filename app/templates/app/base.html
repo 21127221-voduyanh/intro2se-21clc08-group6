@@ -130,8 +130,18 @@
                         Dashboard
                       </a>
                     </li>
-                  {% endif %}
-                  <li>
+                    {% endif %}
+
+                    {% if user.is_job_finder%}
+                    <li>
+                      <a class="dropdown-item" href="{% url 'history' %}">
+                        <i class="bi bi-clock-history"></i>
+                        History
+                      </a>
+                    </li>
+                    {% endif %}
+
+                    <li>
                       <a class="dropdown-item" href = "{% url 'settings' %}">
                         <i class="bi bi-gear" > </i>
                         Settings

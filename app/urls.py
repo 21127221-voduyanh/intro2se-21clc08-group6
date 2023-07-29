@@ -19,4 +19,5 @@ urlpatterns = [
     path('about/',views.about,name='about'),
     path('search/',views.search,name='search'),
     path('dashboard/',views.dashboard,name='dashboard'),
+    path('history/',views.history, name='history'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -373,3 +373,6 @@ def apply(request):
 
 def dashboard(request):
     return render(request,'app/post/dashboard.html')
+
+def history(request):
+    return render(request,'app/post/history.html')
