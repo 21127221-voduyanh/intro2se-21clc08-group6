@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="">
     </head>
     <body>
-        <div class="accordion accordion-flush w-25" id="accordionFlushExample">
+        <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item">
               <h2 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
@@ -35,23 +35,25 @@
                         {% endif%}
                       </div>
                         {% csrf_token %}
-                        <div class="mx-auto mb-3 w-75">
+                        <div class="mx-auto mb-3 w-75 p-1">
                             <label for="inputOldPassword" class="form-label">Old Password</label>
                             <input type="password" class="form-control" id="inputPassword" placeholder = "Type old password" name="old_pass">
                         </div>
                     
-                        <div class="mx-auto mb-3 w-75">
+                        <div class="mx-auto mb-3 w-75 p-1">
                             <label for="inputNewPassword" class="form-label">New Password</label>
                             <input type="password" class="form-control" id="inputPassword" placeholder = "Type new password" name = "pass">
                         </div>
                     
-                        <div class="mx-auto mb-3 w-75">
+                        <div class="mx-auto mb-3 w-75 p-1">
                             <label for="inputConfirmNewPassword" class="form-label">Confirm New Password</label>
                             <input type="password" class="form-control" id="inputPassword" placeholder = "Confirm new password" name ="rpass">
                         </div>
-                        <div class="mx-auto mt-2 w-auto">
-                            <button type="submit" class="btn btn-primary" name = "Security" value = "ChangePassword">Change password</button>
-                        </div>
+                        <br>
+                          <div class="mx-auto mt-2 p-1 text-center" style="width:75%">
+                              <button type="submit" class="btn btn-primary" name = "Security" value = "ChangePassword">Change password</button>
+                          </div>
+                        </br>
                     </form>
               </div>
             </div>
