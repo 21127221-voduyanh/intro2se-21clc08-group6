@@ -193,34 +193,27 @@
               <div class="col-6 col-md">
                 <h5>Popular Job</h5>
                 <ul class="nav flex-column">
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Information Technology</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Finance and Banking</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Business Management</a></li>
+                {%for i in cf%}
+                  <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                {%endfor%}
                 </ul>
               </div>
         
               <div class="col-6 col-md">
                 <h5>Salary</h5>
                 <ul class="nav flex-column">
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Below 100$</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">100$ - 200$</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">200$ - 400$</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">400$ - 600$</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">600$ - 800$</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">800$ - 1000$</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Above 1000$</a></li>
+                {%for i in slr%}
+                  <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                {%endfor%}
                 </ul>
               </div>
               
               <div class="col-6 col-md">
                 <h5>Cities</h5>
                 <ul class="nav flex-column">
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Ho Chi Minh City</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Ha Noi</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Da Nang</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hue</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nha Trang</a></li>
-                  <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Hai Phong</a></li>
+                {%for i in ct%}
+                  <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                {%endfor%}
                 </ul>
               </div>
             </div>
