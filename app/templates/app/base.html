@@ -47,9 +47,9 @@
                       Popular Job
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Information Technology</a></li>
-                      <li><a class="dropdown-item" href="#">Finance and Banking</a></li>
-                      <li><a class="dropdown-item" href="#">Business Management</a></li>
+                    {%for i in cf%}
+                      <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                    {%endfor%}
                     </ul>
                   </li>
 
@@ -59,13 +59,9 @@
                       Salary
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Below 100$</a></li>
-                      <li><a class="dropdown-item" href="#">100$ - 200$</a></li>
-                      <li><a class="dropdown-item" href="#">200$ - 400$</a></li>
-                      <li><a class="dropdown-item" href="#">400$ - 600$</a></li>
-                      <li><a class="dropdown-item" href="#">600$ - 800$</a></li>
-                      <li><a class="dropdown-item" href="#">800$ - 1000$</a></li>
-                      <li><a class="dropdown-item" href="#">Above 1000$</a></li>
+                    {%for i in slr%}
+                      <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                    {%endfor%}
                     </ul>
                   </li>
 
@@ -75,12 +71,9 @@
                       Popular Cities
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Ho Chi Minh City</a></li>
-                      <li><a class="dropdown-item" href="#">Ha Noi</a></li>
-                      <li><a class="dropdown-item" href="#">Da Nang</a></li>
-                      <li><a class="dropdown-item" href="#">Hue</a></li>
-                      <li><a class="dropdown-item" href="#">Nha Trang</a></li>
-                      <li><a class="dropdown-item" href="#">Hai Phong</a></li>
+                    {%for i in ct%}
+                      <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                    {%endfor%}
                     </ul>
                   </li>
 

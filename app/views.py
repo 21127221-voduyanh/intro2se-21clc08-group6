@@ -8,8 +8,16 @@ from django.core.paginator import Paginator, EmptyPage
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
+from collections import Counter
 
 # Create your views here.
+
+def base():
+    post_list = Post.objects.all()
+    cf = Counter([obj.field for obj in post_list]).most_common(3)
+    slr = Counter([obj.salary for obj in post_list]).most_common(7)
+    ct = Counter([obj.city for obj in post_list]).most_common(6)
+    return cf,slr,ct
 
 def home(request):
     user =request.user
@@ -29,15 +37,12 @@ def home(request):
     page = request.GET.get('page')
     posts = p.get_page(page)
     nums = 'n' * posts.paginator.num_pages
-    context = {'posts': posts, 'nums': nums, 'user': request.user}
+    cf,slr,ct = base()
+    context = {'posts': posts, 'nums': nums, 'user': request.user, 'cf': cf, 'slr': slr, 'ct':ct}
     return render(request,'app/home.html',context)
 
-def base(request):
-    user = request.user
-    context = {'user': user}
-    return render(request,'app/base.html',context)
-
 def register_finder(request):
+    cf,slr,ct = base()
     if( request.method == "POST" ):
         check = request.POST.get("checkbox", False)
         f_name = request.POST.get("fname")
@@ -70,10 +75,11 @@ def register_finder(request):
             jf.introduction = intro
             jf.save()
             return redirect('login')
-        
-    return render(request,'app/user/register_finder.html')
+    context = {'cf': cf, 'slr': slr, 'ct':ct}
+    return render(request,'app/user/register_finder.html',context)
 
 def register_company(request):
+    cf,slr,ct = base()
     if( request.method == "POST" ):
         check = request.POST.get("checkbox", False)
         c_name = request.POST.get("cname")
@@ -103,10 +109,11 @@ def register_company(request):
             em.introduction = intro
             em.save()
             return redirect('login')
-        
-    return render(request,'app/user/register_company.html')
+    context = {'cf': cf, 'slr': slr, 'ct':ct}   
+    return render(request,'app/user/register_company.html',context)
 
 def login_user(request):
+    cf,slr,ct = base()
     if request.method == "POST":
         uname = request.POST.get("uname")
         password = request.POST.get("pass")
@@ -124,11 +131,12 @@ def login_user(request):
             return redirect('home')
         else:
             messages.error(request,'Username doesn\'t exist or Password is incorrect')
-            
-    return render(request,'app/user/login.html')
+    context = {'cf': cf, 'slr': slr, 'ct':ct}      
+    return render(request,'app/user/login.html',context)
 
 @login_required(login_url="/login/")
 def profile(request,username):
+    cf,slr,ct = base()
     user2 = User.objects.get(username=username) 
     if user2.is_authenticated:
         if user2.is_job_finder:
@@ -143,7 +151,7 @@ def profile(request,username):
                 u_form = JFUpdateForm(instance=user2.job_finder)
 
             jf = Job_finder.objects.get(user=user2)
-            context = {'user2':user2,'jf': jf, 'u_form': u_form}
+            context = {'user2':user2,'jf': jf, 'u_form': u_form, 'cf': cf, 'slr': slr, 'ct':ct}
             return render(request, 'app/user/profileJF.html', context)
         
         elif user2.is_employer:
@@ -158,7 +166,7 @@ def profile(request,username):
                 u_form = EUpdateForm(instance=user2.employer)
 
             em = Employer.objects.get(user=user2)
-            context = {'user2':user2,'em': em, 'u_form': u_form}
+            context = {'user2':user2,'em': em, 'u_form': u_form, 'cf': cf, 'slr': slr, 'ct':ct}
             return render(request, 'app/user/profileE.html', context)
         
     return redirect('home')
@@ -169,6 +177,7 @@ def logout_user(request):
     return redirect('home')
 
 def settings(request):
+    cf,slr,ct = base()
     if request.method == 'POST':
         action = request.POST.get('Security')
         
@@ -205,10 +214,11 @@ def settings(request):
                 return redirect('home')
             elif user_delete is None :
                 messages.error(request, "Invalid password", extra_tags='deleteaccount')
-
-    return render(request,'app/settings.html')
+    context = {'cf': cf, 'slr': slr, 'ct':ct}
+    return render(request,'app/settings.html',context)
     
 def post(request, post_id):
+    cf,slr,ct = base()
     post = get_object_or_404(Post, pk=post_id)
     comments = Comment.objects.filter(post=post)
     user = request.user
@@ -220,7 +230,8 @@ def post(request, post_id):
         'comments': comments,
         'is_owner': is_owner,
         'liked_comments': liked_comments,
-        'disliked_comments': disliked_comments
+        'disliked_comments': disliked_comments,
+        'cf': cf, 'slr': slr, 'ct':ct
     }   
     post.is_liked = user in post.likes.all()
     post.is_disliked = user in post.dislikes.all()
@@ -305,6 +316,7 @@ def post(request, post_id):
     return render(request, 'app/post/post.html', context)
 
 def publish(request):
+    cf,slr,ct = base()
     form = PostForm()
     if request.method == 'POST':
         form = PostForm(request.POST, request.FILES)   
@@ -317,18 +329,22 @@ def publish(request):
             messages.error(request, "Post created successfully")
         else:
             messages.error(request, "Please complete all information")
-
-    return render(request, 'app/post/publish.html', {'form':form})
+    context = {'form':form, 'cf': cf, 'slr': slr, 'ct':ct}
+    return render(request, 'app/post/publish.html', context)
 
 def about(request):
-    return render(request,'app/about.html')
+    cf,slr,ct = base()
+    context = {'cf': cf, 'slr': slr, 'ct':ct}
+    return render(request,'app/about.html',context)
 
 def search(request):
+    cf,slr,ct = base()
     if request.GET.get('apply') == 'applied':
         messages.error(request,'Sort applied')
     searched = request.GET.get('searched', "")
     check = False
     sort = request.GET.get('sort',"")
+    category = request.GET.get('category',"")
     if sort == 'postdate':
         check = True
         posts = Post.objects.filter(caption__icontains=searched).order_by('-created_at')
@@ -336,6 +352,9 @@ def search(request):
     elif sort == 'relevancy':
         posts = Post.objects.filter(caption__icontains=searched)
         count = Post.objects.filter(caption__icontains=searched).count
+    # elif category == 'pj1':
+    #     posts = Post.objects.filter(field='pj1')
+    #     count = Post.objects.filter(field='pj1').count
     else:
         posts = Post.objects.filter(caption__icontains=searched)
         count = Post.objects.filter(caption__icontains=searched).count
@@ -348,10 +367,12 @@ def search(request):
     except:
         posts = p.page(1)
     nums = 'n' * posts.paginator.num_pages
-    context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count,'check': check, 'sort': sort}
+    context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count,'check': check, 'sort': sort, 
+               'cf': cf, 'slr': slr, 'ct':ct}
     return render(request,'app/search.html',context)
 
 def apply(request):
+    cf,slr,ct = base()
     form = CVForm()
     if request.method == 'POST':
         form = CVForm(request.POST)   
@@ -367,12 +388,17 @@ def apply(request):
             messages.error(request, "Please complete all information")
     context = {
         'job_finder' : request.user.job_finder,
-        'form' : form
+        'form' : form,
+        'cf': cf, 'slr': slr, 'ct':ct
     }
     return render(request, 'app/post/apply.html', context)
 
 def dashboard(request):
-    return render(request,'app/post/dashboard.html')
+    cf,slr,ct = base()
+    context = {'cf': cf, 'slr': slr, 'ct':ct}
+    return render(request,'app/post/dashboard.html',context)
 
 def history(request):
-    return render(request,'app/post/history.html')
+    cf,slr,ct = base()
+    context = {'cf': cf, 'slr': slr, 'ct':ct}
+    return render(request,'app/post/history.html',context)
