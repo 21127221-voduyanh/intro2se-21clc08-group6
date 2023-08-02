@@ -234,7 +234,8 @@ def settings(request):
                 messages.error(request, "Invalid password", extra_tags='deleteaccount')
     context = {'cf': cf, 'slr': slr, 'ct':ct}
     return render(request,'app/settings.html',context)
-    
+
+@login_required(login_url="/login/") 
 def post(request, post_id):
     cf,slr,ct = base()
     post = get_object_or_404(Post, pk=post_id)
@@ -330,7 +331,13 @@ def post(request, post_id):
         elif is_owner and action=='delete':
             post.delete()
             return redirect('home')
-
+        elif not is_owner and action == 'report':
+           Report.objects.create(
+                    reporter = request.user,
+                    is_post = True,
+                    content = request.POST.get('rp_content'),
+                    reported_post = post)
+           messages.success(request, 'Reported post!',extra_tags='report_post')
     return render(request, 'app/post/post.html', context)
 
 def publish(request):
