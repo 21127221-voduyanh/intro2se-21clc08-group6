@@ -48,7 +48,7 @@
                     </a>
                     <ul class="dropdown-menu">
                     {%for i in cf%}
-                      <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                      <li><a class="dropdown-item" href="{% url 'search' %}?category={{ i.0 }}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
                     {%endfor%}
                     </ul>
                   </li>
@@ -60,7 +60,7 @@
                     </a>
                     <ul class="dropdown-menu">
                     {%for i in slr%}
-                      <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                      <li><a class="dropdown-item" href="{% url 'search' %}?category={{ i.0 }}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
                     {%endfor%}
                     </ul>
                   </li>
@@ -72,7 +72,7 @@
                     </a>
                     <ul class="dropdown-menu">
                     {%for i in ct%}
-                      <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                      <li><a class="dropdown-item" href="{% url 'search' %}?category={{ i.0 }}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
                     {%endfor%}
                     </ul>
                   </li>
@@ -194,7 +194,7 @@
                 <h5>Popular Job</h5>
                 <ul class="nav flex-column">
                 {%for i in cf%}
-                  <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                  <li><a class="dropdown-item" href="{% url 'search' %}?category={{ i.0 }}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
                 {%endfor%}
                 </ul>
               </div>
@@ -203,7 +203,7 @@
                 <h5>Salary</h5>
                 <ul class="nav flex-column">
                 {%for i in slr%}
-                  <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                  <li><a class="dropdown-item" href="{% url 'search' %}?category={{ i.0 }}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
                 {%endfor%}
                 </ul>
               </div>
@@ -212,7 +212,7 @@
                 <h5>Cities</h5>
                 <ul class="nav flex-column">
                 {%for i in ct%}
-                  <li><a class="dropdown-item" href="{% url 'search' %}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
+                  <li><a class="dropdown-item" href="{% url 'search' %}?category={{ i.0 }}" name = 'category' value = '{{i.0}}'>{{i.0}}</a></li>
                 {%endfor%}
                 </ul>
               </div>

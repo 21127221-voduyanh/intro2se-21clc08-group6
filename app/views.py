@@ -345,16 +345,40 @@ def search(request):
     check = False
     sort = request.GET.get('sort',"")
     category = request.GET.get('category',"")
-    if sort == 'postdate':
+    searched_cate = ''
+
+
+    if any(category == x[0] for x in cf) and sort == 'postdate':
+        check = True
+        searched_cate = 'Field: ' + category
+        posts = Post.objects.filter(field=category).order_by('-created_at')
+        count = Post.objects.filter(field=category).order_by('-created_at').count()
+    elif any(category == x[0] for x in cf):
+        searched_cate = 'Field: ' + category
+        posts = Post.objects.filter(field=category)
+        count = Post.objects.filter(field=category).count()
+    elif any(category == x[0] for x in slr) and sort == 'postdate':
+        check = True
+        searched_cate = 'Salary: ' + category
+        posts = Post.objects.filter(salary=category).order_by('-created_at')
+        count = Post.objects.filter(salary=category).order_by('-created_at').count()
+    elif any(category == x[0] for x in slr):
+        searched_cate = 'Salary: ' + category
+        posts = Post.objects.filter(salary=category)
+        count = Post.objects.filter(salary=category).count()
+    elif any(category == x[0] for x in ct) and sort == 'postdate':
+        check = True
+        searched_cate = 'City: ' + category
+        posts = Post.objects.filter(city=category).order_by('-created_at')
+        count = Post.objects.filter(city=category).order_by('-created_at').count()
+    elif any(category == x[0] for x in ct):
+        searched_cate = 'City: ' + category
+        posts = Post.objects.filter(city=category)
+        count = Post.objects.filter(city=category).count()
+    elif sort == 'postdate':
         check = True
         posts = Post.objects.filter(caption__icontains=searched).order_by('-created_at')
         count = Post.objects.filter(caption__icontains=searched).order_by('-created_at').count
-    elif sort == 'relevancy':
-        posts = Post.objects.filter(caption__icontains=searched)
-        count = Post.objects.filter(caption__icontains=searched).count
-    # elif category == 'pj1':
-    #     posts = Post.objects.filter(field='pj1')
-    #     count = Post.objects.filter(field='pj1').count
     else:
         posts = Post.objects.filter(caption__icontains=searched)
         count = Post.objects.filter(caption__icontains=searched).count
@@ -367,8 +391,8 @@ def search(request):
     except:
         posts = p.page(1)
     nums = 'n' * posts.paginator.num_pages
-    context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count,'check': check, 'sort': sort, 
-               'cf': cf, 'slr': slr, 'ct':ct}
+    context = {'searched':searched, 'posts':posts,'nums':nums, 'count':count,'check': check, 'sort': sort, 'category': category,
+               'searched_cate': searched_cate, 'cf': cf, 'slr': slr, 'ct':ct}
     return render(request,'app/search.html',context)
 
 def apply(request):
