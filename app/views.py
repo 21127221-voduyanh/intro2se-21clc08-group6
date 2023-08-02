@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from app.models import Employer, Job_finder, User, Post, Comment, CV
+from app.models import Employer, Job_finder, User, Post, Comment, CV, Report
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm, PostForm, CVForm
@@ -141,12 +141,21 @@ def profile(request,username):
     if user2.is_authenticated:
         if user2.is_job_finder:
             if request.method == 'POST':
-                u_form = JFUpdateForm(request.POST, instance=user2.job_finder)
-                if u_form.is_valid():
-                    u_form.save()
-                    messages.success(request, 'Your account has been updated!')
-                    return redirect('profile')
-
+                action = request.POST.get('pf')
+                if action == 'update':
+                    u_form = JFUpdateForm(request.POST, instance=user2.job_finder)
+                    if u_form.is_valid():
+                        u_form.save()
+                        messages.success(request, 'Your account has been updated!',extra_tags='update')
+                        return redirect('profile', username=username)
+                elif action == 'report':
+                    Report.objects.create(
+                    reporter = request.user,
+                    is_user = True,
+                    content = request.POST.get('rp_content'),
+                    reported_user = user2)
+                    u_form = JFUpdateForm(instance=user2.job_finder)
+                    messages.success(request, 'Reported user!',extra_tags='report')
             else:
                 u_form = JFUpdateForm(instance=user2.job_finder)
 
@@ -156,12 +165,21 @@ def profile(request,username):
         
         elif user2.is_employer:
             if request.method == 'POST':
-                u_form = EUpdateForm(request.POST, instance=user2.employer)
-                if u_form.is_valid():
-                    u_form.save()
-                    messages.success(request, 'Your account has been updated!')
-                    return redirect('profile')
-
+                action = request.POST.get('pf')
+                if action == 'update':
+                    u_form = EUpdateForm(request.POST, instance=user2.employer)
+                    if u_form.is_valid():
+                        u_form.save()
+                        messages.success(request, 'Your account has been updated!', extra_tags='update')
+                        return redirect('profile',username=username)
+                elif action == 'report':
+                    Report.objects.create(
+                    reporter = request.user,
+                    is_user = True,
+                    content = request.POST.get('rp_content'),
+                    reported_user = user2)
+                    u_form = EUpdateForm(instance=user2.employer)
+                    messages.success(request, 'Reported user!',extra_tags='report')
             else:
                 u_form = EUpdateForm(instance=user2.employer)
 

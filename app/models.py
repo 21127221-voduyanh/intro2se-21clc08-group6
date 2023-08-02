@@ -165,3 +165,13 @@ class CV(models.Model):
     skill = models.TextField()
     mail = models.EmailField()
     phone = models.CharField()
+
+class Report(models.Model):
+    reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reporter')
+    content = models.TextField(default="")
+    is_user = models.BooleanField(default=False)
+    is_post = models.BooleanField(default=False)
+    is_comment = models.BooleanField(default=False)
+    reported_user = models.ForeignKey(User,on_delete=models.CASCADE, related_name='reported',null=True, blank=True)
+    reported_post = models.ForeignKey(Post,on_delete=models.CASCADE,null=True, blank=True,)
+    reported_comment = models.ForeignKey(Comment,on_delete=models.CASCADE,null=True, blank=True,)

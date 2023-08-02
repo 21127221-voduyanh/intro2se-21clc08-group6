@@ -7,10 +7,17 @@
   <div class="row">
     <div class="col-md-12">
       {% for message in messages %}
+      {%if message.extra_tags == 'update'%}
       <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
+      {%endif%}
+      {% if message.extra_tags == 'report' %}
+            <div class="alert alert-danger" role="alert">
+                  {{ message }}
+            </div>
+      {% endif %}
       {% endfor %}
     </div>
   </div>
@@ -94,7 +101,7 @@
                           <textarea id="introduction" name="introduction" rows="5" required>{{ jf.introduction }}</textarea>
                         </div>
                         <div class="form-group">
-                          <button class="btn btn-outline-info" type="submit">Update</button>
+                          <button class="btn btn-outline-info" type="submit" name='pf' value='update'>Update</button>
                         </div>
 
                         {%else%}
@@ -139,12 +146,13 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">                            
-                                <textarea type="text" class="form-control mt-3" placeholder = "Type here" id="floatingTextarea2">
+                                <textarea type="text" class="form-control mt-3" placeholder = "Type here" id="floatingTextarea2" name='rp_content'>
                                 </textarea>
                               </div>
-                              <div class="modal-footer">     
+                              <div class="modal-footer"> 
+                                {% csrf_token %}      
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-danger">Report</button>
+                                <button type="button" class="btn btn-danger" name = "pf" value = "report">Report</button>
                               </div>
                             </div>
                           </div>
