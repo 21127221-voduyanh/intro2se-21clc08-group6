@@ -250,6 +250,7 @@
                     <input type="hidden" name="action" value="delete">
                     <button type="submit" class="btn btn-danger btn-lg col-sm-25">Delete Post</button>
                 </form>
+                <a href="{% url 'edit_post' pk=post.id %}" class="btn btn-primary btn-lg col-sm-25">Edit Post</a>
             </div>
         </div>
     </div>

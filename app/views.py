@@ -39,6 +39,10 @@ def home(request):
     nums = 'n' * posts.paginator.num_pages
     cf,slr,ct = base()
     context = {'posts': posts, 'nums': nums, 'user': request.user, 'cf': cf, 'slr': slr, 'ct':ct}
+    # Check if there is a "not owner" message in the messages
+    for message in messages.get_messages(request):
+        if message.extra_tags == 'not_owner':
+            context['not_owner_message'] = message
     return render(request,'app/home.html',context)
 
 def register_finder(request):
@@ -356,6 +360,25 @@ def publish(request):
             messages.error(request, "Please complete all information")
     context = {'form':form, 'cf': cf, 'slr': slr, 'ct':ct}
     return render(request, 'app/post/publish.html', context)
+
+@login_required
+def edit_post(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+
+    # Check if the user is the author of the post
+    if request.user != post.employer.user:
+        messages.error(request, "You do not have permission to edit this post.", extra_tags='not_owner')
+        return redirect('home')
+
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = PostForm(instance=post)
+
+    return render(request, 'app/post/edit_post.html', {'form': form})
 
 def about(request):
     cf,slr,ct = base()
