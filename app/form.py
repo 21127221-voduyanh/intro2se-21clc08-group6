@@ -35,6 +35,10 @@ class PostForm(forms.ModelForm):
         }
 
 class CVForm(forms.ModelForm):
+    # Additional fields for company_name and job_applied
+    company_name = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class':'form-control'}))
+    job_applied = forms.CharField(max_length=200, widget=forms.TextInput(attrs={'class':'form-control'}))
+    
     class Meta:
         model = CV
         fields = ['introduction', 'experience', 'education', 'interest', 'languages', 'skill', 'mail', 'phone']

@@ -31,7 +31,11 @@
             <div class = "row g-5">
               <h4 class="mb-0">Basic</h4>
                 <form class="needs-validation" novalidate="" method="POST" action="">
-                  {% csrf_token %} 
+                  {% csrf_token %}
+                    <!-- Include the company_name and job_applied fields as hidden inputs -->
+                    <input type="hidden" name="company_name" value="{{ post.company_name }}">
+                    <input type="hidden" name="job_applied" value="{{ post.job }}">
+            
                     <div class="row g-3">
                       <div class="col-sm-5">
                         <label for="firstName" class="form-label">Full name :  </label>
