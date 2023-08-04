@@ -71,110 +71,106 @@
 
                                 <form class="mx-1 mx-md-4" method="POST" action="">
                                     {% csrf_token %} 
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-user fa-lg me-3 fa-fw"></i>
-                                            <label class="form-label" for="form3Example1c">Company Name: </label>
+                                            <label class="form-label">Company Name: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="form3Example1c" class="form-control border-0" name="cname" readonly value="{{post.company_name}}" />
+                                            <p class="form-control border-0" readonly>{{ post.company_name }}</p>
                                         </div>
-                                        
                                     </div>
-                                     
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                    
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
-                                            <label class="form-label" for="form3Example3c">Contact: </label>
+                                            <label class="form-label">Contact: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="form3Example3c" class="form-control border-0" name="uname" readonly value="{{post.contact}}" />                               
+                                            <p class="form-control border-0" readonly>{{ post.contact }}</p>                               
                                         </div>
                                     </div>
-                  
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="inputAddress" class="form-label">Address: </label>
+                                            <label class="form-label">Address: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input class="form-control border-0" type="text"  id="inputAddress" readonly value="{{post.address}}" name="addr">
+                                            <p class="form-control border-0" readonly>{{ post.address }}</p>
                                         </div>
                                     </div>
-                  
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="inputCity" class="form-label">City: </label>
+                                            <label class="form-label">City: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input class="form-control border-0" type="text"  id="inputCity" readonly value="{{ post.city }}" name="city here" >
+                                            <p class="form-control border-0" readonly>{{ post.city }}</p>
                                         </div>
                                     </div>
-                  
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
-                                            <label for="floatingTextarea2">Introduction: </label>
+                                            <label class="form-label">Introduction: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input class="form-control border-0" type="text" id="floatingTextarea2" name="intro" readonly value="{{post.introduction}}" />                               
+                                            <p class="form-control border-0" readonly>{{ post.introduction }}</p>                               
                                         </div>
                                     </div>
-
-                                    <!-- Additional Labels -->
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                
+                                    <!--  Additional fields    -->
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-briefcase fa-lg me-3 fa-fw"></i>
-                                            <label for="formField" class="form-label">Field: </label>
+                                            <label class="form-label">Field: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="formField" class="form-control border-0" name="field" readonly value="{{post.field}}" />
+                                            <p class="form-control border-0" readonly>{{ post.field }}</p>
                                         </div>
                                     </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-briefcase fa-lg me-3 fa-fw"></i>
-                                            <label for="formJob" class="form-label">Job: </label>
+                                            <label class="form-label">Job: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="formJob" class="form-control border-0" name="job" readonly value="{{post.job}}" />
+                                            <p class="form-control border-0" readonly>{{ post.job }}</p>
                                         </div>
                                     </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-info-circle fa-lg me-3 fa-fw"></i>
-                                            <label for="formJobDescription" class="form-label">Job Description: </label>
+                                            <label class="form-label">Job Description: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="formJobDescription" class="form-control border-0" name="job_description" readonly value="{{post.description}}" />
+                                            <p class="form-control border-0" readonly>{{ post.description }}</p>
                                         </div>
                                     </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-clock fa-lg me-3 fa-fw"></i>
-                                            <label for="formHour" class="form-label">Hour: </label>
+                                            <label class="form-label">Hour: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="formHour" class="form-control border-0" name="hour" readonly value="{{post.hour}}" />
+                                            <p class="form-control border-0" readonly>{{ post.hour }}</p>
                                         </div>
                                     </div>
-
-                                    <div class="d-flex flex-row align-items-center mb-4 details_of_entry">
+                                
+                                    <div class="d-flex flex-row align-items-center mb-2 details_of_entry">
                                         <div class="w-50">
                                             <i class="fas fa-money-bill-alt fa-lg me-3 fa-fw"></i>
-                                            <label for="formSalary" class="form-label">Salary: </label>
+                                            <label class="form-label">Salary: </label>
                                         </div>
                                         <div class="w-50">
-                                            <input type="text" id="formSalary" class="form-control border-0" name="salary" readonly value="{{ post.salary }}" />
+                                            <p class="form-control border-0" readonly>{{ post.salary }}</p>
                                         </div>
                                     </div>
-
-                                   
-                  
                                 </form>
                                 
                                

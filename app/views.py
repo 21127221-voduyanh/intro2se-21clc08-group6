@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from app.models import Employer, Job_finder, User, Post, Comment, CV, Report
+from app.models import Employer, Job_finder, User, Post, Comment, CV, Report, ApplicationHistory
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm, PostForm, CVForm
@@ -9,6 +9,7 @@ from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib.postgres.search import SearchQuery, SearchRank, SearchVector
 from collections import Counter
+from django.utils import timezone
 
 # Create your views here.
 
@@ -254,6 +255,8 @@ def post(request, post_id):
         'is_owner': is_owner,
         'liked_comments': liked_comments,
         'disliked_comments': disliked_comments,
+        'company_name': post.company_name,
+        'job_applied': post.job,
         'cf': cf, 'slr': slr, 'ct':ct
     }   
     post.is_liked = user in post.likes.all()
@@ -448,7 +451,8 @@ def apply(request, post_id):
     form = CVForm()
     post = Post.objects.get(pk = post_id)
     if request.method == 'POST':
-        form = CVForm(request.POST)   
+        form = CVForm(request.POST)
+        print(request.POST)  # Print the raw form data to check if any fields are missing or incorrect
         if form.is_valid():
             form.instance.company_name = post.company_name
             form.instance.caption = post.caption
@@ -460,9 +464,25 @@ def apply(request, post_id):
             form.instance.address = request.user.job_finder.address
             form.instance.date_of_birth = request.user.job_finder.date_of_birth
             form.save()
-            messages.error(request, "CV created successfully")
+
+            form.instance.company_name = post.company_name
+            form.instance.job_applied = post.job
+
+            # Create an ApplicationHistory record
+            ApplicationHistory.objects.create(
+                job_finder=request.user.job_finder,
+                company_name=post.company_name,
+                job_applied=post.job,
+                applied_time=timezone.now(),
+                status='PENDING',  # Or any initial status you want to set
+            )
+
+            messages.success(request, "CV created successfully")
+            return redirect('home')
         else:
+            print(form.errors)
             messages.error(request, "Please complete all information")
+
     context = {
         'post' : post,
         'job_finder' : request.user.job_finder,
@@ -478,7 +498,17 @@ def dashboard(request):
     # cv = CV.objects.filter(finder=user.job_finder).order_by('-created_at')
     return render(request,'app/post/dashboard.html',context)
 
+@login_required
 def history(request):
-    cf,slr,ct = base()
-    context = {'cf': cf, 'slr': slr, 'ct':ct}
-    return render(request,'app/post/history.html',context)
+    cf, slr, ct = base()
+
+    # Retrieve all application history of the current user
+    application_history = ApplicationHistory.objects.filter(job_finder=request.user.job_finder)
+
+    context = {
+        'cf': cf,
+        'slr': slr,
+        'ct': ct,
+        'application_history': application_history
+    }
+    return render(request, 'app/post/history.html', context)

@@ -174,6 +174,18 @@ class CV(models.Model):
     caption = models.CharField()
 
 
+class ApplicationHistory(models.Model):
+    job_finder = models.ForeignKey(Job_finder, on_delete=models.CASCADE)
+    company_name = models.CharField(max_length=200)
+    job_applied = models.CharField(max_length=200)
+    applied_time = models.DateTimeField(auto_now_add=True)
+    STATUS_CHOICES = [
+        ('PENDING', 'Pending'),
+        ('ACCEPTED', 'Accepted'),
+        ('DENIED', 'Denied'),
+    ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
+
 class Report(models.Model):
     reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reporter')
     content = models.TextField(default="")
