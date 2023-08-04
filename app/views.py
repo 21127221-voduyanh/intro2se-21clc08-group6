@@ -446,10 +446,9 @@ def search(request):
                'searched_cate': searched_cate, 'cf': cf, 'slr': slr, 'ct':ct}
     return render(request,'app/search.html',context)
 
-def apply(request, post_id):
+def apply(request):
     cf,slr,ct = base()
     form = CVForm()
-    post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
         form = CVForm(request.POST)
         print(request.POST)  # Print the raw form data to check if any fields are missing or incorrect
@@ -480,10 +479,9 @@ def apply(request, post_id):
             messages.error(request, "Please complete all information")
 
     context = {
-        'job_finder': request.user.job_finder,
-        'form': form,
-        'cf': cf, 'slr': slr, 'ct': ct,
-        'post': post
+        'job_finder' : request.user.job_finder,
+        'form' : form,
+        'cf': cf, 'slr': slr, 'ct':ct
     }
     return render(request, 'app/post/apply.html', context)
 
