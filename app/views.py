@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from app.models import Employer, Job_finder, User, Post, Comment, CV, Report, ApplicationHistory
+from app.models import Employer, Job_finder, User, Post, Comment, CV, Report, ApplicationHistory, Dashboard
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm, PostForm, CVForm
@@ -446,9 +446,10 @@ def search(request):
                'searched_cate': searched_cate, 'cf': cf, 'slr': slr, 'ct':ct}
     return render(request,'app/search.html',context)
 
-def apply(request):
+def apply(request, post_id):
     cf,slr,ct = base()
     form = CVForm()
+    post = get_object_or_404(Post, pk=post_id)
     if request.method == 'POST':
         form = CVForm(request.POST)
         print(request.POST)  # Print the raw form data to check if any fields are missing or incorrect
@@ -472,6 +473,15 @@ def apply(request):
                 status='PENDING',  # Or any initial status you want to set
             )
 
+            Dashboard.objects.create(
+                employer=post.employer,
+                caption=post.caption,
+                user_name=request.user.username,
+                applied_time=timezone.now(),
+                cv=form.instance,
+                status='PENDING'
+            )
+
             messages.success(request, "CV created successfully")
             return redirect('home')
         else:
@@ -481,13 +491,22 @@ def apply(request):
     context = {
         'job_finder' : request.user.job_finder,
         'form' : form,
-        'cf': cf, 'slr': slr, 'ct':ct
+        'cf': cf, 'slr': slr, 'ct':ct,
+        'post' : post
     }
     return render(request, 'app/post/apply.html', context)
 
+@login_required
 def dashboard(request):
     cf,slr,ct = base()
-    context = {'cf': cf, 'slr': slr, 'ct':ct}
+    
+    dashboard = Dashboard.objects.filter(employer=request.user.employer)
+    context = {
+        'cf': cf, 
+        'slr': slr, 
+        'ct':ct,
+        'dashboard' : dashboard
+        }
     return render(request,'app/post/dashboard.html',context)
 
 @login_required

@@ -8,52 +8,37 @@
   <div class="col-lg-7 col-xl-7">
 <div class="table-responsive small">
     <table class="table table-striped table-sm text-center">
-      <thead>
-        <tr>
-          <th scope="col" class="col-sm-1">Order number</th>
-          <th scope="col">Caption</th>
-          <th scope="col">Name</th>
-          <th scope="col">Applied time</th>
-          <th scope="col" class="col-sm-1">Status</th>
-          <th scope="col" class="col-sm-1"></th>
-          <th scope="col" class="col-sm-1"> Hightlight </th>
-         
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td >1</td>
-          <td>Caption 1</td>
-          <td>Mike</td>
-          <td>Date 1</td>
-          <td class= "table-secondary fw-bold col-sm-1" >PENDING </td>
-          <td><a href="{% url 'view_cv' %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
-          <td><i class="bi bi-star bi-lg"></i></td>
+      {% if dashboard %}
+        <thead>
+          <tr>
+            <th scope="col" class="col-sm-1">Order number</th>
+            <th scope="col">Caption</th>
+            <th scope="col">Name</th>
+            <th scope="col">Applied time</th>
+            <th scope="col" class="col-sm-1">Status</th>
+            <th scope="col" class="col-sm-1"></th>
+            <th scope="col" class="col-sm-1"> Hightlight </th>
           
-        </tr>
-        <tr>
-          <td>2</td>
-          <td>Caption 2</td>
-          <td>Hana</td>
-          <td>Date 2</td>
-          <td class= "table-danger text-danger fw-bold">DENIED</td>
-          <td><a href="{% url 'view_cv' %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
-          <td class = "text-warning"><i class="bi bi-star-fill bi-lg"></i></td>
-          
-        </tr>
-
-        <tr>
-          <td>3</td>
-          <td>Caption 3</td>
-          <td>Anna</td>
-          <td>Date 3</td>
-          <td class= "table-success text-success fw-bold">ACCEPTED</td>
-          <td><a href="{% url 'view_cv' %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
-          <td><i class="bi bi-star bi-lg"></i></td>
-          
-        </tr>
-        
-      </tbody>
+          </tr>
+        </thead>
+        <tbody>
+          {% for application in dashboard %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ application.caption }}</td>
+            <td>{{ application.user_name }}</td>
+            <td>{{ application.applied_time }}</td>
+            <td class="{% if application.status == 'PENDING' %}text-center fw-bold{% elif application.status == 'ACCEPTED' %}table-success text-center text-success fw-bold{% else %}table-danger text-center text-danger fw-bold{% endif %}">
+              {{ application.status }}
+            <td><a href="{% url 'view_cv' %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
+            <td><i class="bi bi-star bi-lg"></i></td>
+            
+          </tr>
+          {% endfor %}
+        </tbody>
+        {% else %}
+          <p class="text-center fw-bold "><h3>No application history found.</h3></p>
+        {% endif %}
     </table>
   </div>
 </div>

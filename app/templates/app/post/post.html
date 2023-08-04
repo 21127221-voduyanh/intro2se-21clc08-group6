@@ -180,7 +180,7 @@
                         </div>
                         {% if user.is_job_finder %}
                         <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
-                          <a type="apply" class="btn btn-primary btn-lg"  href="{% url 'apply' %}" >Apply</a>
+                          <a type="apply" class="btn btn-primary btn-lg"  href="{% url 'apply' post_id=post.id%}" >Apply</a>
                         </div>
                         {% endif %}
                         

@@ -61,6 +61,9 @@ class Post(models.Model):
                )
     salary = models.CharField(choices=salaries)
 
+    deny = models.TextField()
+    approve = models.TextField()
+
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     # Hide function uses here
@@ -165,6 +168,21 @@ class CV(models.Model):
     skill = models.TextField()
     mail = models.EmailField()
     phone = models.CharField()
+
+class Dashboard(models.Model):
+    employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
+    caption = models.CharField(max_length=200)
+    user_name = models.CharField(max_length=200)
+    cv = models.ForeignKey(CV, on_delete=models.CASCADE)
+    applied_time = models.DateTimeField(auto_now_add=True)
+    STATUS_CHOICES = [
+        ('PENDING', 'Pending'),
+        ('ACCEPTED', 'Accepted'),
+        ('DENIED', 'Denied'),
+        ('HIDE', 'Hide'),
+        ('HIGHTLIGHT', 'Hightlight')
+    ]
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
 
 class ApplicationHistory(models.Model):
     job_finder = models.ForeignKey(Job_finder, on_delete=models.CASCADE)
