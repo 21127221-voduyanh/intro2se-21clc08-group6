@@ -113,7 +113,8 @@
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="inputAprove" class="form-label">Approve message</label>
-                                                <textarea class="form-control" placeholder="Message when approve applicants" id="inputDescription" style="height: 100px" name="approve"></textarea>
+                                                {% comment %} <textarea class="form-control" placeholder="Message when approve applicants" id="inputDescription" style="height: 100px" name="approve"></textarea> {% endcomment %}
+                                                {{ form.approve }}
                                             </div>
                                         </div>
 
@@ -121,7 +122,8 @@
                                             <i class="fas fa-key fa-lg me-3 fa-fw"></i>
                                             <div class="form-outline flex-fill mb-0">
                                                 <label for="inputDeny" class="form-label">Deny message</label>
-                                                <textarea class="form-control" placeholder="Message when deny applicants" id="inputDescription" style="height: 100px" name="deny"></textarea>
+                                                {% comment %} <textarea class="form-control" placeholder="Message when deny applicants" id="inputDescription" style="height: 100px" name="deny"></textarea> {% endcomment %}
+                                                {{ form.deny }}
                                             </div>
                                         </div>
 

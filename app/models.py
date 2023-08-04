@@ -60,6 +60,8 @@ class Post(models.Model):
                ('Above 1000$','Above 1000$'),
                )
     salary = models.CharField(choices=salaries)
+    approve = models.TextField()
+    deny = models.TextField()
 
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -165,6 +167,12 @@ class CV(models.Model):
     skill = models.TextField()
     mail = models.EmailField()
     phone = models.CharField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.CharField()
+    company_name=models.CharField(default="",max_length=100)
+    job = models.CharField()
+    caption = models.CharField()
+
 
 class Report(models.Model):
     reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reporter')
