@@ -446,18 +446,13 @@ def search(request):
                'searched_cate': searched_cate, 'cf': cf, 'slr': slr, 'ct':ct}
     return render(request,'app/search.html',context)
 
-def apply(request, post_id):
+def apply(request):
     cf,slr,ct = base()
     form = CVForm()
-    post = Post.objects.get(pk = post_id)
     if request.method == 'POST':
         form = CVForm(request.POST)
         print(request.POST)  # Print the raw form data to check if any fields are missing or incorrect
         if form.is_valid():
-            form.instance.company_name = post.company_name
-            form.instance.caption = post.caption
-            form.instance.job = post.job
-            form.instance.status = "pending"
             form.instance.finder = request.user.job_finder
             form.instance.full_name = request.user.job_finder.full_name
             form.instance.gender = request.user.job_finder.gender
@@ -484,7 +479,6 @@ def apply(request, post_id):
             messages.error(request, "Please complete all information")
 
     context = {
-        'post' : post,
         'job_finder' : request.user.job_finder,
         'form' : form,
         'cf': cf, 'slr': slr, 'ct':ct
@@ -493,9 +487,7 @@ def apply(request, post_id):
 
 def dashboard(request):
     cf,slr,ct = base()
-    # user =  request.user
     context = {'cf': cf, 'slr': slr, 'ct':ct}
-    # cv = CV.objects.filter(finder=user.job_finder).order_by('-created_at')
     return render(request,'app/post/dashboard.html',context)
 
 @login_required

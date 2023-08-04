@@ -22,7 +22,7 @@ class CommentForm(forms.ModelForm):
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['pic_url', 'caption','contact', 'address', 'field','job', 'description', 'hour', 'salary', 'approve', 'deny']
+        fields = ['pic_url', 'caption','contact', 'address', 'field','job', 'description', 'hour', 'salary']
         widgets = {
             'caption' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
             'contact' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
@@ -31,9 +31,7 @@ class PostForm(forms.ModelForm):
             'job' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
             'description' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
             'hour' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
-            'salary' : forms.Select(attrs={'class':'form-select'}),
-            'approve' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'}),
-            'deny' : forms.Textarea(attrs={'class':'form-control','style':'width:500px','style':'height:100px'})
+            'salary' : forms.Select(attrs={'class':'form-select'})
         }
 
 class CVForm(forms.ModelForm):
