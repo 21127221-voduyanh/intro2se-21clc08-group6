@@ -506,3 +506,8 @@ def history(request):
         'application_history': application_history
     }
     return render(request, 'app/post/history.html', context)
+
+def view_cv(request):
+    cf,slr,ct = base()
+    context = {'cf': cf, 'slr': slr, 'ct':ct}
+    return render(request,'app/post/view_cv.html',context)

@@ -1,0 +1,132 @@
+{% extends 'app/base.html'%}
+{% load static %}
+
+{% block main-content %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+  </head>
+  
+  <body class = "bg-body-tertiary">
+    <div class = "container">
+        <main>
+            <div class="py-5 text-center">
+                <img class="d-block mx-auto mb-4" src="{% static 'app/image/apply_icon.png' %}" alt="" width="200" height="200">
+                <h2>CV FORM</h2>
+            </div>
+
+            <div class="text-left fw-bold">
+              {% if messages %}
+                  {% for message in messages %}
+                      <div>{{ message }}</div>
+                  {% endfor %}
+              {% endif %}
+            </div>
+
+            <div class="row g-5">
+                <h4 class="mb-0">Basic</h4>
+                <form class="needs-validation" novalidate="">
+                    <div class="row g-3">
+                        <div class="col-sm-5">
+                            <label for="firstName" class="form-label">Full name :</label>
+                            <input type="text" class="form-control" value="John Doe" readonly>
+                        </div>
+            
+                        <div class="col-sm-3">
+                            <label for="lastName" class="form-label">Gender :</label>
+                            <input type="text" class="form-control" value="Male" readonly>
+                        </div>
+            
+                        <div class="col-sm-9">
+                            <label for="address" class="form-label">Address :</label>
+                            <input type="text" class="form-control" value="123 Main Street, City, Country" readonly>
+                        </div>
+            
+                        <div class="col-sm-3">
+                            <label for="lastName" class="form-label">DOB :</label>
+                            <input type="text" class="form-control" value="1990-01-01" readonly>
+                        </div>
+            
+                        <div class="col-sm-6 d-flex flex-row align-items-center">
+                            <div class="form-outline flex-fill mb-0">
+                                <label for="">Experience</label>
+                                <textarea class="form-control" readonly>Briefly write about your experience</textarea>
+                            </div>
+                        </div>
+            
+                        <div class="col-sm-6 d-flex flex-row align-items-center">
+                            <div class="form-outline flex-fill mb-0">
+                                <label for="">Short introduction</label>
+                                <textarea class="form-control" readonly>Briefly introduce yourself</textarea>
+                            </div>
+                        </div>
+            
+                        <div class="col-sm-6 d-flex flex-row align-items-center">
+                            <div class="form-outline flex-fill mb-0">
+                                <label for="">Education</label>
+                                <textarea class="form-control" readonly>Briefly write about your education</textarea>
+                            </div>
+                        </div>
+            
+                        <div class="col-sm-6 d-flex flex-row align-items-center">
+                            <div class="form-outline flex-fill mb-0">
+                                <label for="">Interests</label>
+                                <textarea class="form-control" readonly>Briefly write about your interests</textarea>
+                            </div>
+                        </div>
+            
+                        <div class="col-sm-6 d-flex flex-row align-items-center">
+                            <div class="form-outline flex-fill mb-0">
+                                <label for="">Foreign Languages</label>
+                                <textarea class="form-control" readonly>Briefly write about your foreign languages</textarea>
+                            </div>
+                        </div>
+            
+                        <div class="col-sm-6 d-flex flex-row align-items-center">
+                            <div class="form-outline flex-fill mb-0">
+                                <label for="">Skills and Certification</label>
+                                <textarea class="form-control" readonly>Briefly write about your skills and certifications</textarea>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <hr class="my-4">
+            
+                    <h4 class="mb-3">Contact</h4>
+                    <div class="row g-3">
+                        <div class="col-sm-4">
+                            <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
+                            <input type="email" class="form-control" value="you@example.com" readonly>
+                        </div>
+            
+                        <div class="col-sm-3">
+                            <label for="number" class="form-label">Phone number <span class="text-body-secondary">(Optional)</span></label>
+                            <input type="number" class="form-control" value="0123456789" readonly>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+                    <hr class="my-4">
+                    <div class="d-grid gap-2 d-md-flex col-6 mx-auto">
+                      <a type="button" class="btn btn-danger btn-lg col-sm-6" href="{% url 'dashboard' %}">DENY</a>
+                      <button type="submit" class="btn btn-success btn-lg col-sm-6" href="{% url 'dashboard' %}" >APPROVE</button>
+                    </div>
+                      
+                  </form>
+                  
+            </div>
+        </main>
+    </div>
+    
+    <script src="" async defer></script>
+  </body>
+</html>
+
+
+{% endblock main-content%}

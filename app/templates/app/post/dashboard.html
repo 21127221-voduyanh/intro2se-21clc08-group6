@@ -27,7 +27,7 @@
           <td>Mike</td>
           <td>Date 1</td>
           <td class= "table-secondary fw-bold col-sm-1" >PENDING </td>
-          <td><button type="submit" class="btn btn-primary btn-sm col-sm-25">View CV</button></td>
+          <td><a href="{% url 'view_cv' %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
           <td><i class="bi bi-star bi-lg"></i></td>
           
         </tr>
@@ -37,7 +37,7 @@
           <td>Hana</td>
           <td>Date 2</td>
           <td class= "table-danger text-danger fw-bold">DENIED</td>
-          <td><button type="submit" class="btn btn-primary btn-sm col-sm-25">View CV</button></td>
+          <td><a href="{% url 'view_cv' %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
           <td class = "text-warning"><i class="bi bi-star-fill bi-lg"></i></td>
           
         </tr>
@@ -48,7 +48,7 @@
           <td>Anna</td>
           <td>Date 3</td>
           <td class= "table-success text-success fw-bold">ACCEPTED</td>
-          <td><button type="submit" class="btn btn-primary btn-sm col-sm-25">View CV</button></td>
+          <td><a href="{% url 'view_cv' %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
           <td><i class="bi bi-star bi-lg"></i></td>
           
         </tr>
@@ -94,8 +94,8 @@
               {% elif item.status == 'ACCEPTED' %}
                 <td class="table-success text-success fw-bold">ACCEPTED</td>
               {% endif %}
-              <td><button type="submit" class="btn btn-primary btn-sm col-sm-25">View CV</button></td>
-              {% if item.highlight == 'star' %}
+              <td><a href="{% url 'view_cv' %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
+              {% if item.highlight == 'star' %}         
                 <td class="text-warning"><i class="bi bi-star bi-lg"></i></td>
               {% else %}
                 <td><i class="bi bi-star-fill bi-lg"></i></td>

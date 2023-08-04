@@ -21,4 +21,5 @@ urlpatterns = [
     path('dashboard/',views.dashboard,name='dashboard'),
     path('history/',views.history, name='history'),
     path('post/edit/<int:pk>/', views.edit_post, name='edit_post'),
+    path('view_cv/',views.view_cv,name='view_cv'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
