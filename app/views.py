@@ -67,6 +67,10 @@ def register_finder(request):
             messages.error(request, 'Passwords must match')
         elif check_user is not None:
             messages.error(request, 'Username existed, please choose another username')
+        elif len(name) == 0:
+            messages.error(request, 'Username is required')
+        elif len(password) == 0:
+            messages.error(request, 'Password is required')
         else:
             user = User.objects.create_user(username=name, password=password)
             user.is_job_finder = True
@@ -103,6 +107,10 @@ def register_company(request):
             messages.error(request, 'Passwords must match')
         elif check_user is not None:
             messages.error(request, 'Username existed, please choose another username')
+        elif len(name) == 0:
+            messages.error(request, 'Username is required')
+        elif len(password) == 0:
+            messages.error(request, 'Password is required')
         else:
             user = User.objects.create_user(username=name, password=password)
             user.is_employer = True
@@ -214,14 +222,16 @@ def settings(request):
             user_change = authenticate(request, username=u.username, password=old_password)
 
             if user_change is not None:
-                if new_password == confirm_password:
+                if len(new_password) == 0:
+                    messages.error(request, "New password is required", extra_tags='changepassword')
+                elif new_password != confirm_password:
+                    messages.error(request, "Passwords must match", extra_tags='changepassword')
+                else:
                     user_change.set_password(new_password)
                     user_change.save()
                     auth_login(request, user_change)
                     logout(request)
                     return redirect('login')
-                else :
-                    messages.error(request, "Passwords must match", extra_tags='changepassword')
             elif user_change is None:
                 messages.error(request, "Invalid password", extra_tags='changepassword')
 
