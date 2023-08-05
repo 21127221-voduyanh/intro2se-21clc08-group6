@@ -538,3 +538,8 @@ def view_cv(request):
     cf,slr,ct = base()
     context = {'cf': cf, 'slr': slr, 'ct':ct}
     return render(request,'app/post/view_cv.html',context)
+
+def term_of_service(request):
+    cf,slr,ct = base()
+    context = {'cf': cf, 'slr': slr, 'ct':ct}
+    return render(request,'app/term_of_service.html',context)

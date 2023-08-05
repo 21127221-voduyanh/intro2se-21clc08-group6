@@ -182,7 +182,10 @@
                               <input class="form-check-input" style="border-width: 3px; border-color: black; margin-right: 5px;" type="checkbox" value="True" id="form2Example3c" name="checkbox">
                               <label class="form-check-label" for="form2Example3c">
                                   <span class="checkbox-custom"></span>
-                                  I agree to all statements in <a href="#!">Terms of Service</a>
+                                  I agree to all statements in 
+                                  <a href="{% url 'term_of_service' %}" target= "_blank">
+                                    Terms of Service
+                                  </a>
                               </label>
                           </div>
           
