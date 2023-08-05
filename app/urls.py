@@ -22,4 +22,5 @@ urlpatterns = [
     path('history/',views.history, name='history'),
     path('post/edit/<int:pk>/', views.edit_post, name='edit_post'),
     path('view_cv/',views.view_cv,name='view_cv'),
+    path('term_of_service',views.term_of_service,name='term_of_service'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
