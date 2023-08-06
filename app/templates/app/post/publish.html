@@ -30,10 +30,12 @@
                         <div class="card-body p-md-5">
                             <div class="row justify-content-center">
                                
-                                    <div class="alert alert-success">
+                                    <div class="text-center fw-bold">
                                         {% if messages %}
                                             {% for message in messages %}
-                                                <div>{{ message }}</div>
+                                                <div class="alert alert-success"> 
+                                                    {{ message }}
+                                                </div>
                                             {% endfor %}
                                         {% endif %}
                                     </div>
