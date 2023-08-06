@@ -60,7 +60,7 @@ def register_finder(request):
         city = request.POST.get("city")
         intro = request.POST.get("intro")
 
-        check_user =  authenticate(request, username=name, password=password)
+        check_user =  User.objects.get(username=name)
         if check == False:
             messages.error(request, "Please accept the terms")
         elif(password != r_password):
@@ -99,7 +99,7 @@ def register_company(request):
         city = request.POST.get("city")
         intro = request.POST.get("intro")
 
-        check_user =  authenticate(request, username=name, password=password)
+        check_user =  User.objects.get(username=name)
 
         if check == False:
             messages.error(request, "Please accept the terms")
