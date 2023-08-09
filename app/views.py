@@ -60,12 +60,12 @@ def register_finder(request):
         city = request.POST.get("city")
         intro = request.POST.get("intro")
 
-        check_user =  User.objects.get(username=name)
+        check_user = User.objects.filter(username=name).exists()
         if check == False:
             messages.error(request, "Please accept the terms")
         elif(password != r_password):
             messages.error(request, 'Passwords must match')
-        elif check_user is not None:
+        elif check_user:
             messages.error(request, 'Username existed, please choose another username')
         elif len(name) == 0:
             messages.error(request, 'Username is required')
@@ -99,13 +99,13 @@ def register_company(request):
         city = request.POST.get("city")
         intro = request.POST.get("intro")
 
-        check_user =  User.objects.get(username=name)
+        check_user = User.objects.filter(username=name).exists()
 
         if check == False:
             messages.error(request, "Please accept the terms")
         elif(password != r_password):
             messages.error(request, 'Passwords must match')
-        elif check_user is not None:
+        elif check_user:
             messages.error(request, 'Username existed, please choose another username')
         elif len(name) == 0:
             messages.error(request, 'Username is required')
