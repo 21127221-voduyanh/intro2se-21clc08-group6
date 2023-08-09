@@ -368,7 +368,8 @@ def publish(request):
             form.instance.city=request.user.employer.city
             form.instance.company_name=request.user.employer.company_name
             form.save()
-            messages.error(request, "Post created successfully")
+            messages.success(request, "Post created and published successfully")
+            return redirect('home')
         else:
             messages.error(request, "Please complete all information")
     context = {'form':form, 'cf': cf, 'slr': slr, 'ct':ct}
