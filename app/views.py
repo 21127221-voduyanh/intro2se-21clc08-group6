@@ -543,9 +543,15 @@ def cancel_application(request, application_id):
 
     return redirect('history')
 
-def view_cv(request):
+def view_cv(request, cv_id):
     cf,slr,ct = base()
-    context = {'cf': cf, 'slr': slr, 'ct':ct}
+    cv = get_object_or_404(CV, pk=cv_id)
+    context = {
+        'cf': cf, 
+        'slr': slr, 
+        'ct':ct,
+        'cv' : cv
+        }
     return render(request,'app/post/view_cv.html',context)
 
 def term_of_service(request):

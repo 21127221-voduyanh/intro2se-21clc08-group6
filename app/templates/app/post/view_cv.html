@@ -34,63 +34,73 @@
                     <div class="row g-3">
                         <div class="col-sm-5">
                             <label for="firstName" class="form-label">Full name :</label>
-                            <input type="text" class="form-control" value="John Doe" readonly>
+                            {% comment %} <input type="text" class="form-control" value="John Doe" readonly> {% endcomment %}
+                            {{ cv.full_name }}
                         </div>
             
                         <div class="col-sm-3">
                             <label for="lastName" class="form-label">Gender :</label>
-                            <input type="text" class="form-control" value="Male" readonly>
+                            {% comment %} <input type="text" class="form-control" value="Male" readonly> {% endcomment %}
+                            {{ cv.gender }}
                         </div>
             
                         <div class="col-sm-9">
                             <label for="address" class="form-label">Address :</label>
-                            <input type="text" class="form-control" value="123 Main Street, City, Country" readonly>
+                            {% comment %} <input type="text" class="form-control" value="123 Main Street, City, Country" readonly> {% endcomment %}
+                            {{ cv.address }}
                         </div>
             
                         <div class="col-sm-3">
                             <label for="lastName" class="form-label">DOB :</label>
-                            <input type="text" class="form-control" value="1990-01-01" readonly>
+                            {% comment %} <input type="text" class="form-control" value="1990-01-01" readonly> {% endcomment %}
+                            {{ cv.date_of_birth }}
                         </div>
             
                         <div class="col-sm-6 d-flex flex-row align-items-center">
                             <div class="form-outline flex-fill mb-0">
                                 <label for="">Experience</label>
-                                <textarea class="form-control" readonly>Briefly write about your experience</textarea>
+                                {% comment %} <textarea class="form-control" readonly>Briefly write about your experience</textarea> {% endcomment %}
+                                {{ cv.experience }}
                             </div>
                         </div>
             
                         <div class="col-sm-6 d-flex flex-row align-items-center">
                             <div class="form-outline flex-fill mb-0">
                                 <label for="">Short introduction</label>
-                                <textarea class="form-control" readonly>Briefly introduce yourself</textarea>
+                                {% comment %} <textarea class="form-control" readonly>Briefly introduce yourself</textarea> {% endcomment %}
+                                {{ cv.introduction }}
                             </div>
                         </div>
             
                         <div class="col-sm-6 d-flex flex-row align-items-center">
                             <div class="form-outline flex-fill mb-0">
                                 <label for="">Education</label>
-                                <textarea class="form-control" readonly>Briefly write about your education</textarea>
+                                {% comment %} <textarea class="form-control" readonly>Briefly write about your education</textarea> {% endcomment %}
+                                {{ cv.education }}
                             </div>
                         </div>
             
                         <div class="col-sm-6 d-flex flex-row align-items-center">
                             <div class="form-outline flex-fill mb-0">
                                 <label for="">Interests</label>
-                                <textarea class="form-control" readonly>Briefly write about your interests</textarea>
+                                {% comment %} <textarea class="form-control" readonly>Briefly write about your interests</textarea> {% endcomment %}
+                                {{ cv.interest }}
                             </div>
                         </div>
             
                         <div class="col-sm-6 d-flex flex-row align-items-center">
                             <div class="form-outline flex-fill mb-0">
                                 <label for="">Foreign Languages</label>
-                                <textarea class="form-control" readonly>Briefly write about your foreign languages</textarea>
+                                {% comment %} <textarea class="form-control" readonly>Briefly write about your foreign languages</textarea> {% endcomment %}
+                                {{ cv.languages }}
                             </div>
                         </div>
             
                         <div class="col-sm-6 d-flex flex-row align-items-center">
                             <div class="form-outline flex-fill mb-0">
                                 <label for="">Skills and Certification</label>
-                                <textarea class="form-control" readonly>Briefly write about your skills and certifications</textarea>
+                                {% comment %} <textarea class="form-control" readonly>Briefly write about your skills and certifications</textarea> {% endcomment %}
+                                {{ cv.skill }}
                             </div>
                         </div>
                     </div>
@@ -101,12 +111,14 @@
                     <div class="row g-3">
                         <div class="col-sm-4">
                             <label for="email" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
-                            <input type="email" class="form-control" value="you@example.com" readonly>
+                            {% comment %} <input type="email" class="form-control" value="you@example.com" readonly> {% endcomment %}
+                            {{ cv.mail }}
                         </div>
             
                         <div class="col-sm-3">
                             <label for="number" class="form-label">Phone number <span class="text-body-secondary">(Optional)</span></label>
-                            <input type="number" class="form-control" value="0123456789" readonly>
+                            {% comment %} <input type="number" class="form-control" value="0123456789" readonly> {% endcomment %}
+                            {{ cv.phone }}
                         </div>
                     </div>
                 </form>
