@@ -297,14 +297,16 @@
         {% for comment in comments %}
     
         <div class="row d-flex justify-content-center align-items-center">
-                <div class="comment">
-                    <div class="card mt-4 col-md-6">
-                    <p>
-                        <strong><a href="{% url 'profile' username=comment.user.username %}">{{ comment.user.username }}</a></strong>
+            <div class="comment">
+                <div class="card mt-4 col-md-6">
+                    <p style="margin-left: 15px; margin-right: 15px;">
+                        <strong><a href="{% url 'profile' username=comment.user.username %}" style="margin-right: 10px;">{{ comment.user.username }}</a></strong>
                         - {{ comment.created_at|timesince }} ago
                     </p>
-                    <p>{{ comment.content }}</p>
+                    <p style="margin-left: 15px; margin-right: 15px;">{{ comment.content }}</p>
                 </div>
+            </div>
+        </div>
                     <div class="d-flex">
                         <form method="POST" action="{% url 'post' post.id %}">
                             {% csrf_token %}
