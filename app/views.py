@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from app.models import Employer, Job_finder, User, Post, Comment, CV, Report, ApplicationHistory, Dashboard
+from app.models import Employer, Job_finder, User, Post, Comment, CV, Report, Dashboard
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm, PostForm, CVForm
@@ -475,22 +475,20 @@ def apply(request, post_id):
             form.instance.company_name = post.company_name
             form.instance.job_applied = post.job
 
-            # Create an ApplicationHistory record
-            ApplicationHistory.objects.create(
-                job_finder=request.user.job_finder,
-                company_name=post.company_name,
-                job_applied=post.job,
-                applied_time=timezone.now(),
-                status='PENDING',  # Or any initial status you want to set
-            )
-
             Dashboard.objects.create(
+                #E
                 employer=post.employer,
                 caption=post.caption,
                 user_name=request.user.username,
-                applied_time=timezone.now(),
                 cv=form.instance,
-                status='PENDING'
+                status_E='PENDING',
+                #JF
+                job_finder=request.user.job_finder,
+                company_name=post.company_name,
+                job_applied=post.job,
+                status_JF='PENDING',
+                #ALL
+                applied_time=timezone.now(),
             )
 
             messages.success(request, "CV created successfully")
@@ -525,7 +523,7 @@ def history(request):
     cf, slr, ct = base()
 
     # Retrieve all application history of the current user
-    application_history = ApplicationHistory.objects.filter(job_finder=request.user.job_finder)
+    application_history = Dashboard.objects.filter(job_finder=request.user.job_finder)
 
     context = {
         'cf': cf,

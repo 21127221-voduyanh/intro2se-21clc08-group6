@@ -170,31 +170,33 @@ class CV(models.Model):
     phone = models.CharField()
 
 class Dashboard(models.Model):
+    #E
     employer = models.ForeignKey(Employer, on_delete=models.CASCADE)
     caption = models.CharField(max_length=200)
     user_name = models.CharField(max_length=200)
     cv = models.ForeignKey(CV, on_delete=models.CASCADE)
-    applied_time = models.DateTimeField(auto_now_add=True)
-    STATUS_CHOICES = [
+    STATUS_CHOICES_E = [
         ('PENDING', 'Pending'),
         ('ACCEPTED', 'Accepted'),
         ('DENIED', 'Denied'),
         ('HIDE', 'Hide'),
         ('HIGHTLIGHT', 'Hightlight')
     ]
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
-
-class ApplicationHistory(models.Model):
-    job_finder = models.ForeignKey(Job_finder, on_delete=models.CASCADE)
-    company_name = models.CharField(max_length=200)
-    job_applied = models.CharField(max_length=200)
-    applied_time = models.DateTimeField(auto_now_add=True)
-    STATUS_CHOICES = [
+    status_E = models.CharField(max_length=10, choices=STATUS_CHOICES_E, default='PENDING')
+    #JF
+    job_finder = models.ForeignKey(Job_finder, on_delete=models.CASCADE,default="")
+    company_name = models.CharField(max_length=200,default="")
+    job_applied = models.CharField(max_length=200,default="")
+    STATUS_CHOICES_JF = [
         ('PENDING', 'Pending'),
         ('ACCEPTED', 'Accepted'),
         ('DENIED', 'Denied'),
     ]
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='PENDING')
+    status_JF = models.CharField(max_length=10, choices=STATUS_CHOICES_JF, default='PENDING')
+
+    #BOTH
+    applied_time = models.DateTimeField(auto_now_add=True)
+
 
 class Report(models.Model):
     reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reporter')

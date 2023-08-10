@@ -29,7 +29,7 @@
             <td>{{ application.user_name }}</td>
             <td>{{ application.applied_time }}</td>
             <td class="{% if application.status == 'PENDING' %}text-center fw-bold table-secondary{% elif application.status == 'ACCEPTED' %}table-success text-center text-success fw-bold table-success{% else %}table-danger text-center text-danger fw-bold table-danger{% endif %}">
-              {{ application.status }}
+              {{ application.status_E }}
             <td><a href="{% url 'view_cv' %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
             <!-- If highlight == True -->
             <td><i class="bi bi-star bi-lg"></i></td>

@@ -33,7 +33,7 @@
                                 <td>{{ application.job_applied }}</td>
                                 <td>{{ application.applied_time }}</td>
                                 <td class="{% if application.status == 'PENDING' %}text-center fw-bold{% elif application.status == 'ACCEPTED' %}table-success text-center text-success fw-bold{% else %}table-danger text-center text-danger fw-bold{% endif %}">
-                                    {{ application.status }}
+                                    {{ application.status_JF }}
                                 </td>
                                 <td><button type="submit" class="mx-5 btn btn-secondary btn-sm col-sm-25">Cancel</button></td>
                             </tr>
