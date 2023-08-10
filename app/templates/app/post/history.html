@@ -35,7 +35,14 @@
                                 <td class="{% if application.status == 'PENDING' %}text-center fw-bold{% elif application.status == 'ACCEPTED' %}table-success text-center text-success fw-bold{% else %}table-danger text-center text-danger fw-bold{% endif %}">
                                     {{ application.status_JF }}
                                 </td>
-                                <td><button type="submit" class="mx-5 btn btn-secondary btn-sm col-sm-25">Cancel</button></td>
+                                <td>
+                                    {% if application.status_JF == 'PENDING' %}
+                                        <form method="post" action="{% url 'cancel_application' application.id %}">
+                                            {% csrf_token %}
+                                            <button type="submit" class="mx-5 btn btn-secondary btn-sm col-sm-25">Cancel</button>
+                                        </form>
+                                    {% endif %}
+                                </td>
                             </tr>
                             {% endfor %}
                         </tbody>

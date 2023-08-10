@@ -518,7 +518,7 @@ def dashboard(request):
         }
     return render(request,'app/post/dashboard.html',context)
 
-@login_required
+@login_required(login_url="/login/") 
 def history(request):
     cf, slr, ct = base()
 
@@ -532,6 +532,16 @@ def history(request):
         'application_history': application_history
     }
     return render(request, 'app/post/history.html', context)
+
+@login_required(login_url="/login/") 
+def cancel_application(request, application_id):
+    application = get_object_or_404(Dashboard, id=application_id)
+
+    # Check if the application status is pending
+    if application.status_JF == 'PENDING':
+        application.delete()
+
+    return redirect('history')
 
 def view_cv(request):
     cf,slr,ct = base()
