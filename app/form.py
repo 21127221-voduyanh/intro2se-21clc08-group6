@@ -52,5 +52,5 @@ class CVForm(forms.ModelForm):
             'languages' : forms.Textarea(attrs={'class':'form-control'}),
             'skill' : forms.Textarea(attrs={'class':'form-control'}),
             'mail' : forms.EmailInput(attrs={'class':'form-control'}),
-            'phone' : forms.NumberInput(attrs={'class':'form-control'})
+            'phone' : forms.NumberInput(attrs={'class':'form-control', 'onkeydown':"return event.keyCode !== 69"})
         }
