@@ -44,9 +44,9 @@
               {% csrf_token %}
 
               {% if application.highlight %}
-              <td><button type="submit" name="hl" value=application.id class ="btn btn-primary btn-lg mx-2"><i class="bi bi-star-fill bi-lg"></i></button></td>
+              <td><button type="submit" name="hl" value=application.id class ="btn btn-primary btn-sm mx-2"><i class="bi bi-star-fill bi-lg text-warning"></i></button></td>
               {% else %}
-              <td><button type="submit" name="hl" value=application.id class ="btn btn-secondary btn-lg mx-2"><i class="bi bi-star-fill bi-lg"></i></button></td>
+              <td><button type="submit" name="hl" value=application.id class ="btn btn-secondary btn-sm mx-2"><i class="bi bi-star bi-lg"></i></button></td>
               {% endif %}
 
           </form>
