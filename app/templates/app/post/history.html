@@ -32,7 +32,7 @@
                                 <td>{{ application.company_name }}</td>
                                 <td>{{ application.job_applied }}</td>
                                 <td>{{ application.applied_time }}</td>
-                                <td class="{% if application.status == 'PENDING' %}text-center fw-bold{% elif application.status == 'ACCEPTED' %}table-success text-center text-success fw-bold{% else %}table-danger text-center text-danger fw-bold{% endif %}">
+                                <td class="{% if application.status_JF == 'PENDING' %}text-center fw-bold{% elif application.status_JF == 'ACCEPTED' %}table-success text-center text-success fw-bold{% else %}table-danger text-center text-danger fw-bold{% endif %}">
                                     {{ application.status_JF }}
                                 </td>
                                 <td>

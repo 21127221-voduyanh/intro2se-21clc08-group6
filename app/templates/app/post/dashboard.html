@@ -36,7 +36,7 @@
             <td>{{ application.caption }}</td>
             <td>{{ application.user_name }}</td>
             <td>{{ application.applied_time }}</td>
-            <td class="{% if application.status == 'PENDING' %}text-center fw-bold table-secondary{% elif application.status == 'ACCEPTED' %} text-center text-success fw-bold table-success{% else %} text-center text-danger fw-bold table-danger{% endif %}">
+            <td class="{% if application.status_E == 'PENDING' %}text-center fw-bold table-secondary{% elif application.status_E == 'ACCEPTED' %} text-center text-success fw-bold table-success{% else %} text-center text-danger fw-bold table-danger{% endif %}">
               {{ application.status_E }}
             <td><a href="{% url 'view_cv' application.id %}" class="btn btn-primary btn-sm col-sm-25">View CV</a></td>
 
