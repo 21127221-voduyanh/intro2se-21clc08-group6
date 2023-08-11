@@ -173,6 +173,11 @@
                     <div class="d-grid gap-2 d-md-flex col-6 mx-auto">
                         <button type="submit" name="deny" class="btn btn-danger btn-lg col-sm-6">DENY</button>
                         <button type="submit" name="approve" class="btn btn-success btn-lg col-sm-6">APPROVE</button>
+                        {% if db.highlight %}
+                        <button type="submit" name="highlight" class="btn btn-danger btn-lg col-sm-6">HIGHLIGHT</button>
+                        {% else %}
+                        <button type="submit" name="highlight" class="btn btn-success btn-lg col-sm-6">HIGHLIGHT</button>
+                        {% endif %}
                     </div>
                       
                 </form>

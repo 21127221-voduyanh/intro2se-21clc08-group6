@@ -547,13 +547,15 @@ def cancel_application(request, application_id):
 def view_cv(request, cv_id):
     cf,slr,ct = base()
     cv = get_object_or_404(CV, pk=cv_id)
+    dashboard = get_object_or_404(Dashboard, cv=cv_id)
     context = {
         'cf': cf, 
         'slr': slr, 
         'ct':ct,
-        'cv' : cv
+        'cv' : cv,
+        'db' : dashboard
     }
-    dashboard = get_object_or_404(Dashboard, cv=cv_id)
+    
     if "deny" in request.POST:
         dashboard.status_E = "DENIED"
         dashboard.status_JF = "DENIED"
@@ -562,6 +564,10 @@ def view_cv(request, cv_id):
     if "approve" in request.POST:
         dashboard.status_E = "ACCEPTED"
         dashboard.status_JF = "ACCEPTED"
+        dashboard.save()
+        return redirect('dashboard')
+    if "highlight" in request.POST:
+        dashboard.highlight = not(dashboard.highlight)
         dashboard.save()
         return redirect('dashboard')
     return render(request,'app/post/view_cv.html',context)
