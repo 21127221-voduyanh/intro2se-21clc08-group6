@@ -516,6 +516,7 @@ def dashboard(request):
         'ct':ct,
         'dashboard' : dashboard
         }
+
     return render(request,'app/post/dashboard.html',context)
 
 @login_required(login_url="/login/") 
@@ -554,8 +555,8 @@ def view_cv(request, cv_id):
     }
     dashboard = get_object_or_404(Dashboard, cv=cv_id)
     if "deny" in request.POST:
-        dashboard.status_E = "DENY"
-        dashboard.status_JF = "DENY"
+        dashboard.status_E = "DENIED"
+        dashboard.status_JF = "DENIED"
         dashboard.save()
         return redirect('dashboard')
     if "approve" in request.POST:

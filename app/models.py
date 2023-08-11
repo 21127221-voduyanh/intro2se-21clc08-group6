@@ -196,6 +196,7 @@ class Dashboard(models.Model):
 
     #BOTH
     applied_time = models.DateTimeField(auto_now_add=True)
+    highlight = models.BooleanField(default=False)
 
 
 class Report(models.Model):

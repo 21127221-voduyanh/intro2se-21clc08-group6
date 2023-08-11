@@ -266,7 +266,7 @@
 
                 {% if  post.is_disliked%}
                 <button type="submit" name="action" value="dislike" class ="btn btn-danger btn-lg mx-2"><i class="bi bi-hand-thumbs-down-fill "></i> ({{ post.dislikes.count }})</button>
-                {% else %}
+                {% else %}  
                 <button type="submit" name="action" value="dislike" class ="btn btn-secondary btn-lg mx-2"><i class="bi bi-hand-thumbs-down "></i></i> ({{ post.dislikes.count }})</button>
                 {% endif %}
             
