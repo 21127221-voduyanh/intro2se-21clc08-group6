@@ -14,7 +14,7 @@ from django.utils import timezone
 # Create your views here.
 
 def base():
-    post_list = Post.objects.all()
+    post_list = Post.objects.filter(is_hidden=False)
     cf = Counter([obj.field for obj in post_list]).most_common(3)
     slr = Counter([obj.salary for obj in post_list]).most_common(7)
     ct = Counter([obj.city for obj in post_list]).most_common(6)
@@ -413,37 +413,37 @@ def search(request):
     if any(category == x[0] for x in cf) and sort == 'postdate':
         check = True
         searched_cate = 'Field: ' + category
-        posts = Post.objects.filter(field=category).order_by('-created_at')
-        count = Post.objects.filter(field=category).order_by('-created_at').count()
+        posts = Post.objects.filter(Q(field=category) & Q(is_hidden=False)).order_by('-created_at')
+        count = Post.objects.filter(Q(field=category) & Q(is_hidden=False)).order_by('-created_at').count()
     elif any(category == x[0] for x in cf):
         searched_cate = 'Field: ' + category
-        posts = Post.objects.filter(field=category)
-        count = Post.objects.filter(field=category).count()
+        posts = Post.objects.filter(Q(field=category) & Q(is_hidden=False))
+        count = Post.objects.filter(Q(field=category) & Q(is_hidden=False)).count()
     elif any(category == x[0] for x in slr) and sort == 'postdate':
         check = True
         searched_cate = 'Salary: ' + category
-        posts = Post.objects.filter(salary=category).order_by('-created_at')
-        count = Post.objects.filter(salary=category).order_by('-created_at').count()
+        posts = Post.objects.filter(Q(salary=category) & Q(is_hidden=False)).order_by('-created_at')
+        count = Post.objects.filter(Q(salary=category) & Q(is_hidden=False)).order_by('-created_at').count()
     elif any(category == x[0] for x in slr):
         searched_cate = 'Salary: ' + category
-        posts = Post.objects.filter(salary=category)
-        count = Post.objects.filter(salary=category).count()
+        posts = Post.objects.filter(Q(salary=category) & Q(is_hidden=False))
+        count = Post.objects.filter(Q(salary=category) & Q(is_hidden=False)).count()
     elif any(category == x[0] for x in ct) and sort == 'postdate':
         check = True
         searched_cate = 'City: ' + category
-        posts = Post.objects.filter(city=category).order_by('-created_at')
-        count = Post.objects.filter(city=category).order_by('-created_at').count()
+        posts = Post.objects.filter(Q(city=category) & Q(is_hidden=False)).order_by('-created_at')
+        count = Post.objects.filter(Q(city=category) & Q(is_hidden=False)).order_by('-created_at').count()
     elif any(category == x[0] for x in ct):
         searched_cate = 'City: ' + category
-        posts = Post.objects.filter(city=category)
-        count = Post.objects.filter(city=category).count()
+        posts = Post.objects.filter(Q(city=category) & Q(is_hidden=False))
+        count = Post.objects.filter(Q(city=category) & Q(is_hidden=False)).count()
     elif sort == 'postdate':
         check = True
-        posts = Post.objects.filter(caption__icontains=searched).order_by('-created_at')
-        count = Post.objects.filter(caption__icontains=searched).order_by('-created_at').count
+        posts = Post.objects.filter(Q(caption__icontains=searched) & Q(is_hidden=False)).order_by('-created_at')
+        count = Post.objects.filter(Q(caption__icontains=searched) & Q(is_hidden=False)).order_by('-created_at').count
     else:
-        posts = Post.objects.filter(caption__icontains=searched)
-        count = Post.objects.filter(caption__icontains=searched).count
+        posts = Post.objects.filter(Q(caption__icontains=searched) & Q(is_hidden=False))
+        count = Post.objects.filter(Q(caption__icontains=searched) & Q(is_hidden=False)).count
     p = Paginator(posts, 10)
     page = request.GET.get('page',1)
     try:
