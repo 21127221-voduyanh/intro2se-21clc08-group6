@@ -551,7 +551,18 @@ def view_cv(request, cv_id):
         'slr': slr, 
         'ct':ct,
         'cv' : cv
-        }
+    }
+    dashboard = get_object_or_404(Dashboard, cv=cv_id)
+    if "deny" in request.POST:
+        dashboard.status_E = "DENY"
+        dashboard.status_JF = "DENY"
+        dashboard.save()
+        return redirect('dashboard')
+    if "approve" in request.POST:
+        dashboard.status_E = "ACCEPTED"
+        dashboard.status_JF = "ACCEPTED"
+        dashboard.save()
+        return redirect('dashboard')
     return render(request,'app/post/view_cv.html',context)
 
 def term_of_service(request):

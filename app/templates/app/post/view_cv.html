@@ -167,19 +167,19 @@
             </div>
             </div>
             
-            
+                <form class="mx-1 mx-md-4" method="POST" action="">
+                    {% csrf_token %}
                     <hr class="my-4">
                     <div class="d-grid gap-2 d-md-flex col-6 mx-auto">
-                      <a type="button" class="btn btn-danger btn-lg col-sm-6" href="{% url 'dashboard' %}">DENY</a>
-                      <button type="submit" class="btn btn-success btn-lg col-sm-6" href="{% url 'dashboard' %}" >APPROVE</button>
+                        <button type="submit" name="deny" class="btn btn-danger btn-lg col-sm-6">DENY</button>
+                        <button type="submit" name="approve" class="btn btn-success btn-lg col-sm-6">APPROVE</button>
                     </div>
                       
-                  </form>
+                </form>
                   
             </div>
         </main>
     </div>
-
     
     <script src="" async defer></script>
   </body>
