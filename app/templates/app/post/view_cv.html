@@ -170,13 +170,13 @@
                 <form class="mx-1 mx-md-4" method="POST" action="">
                     {% csrf_token %}
                     <hr class="my-4">
-                    <div class="d-grid gap-2 d-md-flex col-6 mx-auto">
+                    <div class=" gap-3 d-md-flex col-6 justify-content-center mx-auto">
                         <button type="submit" name="deny" class="btn btn-danger btn-lg col-sm-6">DENY</button>
                         <button type="submit" name="approve" class="btn btn-success btn-lg col-sm-6">APPROVE</button>
                         {% if db.highlight %}
-                        <button type="submit" name="highlight" class="btn btn-danger btn-lg col-sm-6">HIGHLIGHT</button>
+                        <button type="submit" name="highlight" class="btn btn-secondary text-center fw-bold  btn-lg col-sm-6">UNHIGHLIGHT</button>
                         {% else %}
-                        <button type="submit" name="highlight" class="btn btn-success btn-lg col-sm-6">HIGHLIGHT</button>
+                        <button type="submit" name="highlight" class="btn btn-warning text-center fw-bold btn-lg col-sm-6">HIGHLIGHT</button>
                         {% endif %}
                     </div>
                       
