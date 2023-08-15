@@ -61,6 +61,10 @@ def register_finder(request):
         intro = request.POST.get("intro")
 
         check_user = User.objects.filter(username=name).exists()
+        check_blank = False
+        if ' ' in name or ' ' in password:
+            check_blank = True
+
         if check == False:
             messages.error(request, "Please accept the terms")
         elif(password != r_password):
@@ -71,6 +75,8 @@ def register_finder(request):
             messages.error(request, 'Username is required')
         elif len(password) == 0:
             messages.error(request, 'Password is required')
+        elif check_blank:
+            messages.error(request, 'Blanks (\' \') are not allowed in Username or Password')
         else:
             user = User.objects.create_user(username=name, password=password)
             user.is_job_finder = True
@@ -100,6 +106,9 @@ def register_company(request):
         intro = request.POST.get("intro")
 
         check_user = User.objects.filter(username=name).exists()
+        check_blank = False
+        if ' ' in name or ' ' in password:
+            check_blank = True
 
         if check == False:
             messages.error(request, "Please accept the terms")
@@ -111,6 +120,8 @@ def register_company(request):
             messages.error(request, 'Username is required')
         elif len(password) == 0:
             messages.error(request, 'Password is required')
+        elif check_blank:
+            messages.error(request, 'Blanks (\' \') are not allowed in Username or Password')
         else:
             user = User.objects.create_user(username=name, password=password)
             user.is_employer = True
