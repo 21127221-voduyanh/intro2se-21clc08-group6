@@ -521,6 +521,9 @@ def dashboard(request):
     cf,slr,ct = base()
     
     dashboard = Dashboard.objects.filter(employer=request.user.employer)
+
+    dashboard = dashboard.order_by('-highlight')
+
     context = {
         'cf': cf, 
         'slr': slr, 
