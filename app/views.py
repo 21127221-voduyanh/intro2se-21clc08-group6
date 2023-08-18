@@ -522,7 +522,7 @@ def dashboard(request):
     
     dashboard = Dashboard.objects.filter(employer=request.user.employer)
 
-    dashboard = dashboard.order_by('-highlight')
+    dashboard = dashboard.order_by('-highlight', '-applied_time')
 
     context = {
         'cf': cf, 
