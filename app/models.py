@@ -7,13 +7,77 @@ import math
 class User(AbstractUser):
     is_job_finder = models.BooleanField(default=False)
     is_employer = models.BooleanField(default=False)
-
+CITY_CHOICES = (
+        ('An Giang', 'An Giang'),
+        ('Ba Ria-Vung Tau', 'Ba Ria-Vung Tau'),
+        ('Bac Lieu', 'Bac Lieu'),
+        ('Bac Kan', 'Bac Kan'),
+        ('Bac Giang', 'Bac Giang'),
+        ('Bac Ninh', 'Bac Ninh'),
+        ('Ben Tre', 'Ben Tre'),
+        ('Binh Duong', 'Binh Duong'),
+        ('Binh Dinh', 'Binh Dinh'),
+        ('Binh Phuoc', 'Binh Phuoc'),
+        ('Binh Thuan', 'Binh Thuan'),
+        ('Ca Mau', 'Ca Mau'),
+        ('Cao Bang', 'Cao Bang'),
+        ('Can Tho', 'Can Tho'),
+        ('Da Nang', 'Da Nang'),
+        ('Dak Lak', 'Dak Lak'),
+        ('Dak Nong', 'Dak Nong'),
+        ('Dien Bien', 'Dien Bien'),
+        ('Dong Nai', 'Dong Nai'),
+        ('Dong Thap', 'Dong Thap'),
+        ('Gia Lai', 'Gia Lai'),
+        ('Ha Giang', 'Ha Giang'),
+        ('Ha Nam', 'Ha Nam'),
+        ('Ha Noi', 'Ha Noi'),
+        ('Ha Tinh', 'Ha Tinh'),
+        ('Hai Duong', 'Hai Duong'),
+        ('Hai Phong', 'Hai Phong'),
+        ('Hoa Binh', 'Hoa Binh'),
+        ('Ho Chi Minh City', 'Ho Chi Minh City'),
+        ('Hau Giang', 'Hau Giang'),
+        ('Hung Yen', 'Hung Yen'),
+        ('Khanh Hoa', 'Khanh Hoa'),
+        ('Kien Giang', 'Kien Giang'),
+        ('Kon Tum', 'Kon Tum'),
+        ('Lai Chau', 'Lai Chau'),
+        ('Lao Cai', 'Lao Cai'),
+        ('Lang Son', 'Lang Son'),
+        ('Lam Dong', 'Lam Dong'),
+        ('Long An', 'Long An'),
+        ('Nam Dinh', 'Nam Dinh'),
+        ('Nghe An', 'Nghe An'),
+        ('Ninh Binh', 'Ninh Binh'),
+        ('Ninh Thuan', 'Ninh Thuan'),
+        ('Phu Tho', 'Phu Tho'),
+        ('Phu Yen', 'Phu Yen'),
+        ('Quang Binh', 'Quang Binh'),
+        ('Quang Nam', 'Quang Nam'),
+        ('Quang Ngai', 'Quang Ngai'),
+        ('Quang Ninh', 'Quang Ninh'),
+        ('Quang Tri', 'Quang Tri'),
+        ('Soc Trang', 'Soc Trang'),
+        ('Son La', 'Son La'),
+        ('Tay Ninh', 'Tay Ninh'),
+        ('Thai Binh', 'Thai Binh'),
+        ('Thai Nguyen', 'Thai Nguyen'),
+        ('Thanh Hoa', 'Thanh Hoa'),
+        ('Thua Thien-Hue', 'Thua Thien-Hue'),
+        ('Tien Giang', 'Tien Giang'),
+        ('Tra Vinh', 'Tra Vinh'),
+        ('Tuyen Quang', 'Tuyen Quang'),
+        ('Vinh Long', 'Vinh Long'),
+        ('Vinh Phuc', 'Vinh Phuc'),
+        ('Yen Bai', 'Yen Bai'),
+    )
 class Job_finder(models.Model):
     full_name=models.CharField(max_length=100)
     user=models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True)
     gender=models.CharField(max_length=100)
     address=models.TextField()
-    city=models.TextField()
+    city = models.CharField(max_length=255, choices=CITY_CHOICES)
     date_of_birth=models.TextField()
     introduction=models.TextField()
 
@@ -21,7 +85,7 @@ class Employer(models.Model):
     company_name=models.CharField(max_length=100)
     user=models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True)
     address=models.TextField()
-    city=models.TextField()
+    city = models.CharField(max_length=255, choices=CITY_CHOICES)
     introduction=models.TextField()
 
 class Post(models.Model):
