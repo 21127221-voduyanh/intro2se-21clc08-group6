@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from app.models import Employer, Job_finder, User, Post, Comment, CV, Report, Dashboard
+from app.models import Employer, Job_finder, User, Post, Comment, CV, Report, Dashboard, CITY_CHOICES
 from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login, logout
 from app.form import EUpdateForm, JFUpdateForm, PostForm, CVForm
@@ -198,7 +198,7 @@ def profile(request,username):
                 u_form = JFUpdateForm(instance=user2.job_finder)
 
             jf = Job_finder.objects.get(user=user2)
-            context = {'user2':user2,'jf': jf, 'u_form': u_form, 'cf': cf, 'slr': slr, 'ct':ct}
+            context = {'user2':user2,'jf': jf, 'u_form': u_form, 'cf': cf, 'slr': slr, 'ct':ct, 'city_choices': CITY_CHOICES}
             return render(request, 'app/user/profileJF.html', context)
         
         elif user2.is_employer:
@@ -222,7 +222,7 @@ def profile(request,username):
                 u_form = EUpdateForm(instance=user2.employer)
 
             em = Employer.objects.get(user=user2)
-            context = {'user2':user2,'em': em, 'u_form': u_form, 'cf': cf, 'slr': slr, 'ct':ct}
+            context = {'user2':user2,'em': em, 'u_form': u_form, 'cf': cf, 'slr': slr, 'ct':ct, 'city_choices': CITY_CHOICES}
             return render(request, 'app/user/profileE.html', context)
         
     return redirect('home')
