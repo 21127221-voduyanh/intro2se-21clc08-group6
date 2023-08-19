@@ -77,6 +77,14 @@ def register_finder(request):
             messages.error(request, 'Password is required')
         elif check_blank:
             messages.error(request, 'Blanks (\' \') are not allowed in Username or Password')
+        elif len(f_name) == 0:
+            messages.error(request, 'Please fill in Full name')
+        elif gender == 'Choose your Gender':
+            messages.error(request, 'Please choose your Gender')
+        elif len(addr) == 0:
+            messages.error(request, 'Please fill in Address')
+        elif city == "Choose your City":
+            messages.error(request, 'Please choose your City')
         else:
             user = User.objects.create_user(username=name, password=password)
             user.is_job_finder = True
@@ -122,6 +130,12 @@ def register_company(request):
             messages.error(request, 'Password is required')
         elif check_blank:
             messages.error(request, 'Blanks (\' \') are not allowed in Username or Password')
+        elif len(c_name) == 0:
+            messages.error(request, 'Please fill in Company Name')
+        elif len(addr) == 0:
+            messages.error(request, 'Please fill in Address')
+        elif city == "Choose your City":
+            messages.error(request, 'Please choose your City')
         else:
             user = User.objects.create_user(username=name, password=password)
             user.is_employer = True
