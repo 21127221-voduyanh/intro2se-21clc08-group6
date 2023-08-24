@@ -514,6 +514,8 @@ def apply(request, post_id):
                 status_JF='PENDING',
                 #ALL
                 applied_time=timezone.now(),
+                deny = post.deny,
+                approve = post.approve
             )
 
             messages.success(request, "CV created successfully")

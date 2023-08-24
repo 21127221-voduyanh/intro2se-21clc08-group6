@@ -261,7 +261,8 @@ class Dashboard(models.Model):
     #BOTH
     applied_time = models.DateTimeField(auto_now_add=True)
     highlight = models.BooleanField(default=False)
-
+    deny = models.TextField()
+    approve = models.TextField()
 
 class Report(models.Model):
     reporter = models.ForeignKey(User, on_delete=models.CASCADE, related_name='reporter')
